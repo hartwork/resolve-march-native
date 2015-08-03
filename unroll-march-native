@@ -127,7 +127,7 @@ def main():
     print(joiner.join(sorted(native_unrolled_flag_set)))
 
     if set(_extract_flags(_run(options.gcc, native_unrolled_flag_set, options.debug))) != march_native_flag_set:
-        print('ERROR: Sanity checks failed, flag list may be mistaken', file=sys)
+        print('ERROR: Sanity checks failed, flag list may be mistaken', file=sys.stderr)
         sys.exit(1)
 
 
