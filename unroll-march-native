@@ -106,7 +106,7 @@ def main():
     parser.add_argument('--vertical', dest='formatting',
             default=_HORIZONTAL, action='store_const', const=_VERTICAL,
             help='produce vertical output (default: horizontal output)')
-    parser.add_argument('--version', action='version', version='%(prog)s 0_p20150803_p0450')
+    parser.add_argument('--version', action='version', version='%(prog)s 0_p20150803_p2036')
     options = parser.parse_args()
 
     march_native_flag_set = set(_extract_flags(_run(options.gcc, ['-march=native'], options.debug)))
