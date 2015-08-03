@@ -1,0 +1,118 @@
+#! /usr/bin/env python2
+# Copyright (C) 2015 Sebastian Pipping <sebastian@pipping.org>
+# Licensed under GPL v2 or later
+
+from __future__ import print_function
+
+import argparse
+import os
+import re
+import subprocess
+import sys
+import tempfile
+
+
+_param_pattern = '--param [^ \\n]+'
+_simple_pattern = '-[^ \\n]+'
+
+_flag_matcher = re.compile('(?:%s|%s)' % (_param_pattern, _simple_pattern))
+
+
+_HORIZONTAL, _VERTICAL = range(2)
+
+
+def _extract_flags(text):
+    start_marker_seen = False
+
+    for line in text.split('\n'):
+        if not line.startswith('#'):
+            continue
+
+        if not start_marker_seen:
+            if 'options passed' in line:
+                start_marker_seen = True
+            else:
+                continue
+
+        for m in re.finditer(_flag_matcher, line):
+            yield m.group(0)
+
+
+def _extract_arch_from_flags(flags):
+    prefix = '-march='
+    for flag in flags:
+        if flag.startswith(prefix):
+            return flag[len(prefix):]
+    raise ValueError('-march=.. not found')
+
+
+def _fix_flags(flags):
+    prefix = '--param '
+    for flag in flags:
+        if flag.startswith(prefix):
+            yield '--param'
+            yield flag[len(prefix):]
+        else:
+            yield flag
+
+
+def _run(gcc_command, flags):
+    tempdir = tempfile.mkdtemp()
+    try:
+        input_filename = os.path.join(tempdir, 'empty.c')
+        with open(input_filename, 'w') as f:
+            pass
+
+        try:
+            output_filename = os.path.join(tempdir, 'march_native.s')
+            cmd = [
+                    gcc_command,
+                    '-S', '-fverbose-asm',
+                    '-o', output_filename,
+                    input_filename,
+                    ] + list(_fix_flags(flags))
+            env = os.environ.copy().update({
+                'LC_ALL': 'C',
+            })
+            subprocess.check_output(cmd, env=env)
+            try:
+                with open(output_filename, 'r') as f:
+                    return f.read()
+            finally:
+                os.remove(output_filename)
+        finally:
+            os.remove(input_filename)
+    finally:
+        os.rmdir(tempdir)
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--gcc', default='gcc', metavar='COMMAND',
+            help='gcc command (default: %(default)s)')
+    parser.add_argument('--vertical', dest='formatting',
+            default=_HORIZONTAL, action='store_const', const=_VERTICAL,
+            help='produce vertical output (default: horizontal output)')
+    parser.add_argument('--version', action='version', version='%(prog)s 0_p20150803_p0450')
+    options = parser.parse_args()
+
+    march_native_flag_set = set(_extract_flags(_run(options.gcc, ['-march=native'])))
+    march_explicit = '-march=%s' % _extract_arch_from_flags(march_native_flag_set)
+    march_explicit_flag_set = set(_extract_flags(_run(options.gcc, [march_explicit])))
+
+    native_unrolled_flag_set = march_native_flag_set - march_explicit_flag_set
+    native_unrolled_flag_set.add(march_explicit)
+
+    if options.formatting == _VERTICAL:
+        joiner = '\n'
+    else:
+        joiner = ' '
+    print(joiner.join(sorted(native_unrolled_flag_set)))
+
+    if set(_extract_flags(_run(options.gcc, native_unrolled_flag_set))) != march_native_flag_set:
+        print('ERROR: Sanity checks failed, flag list may be mistaken', file=sys)
+        sys.exit(1)
+
+
+if __name__ == '__main__':
+    main()
