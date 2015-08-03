@@ -71,9 +71,12 @@ def _run(gcc_command, flags, debug):
                     '-o', output_filename,
                     input_filename,
                     ] + list(_fix_flags(flags))
-            env = os.environ.copy().update({
+            env = os.environ.copy()
+            env.update({
                 'LC_ALL': 'C',
             })
+            for key in ('LANG', 'LANGUAGE'):
+                env.pop(key, None)
 
             if debug:
                 print('# %s' % ' '.join(cmd), file=sys.stderr)
