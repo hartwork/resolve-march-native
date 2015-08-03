@@ -43,7 +43,7 @@ def _extract_arch_from_flags(flags):
     for flag in flags:
         if flag.startswith(prefix):
             return flag[len(prefix):]
-    raise ValueError('-march=.. not found')
+    raise ValueError('No entry -march=.. found in: %s' % ' '.join(sorted(flags)))
 
 
 def _fix_flags(flags):
