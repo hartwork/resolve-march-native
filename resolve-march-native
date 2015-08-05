@@ -13,6 +13,8 @@ import tempfile
 from textwrap import dedent
 
 
+__version__ = '0_p20150803_p2036'
+
 _param_pattern = '--param [^ \\n]+'
 _simple_pattern = '-[^ \\n]+'
 
@@ -114,7 +116,7 @@ def main():
     parser.add_argument('--vertical', dest='formatting',
             default=_HORIZONTAL, action='store_const', const=_VERTICAL,
             help='produce vertical output (default: horizontal output)')
-    parser.add_argument('--version', action='version', version='%(prog)s 0_p20150803_p2036')
+    parser.add_argument('--version', action='version', version='%(prog)s ' + __version__)
     options = parser.parse_args()
 
     march_native_flag_set = set(_extract_flags(_run(options.gcc, ['-march=native'], options.debug)))
