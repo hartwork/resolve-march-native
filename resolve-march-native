@@ -10,6 +10,7 @@ import re
 import subprocess
 import sys
 import tempfile
+from textwrap import dedent
 
 
 _param_pattern = '--param [^ \\n]+'
@@ -98,7 +99,14 @@ def _dump_flags(flags):
 
 
 def main():
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(
+            formatter_class=argparse.RawDescriptionHelpFormatter,
+            epilog=dedent("""\
+                %(prog)s is software libre licensed under GPL v2 or later,
+                written by Sebastian Pipping.  Please report bugs to
+                https://github.com/hartwork/resolve-march-native/issues.  Thanks!
+                """),
+            )
     parser.add_argument('--debug', action='store_true',
             help='enable debugging (default: disabled)')
     parser.add_argument('--gcc', default='gcc', metavar='COMMAND',
