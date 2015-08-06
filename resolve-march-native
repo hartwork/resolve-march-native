@@ -114,6 +114,12 @@ def _resolve_mtune(flag_set, arch):
         flag_set.remove(flag)
 
 
+def _resolve_mno_flags(flag_set):
+    for flag in list(flag_set):
+        if flag.startswith('-mno-'):
+            flag_set.remove(flag)
+
+
 def main():
     parser = argparse.ArgumentParser(
             formatter_class=argparse.RawDescriptionHelpFormatter,
@@ -133,6 +139,8 @@ def main():
     parser.add_argument('--keep-identical-mtune', action='store_true',
             help='keep implied -mtune=... despite architecture identical to -march=... '
             '(default: stripped away)')
+    parser.add_argument('--keep-mno-flags', action='store_true',
+            help='keep -mno-* paramters (default: stripped away)')
     parser.add_argument('--version', action='version', version='%(prog)s ' + __version__)
     options = parser.parse_args()
 
@@ -152,6 +160,8 @@ def main():
     native_unrolled_flag_set_backup = native_unrolled_flag_set.copy()
     if not options.keep_identical_mtune:
         _resolve_mtune(native_unrolled_flag_set, arch)
+    if not options.keep_mno_flags:
+        _resolve_mno_flags(native_unrolled_flag_set)
 
     if options.formatting == _VERTICAL:
         joiner = '\n'
