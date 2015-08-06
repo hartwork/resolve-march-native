@@ -120,6 +120,21 @@ def _resolve_mno_flags(flag_set):
             flag_set.remove(flag)
 
 
+def _resolve_default_params(flag_set, debug):
+    defaults = {
+        'l1-cache-line-size': 32,
+        'l1-cache-size': 64,
+        'l2-cache-size': 512,
+    }
+    needle_set = set(('--param %s=%s' % (k, v) for k, v in defaults.items()))
+
+    for flag in list(flag_set):
+        if flag in needle_set:
+            if debug:
+                print('Stripping %s because it is repeating defaults, only.' % flag, file=sys.stderr)
+            flag_set.remove(flag)
+
+
 def main():
     parser = argparse.ArgumentParser(
             formatter_class=argparse.RawDescriptionHelpFormatter,
@@ -141,6 +156,8 @@ def main():
             '(default: stripped away)')
     parser.add_argument('--keep-mno-flags', action='store_true',
             help='keep -mno-* paramters (default: stripped away)')
+    parser.add_argument('--keep-default-params', action='store_true',
+            help='keep --param ... with values matching defaults (default: stripped away)')
     parser.add_argument('--version', action='version', version='%(prog)s ' + __version__)
     options = parser.parse_args()
 
@@ -162,6 +179,8 @@ def main():
         _resolve_mtune(native_unrolled_flag_set, arch)
     if not options.keep_mno_flags:
         _resolve_mno_flags(native_unrolled_flag_set)
+    if not options.keep_default_params:
+        _resolve_default_params(native_unrolled_flag_set, options.debug)
 
     if options.formatting == _VERTICAL:
         joiner = '\n'
