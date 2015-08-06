@@ -13,7 +13,7 @@ import tempfile
 from textwrap import dedent
 
 
-__version__ = '0_p20150805_p2350'
+__version__ = '0_p20150806_p0441'
 
 _param_pattern = '--param [^ \\n]+'
 _simple_pattern = '-[^ \\n]+'
