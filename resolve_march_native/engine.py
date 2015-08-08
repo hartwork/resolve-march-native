@@ -69,16 +69,22 @@ class Engine(object):
 			self._dump_flags(march_explicit_flag_set)
 		return march_explicit_flag_set
 
-	def run(self, options):
-		march_native_flag_set = self._get_march_native_flag_set(options.gcc, options.debug)
-		arch = self._extract_arch_from_flags(march_native_flag_set)
-		march_explicit = '-march=%s' % arch
-		march_explicit_flag_set = self._get_march_explicit_flag_set(options.gcc, options.debug, march_explicit)
+	@staticmethod
+	def _get_march_explicit(arch):
+		return '-march=%s' % arch
 
+	def _sanity_check(self, candidate_native_unrolled_flag_set, march_native_flag_set, gcc_command, debug):
+		if set(extract_flags(run(gcc_command, candidate_native_unrolled_flag_set, debug))) \
+				!= march_native_flag_set:
+			print('ERROR: Sanity checks failed, flag list may be mistaken', file=sys.stderr)
+			sys.exit(1)
+
+	def _resolve(self, march_native_flag_set, march_explicit_flag_set, arch, options):
 		native_unrolled_flag_set = march_native_flag_set - march_explicit_flag_set
-		native_unrolled_flag_set.add(march_explicit)
+		native_unrolled_flag_set.add(self._get_march_explicit(arch))
 
-		native_unrolled_flag_set_backup = native_unrolled_flag_set.copy()
+		self._sanity_check(native_unrolled_flag_set, march_native_flag_set, options.gcc, options.debug)
+
 		if not options.keep_identical_mtune:
 			self._resolve_mtune(native_unrolled_flag_set, arch)
 		if not options.keep_mno_flags:
@@ -86,8 +92,12 @@ class Engine(object):
 		if not options.keep_default_params:
 			self._resolve_default_params(native_unrolled_flag_set, options.debug)
 
-		if set(extract_flags(run(options.gcc, native_unrolled_flag_set_backup, options.debug))) != march_native_flag_set:
-			print('ERROR: Sanity checks failed, flag list may be mistaken', file=sys.stderr)
-			sys.exit(1)
-
 		return native_unrolled_flag_set
+
+	def run(self, options):
+		march_native_flag_set = self._get_march_native_flag_set(options.gcc, options.debug)
+		arch = self._extract_arch_from_flags(march_native_flag_set)
+		march_explicit_flag_set = self._get_march_explicit_flag_set(
+				options.gcc, options.debug, self._get_march_explicit(arch))
+
+		return self._resolve(march_native_flag_set, march_explicit_flag_set, arch, options)
