@@ -6,39 +6,17 @@ from __future__ import print_function
 
 import argparse
 import os
-import re
 import subprocess
 import sys
 import tempfile
 from textwrap import dedent
 
+from resolve_march_native.parser import extract_flags
+
 
 __version__ = '0_p20150806_p0441'
 
-_param_pattern = '--param [^ \\n]+'
-_simple_pattern = '-[^ \\n]+'
-
-_flag_matcher = re.compile('(?:%s|%s)' % (_param_pattern, _simple_pattern))
-
-
 _HORIZONTAL, _VERTICAL = range(2)
-
-
-def _extract_flags(text):
-    start_marker_seen = False
-
-    for line in text.split('\n'):
-        if not line.startswith('#'):
-            continue
-
-        if not start_marker_seen:
-            if 'options passed' in line:
-                start_marker_seen = True
-            else:
-                continue
-
-        for m in re.finditer(_flag_matcher, line):
-            yield m.group(0)
 
 
 def _extract_arch_from_flags(flags):
@@ -161,13 +139,13 @@ def main():
     parser.add_argument('--version', action='version', version='%(prog)s ' + __version__)
     options = parser.parse_args()
 
-    march_native_flag_set = set(_extract_flags(_run(options.gcc, ['-march=native'], options.debug)))
+    march_native_flag_set = set(extract_flags(_run(options.gcc, ['-march=native'], options.debug)))
     if options.debug:
         _dump_flags(march_native_flag_set)
 
     arch = _extract_arch_from_flags(march_native_flag_set)
     march_explicit = '-march=%s' % arch
-    march_explicit_flag_set = set(_extract_flags(_run(options.gcc, [march_explicit], options.debug)))
+    march_explicit_flag_set = set(extract_flags(_run(options.gcc, [march_explicit], options.debug)))
     if options.debug:
         _dump_flags(march_explicit_flag_set)
 
@@ -188,7 +166,7 @@ def main():
         joiner = ' '
     print(joiner.join(sorted(native_unrolled_flag_set)))
 
-    if set(_extract_flags(_run(options.gcc, native_unrolled_flag_set_backup, options.debug))) != march_native_flag_set:
+    if set(extract_flags(_run(options.gcc, native_unrolled_flag_set_backup, options.debug))) != march_native_flag_set:
         print('ERROR: Sanity checks failed, flag list may be mistaken', file=sys.stderr)
         sys.exit(1)
 
