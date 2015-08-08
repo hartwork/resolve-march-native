@@ -56,16 +56,24 @@ class Engine(object):
 					print('Stripping %s because it is repeating defaults, only.' % flag, file=sys.stderr)
 				flag_set.remove(flag)
 
-	def run(self, options):
-		march_native_flag_set = set(extract_flags(run(options.gcc, ['-march=native'], options.debug)))
-		if options.debug:
-			self._dump_flags(march_native_flag_set)
 
+	def _get_march_native_flag_set(self, gcc_command, debug):
+		march_native_flag_set = set(extract_flags(run(gcc_command, ['-march=native'], debug)))
+		if debug:
+			self._dump_flags(march_native_flag_set)
+		return march_native_flag_set
+
+	def _get_march_explicit_flag_set(self, gcc_command, debug, march_explicit):
+		march_explicit_flag_set = set(extract_flags(run(gcc_command, [march_explicit], debug)))
+		if debug:
+			self._dump_flags(march_explicit_flag_set)
+		return march_explicit_flag_set
+
+	def run(self, options):
+		march_native_flag_set = self._get_march_native_flag_set(options.gcc, options.debug)
 		arch = self._extract_arch_from_flags(march_native_flag_set)
 		march_explicit = '-march=%s' % arch
-		march_explicit_flag_set = set(extract_flags(run(options.gcc, [march_explicit], options.debug)))
-		if options.debug:
-			self._dump_flags(march_explicit_flag_set)
+		march_explicit_flag_set = self._get_march_explicit_flag_set(options.gcc, options.debug, march_explicit)
 
 		native_unrolled_flag_set = march_native_flag_set - march_explicit_flag_set
 		native_unrolled_flag_set.add(march_explicit)
