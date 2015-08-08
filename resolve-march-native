@@ -5,63 +5,13 @@
 from __future__ import print_function
 
 import argparse
-import sys
 from textwrap import dedent
 
-from resolve_march_native.parser import extract_flags
-from resolve_march_native.runner import run
-
+from resolve_march_native.engine import Engine
 
 __version__ = '0_p20150806_p0441'
 
 _HORIZONTAL, _VERTICAL = range(2)
-
-
-def _extract_arch_from_flags(flags):
-    prefix = '-march='
-    for flag in flags:
-        if flag.startswith(prefix):
-            return flag[len(prefix):]
-    raise ValueError('No entry -march=.. found in: %s' % ' '.join(sorted(flags)))
-
-
-def _extract_tune_from_flags(flags):
-    prefix = '-mtune='
-    for flag in flags:
-        if flag.startswith(prefix):
-            return (flag, flag[len(prefix):])
-    raise ValueError('No entry -tune=.. found in: %s' % ' '.join(sorted(flags)))
-
-
-def _dump_flags(flags):
-    print('Flags extracted: %s' % ' '.join(sorted(flags)), file=sys.stderr)
-
-
-def _resolve_mtune(flag_set, arch):
-    flag, tune = _extract_tune_from_flags(flag_set)
-    if tune == arch:
-        flag_set.remove(flag)
-
-
-def _resolve_mno_flags(flag_set):
-    for flag in list(flag_set):
-        if flag.startswith('-mno-'):
-            flag_set.remove(flag)
-
-
-def _resolve_default_params(flag_set, debug):
-    defaults = {
-        'l1-cache-line-size': 32,
-        'l1-cache-size': 64,
-        'l2-cache-size': 512,
-    }
-    needle_set = set(('--param %s=%s' % (k, v) for k, v in defaults.items()))
-
-    for flag in list(flag_set):
-        if flag in needle_set:
-            if debug:
-                print('Stripping %s because it is repeating defaults, only.' % flag, file=sys.stderr)
-            flag_set.remove(flag)
 
 
 def main():
@@ -90,36 +40,12 @@ def main():
     parser.add_argument('--version', action='version', version='%(prog)s ' + __version__)
     options = parser.parse_args()
 
-    march_native_flag_set = set(extract_flags(run(options.gcc, ['-march=native'], options.debug)))
-    if options.debug:
-        _dump_flags(march_native_flag_set)
-
-    arch = _extract_arch_from_flags(march_native_flag_set)
-    march_explicit = '-march=%s' % arch
-    march_explicit_flag_set = set(extract_flags(run(options.gcc, [march_explicit], options.debug)))
-    if options.debug:
-        _dump_flags(march_explicit_flag_set)
-
-    native_unrolled_flag_set = march_native_flag_set - march_explicit_flag_set
-    native_unrolled_flag_set.add(march_explicit)
-
-    native_unrolled_flag_set_backup = native_unrolled_flag_set.copy()
-    if not options.keep_identical_mtune:
-        _resolve_mtune(native_unrolled_flag_set, arch)
-    if not options.keep_mno_flags:
-        _resolve_mno_flags(native_unrolled_flag_set)
-    if not options.keep_default_params:
-        _resolve_default_params(native_unrolled_flag_set, options.debug)
-
+    native_unrolled_flag_set = Engine().run(options)
     if options.formatting == _VERTICAL:
         joiner = '\n'
     else:
         joiner = ' '
     print(joiner.join(sorted(native_unrolled_flag_set)))
-
-    if set(extract_flags(run(options.gcc, native_unrolled_flag_set_backup, options.debug))) != march_native_flag_set:
-        print('ERROR: Sanity checks failed, flag list may be mistaken', file=sys.stderr)
-        sys.exit(1)
 
 
 if __name__ == '__main__':
