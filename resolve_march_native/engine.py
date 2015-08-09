@@ -59,7 +59,6 @@ class Engine(object):
 					print('Stripping %s because it is repeating defaults, only.' % flag, file=sys.stderr)
 				flag_set.remove(flag)
 
-
 	def _get_march_native_flag_set(self):
 		march_native_flag_set = set(extract_flags(run(self._gcc_command, ['-march=native'], self._debug)))
 		if self._debug:
