@@ -9,7 +9,6 @@ from resolve_march_native.parser import extract_flags
 class TestParser(TestCase):
 	_EXPECTED_FLAGS_WESTMERE_NATIVE = [
 		# options passed
-		'-D_GNU_SOURCE',
 		'-march=westmere',
 		'-mmmx',
 		'-mno-3dnow',

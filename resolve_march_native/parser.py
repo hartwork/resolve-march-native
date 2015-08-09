@@ -24,4 +24,8 @@ def extract_flags(text):
                 continue
 
         for m in re.finditer(_flag_matcher, line):
-            yield m.group(0)
+            flag = m.group(0)
+            if flag.startswith('-D'):
+                continue
+
+            yield flag
