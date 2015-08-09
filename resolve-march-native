@@ -35,7 +35,7 @@ def main():
             help='keep implied -mtune=... despite architecture identical to -march=... '
             '(default: stripped away)')
     parser.add_argument('--keep-mno-flags', action='store_true',
-            help='keep -mno-* paramters (default: stripped away)')
+            help='keep -mno-* parameters (default: (superfluous ones) stripped away)')
     parser.add_argument('--keep-default-params', action='store_true',
             help='keep --param ... with values matching defaults (default: stripped away)')
     parser.add_argument('--version', action='version', version='%(prog)s ' + __version__)
