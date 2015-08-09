@@ -16,10 +16,10 @@ class TestSort(TestCase):
 			'--param l1-cache-line-size=64',
 		]
 		expected_order = [
-			'--param l1-cache-line-size=64',
-			'--param l1-cache-size=24',
 			'-march=bonnell',
 			'-mno-cx16',
+			'--param l1-cache-line-size=64',
+			'--param l1-cache-size=24',
 		]
 		actual_order = sorted(input_order, key=flags_sort_key)
 		self.assertEquals(actual_order, expected_order)
