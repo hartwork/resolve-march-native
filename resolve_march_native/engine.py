@@ -10,6 +10,10 @@ from resolve_march_native.runner import run
 
 
 class Engine(object):
+	def __init__(self, gcc_command, debug):
+		self._gcc_command = gcc_command
+		self._debug = debug
+
 	@staticmethod
 	def _extract_arch_from_flags(flags):
 		prefix = '-march='
@@ -41,8 +45,7 @@ class Engine(object):
 			if flag.startswith('-mno-'):
 				flag_set.remove(flag)
 
-	@staticmethod
-	def _resolve_default_params(flag_set, debug):
+	def _resolve_default_params(self, flag_set):
 		defaults = {
 			'l1-cache-line-size': 32,
 			'l1-cache-size': 64,
@@ -52,20 +55,20 @@ class Engine(object):
 
 		for flag in list(flag_set):
 			if flag in needle_set:
-				if debug:
+				if self._debug:
 					print('Stripping %s because it is repeating defaults, only.' % flag, file=sys.stderr)
 				flag_set.remove(flag)
 
 
-	def _get_march_native_flag_set(self, gcc_command, debug):
-		march_native_flag_set = set(extract_flags(run(gcc_command, ['-march=native'], debug)))
-		if debug:
+	def _get_march_native_flag_set(self):
+		march_native_flag_set = set(extract_flags(run(self._gcc_command, ['-march=native'], self._debug)))
+		if self._debug:
 			self._dump_flags(march_native_flag_set)
 		return march_native_flag_set
 
-	def _get_march_explicit_flag_set(self, gcc_command, debug, march_explicit):
-		march_explicit_flag_set = set(extract_flags(run(gcc_command, [march_explicit], debug)))
-		if debug:
+	def _get_march_explicit_flag_set(self, march_explicit):
+		march_explicit_flag_set = set(extract_flags(run(self._gcc_command, [march_explicit], self._debug)))
+		if self._debug:
 			self._dump_flags(march_explicit_flag_set)
 		return march_explicit_flag_set
 
@@ -82,14 +85,14 @@ class Engine(object):
 		if not options.keep_mno_flags:
 			self._resolve_mno_flags(native_unrolled_flag_set)
 		if not options.keep_default_params:
-			self._resolve_default_params(native_unrolled_flag_set, options.debug)
+			self._resolve_default_params(native_unrolled_flag_set)
 
 		return native_unrolled_flag_set
 
 	def run(self, options):
-		march_native_flag_set = self._get_march_native_flag_set(options.gcc, options.debug)
+		march_native_flag_set = self._get_march_native_flag_set()
 		arch = self._extract_arch_from_flags(march_native_flag_set)
 		march_explicit_flag_set = self._get_march_explicit_flag_set(
-				options.gcc, options.debug, self._get_march_explicit(arch))
+				self._get_march_explicit(arch))
 
 		return self._resolve(march_native_flag_set, march_explicit_flag_set, arch, options)

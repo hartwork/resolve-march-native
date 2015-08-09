@@ -33,8 +33,9 @@ class TestEngine(TestCase):
 			def _get_march_explicit_flag_set(self, *_):
 				return march_explicit_flag_set
 
-		engine = TestEngine()
-		received_flag_set = engine.run(TestOptions())
+		options = TestOptions()
+		engine = TestEngine(options.gcc, options.debug)
+		received_flag_set = engine.run(options)
 
 		self.assertEquals(received_flag_set, expected_flag_set)
 

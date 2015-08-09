@@ -40,7 +40,7 @@ def main():
     parser.add_argument('--version', action='version', version='%(prog)s ' + __version__)
     options = parser.parse_args()
 
-    native_unrolled_flag_set = Engine().run(options)
+    native_unrolled_flag_set = Engine(options.gcc, options.debug).run(options)
     if options.formatting == _VERTICAL:
         joiner = '\n'
     else:
