@@ -39,6 +39,19 @@ class TestEngine(TestCase):
 
 		self.assertEquals(received_flag_set, expected_flag_set)
 
+	def test_bonnell(self):
+		expected_flag_set = set((
+			'--param l1-cache-size=24',
+			'--param l1-cache-line-size=64',
+			'-march=bonnell',
+		))
+
+		self._test_engine(
+				expected_flag_set,
+				'bonnell--4-9-3-gentoo--native.s',
+				'bonnell--4-9-3-gentoo--explicit.s',
+				)
+
 	def test_corei7_avx(self):
 		expected_flag_set = set((
 			'--param l1-cache-line-size=64',
