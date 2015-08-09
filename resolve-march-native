@@ -10,7 +10,7 @@ from textwrap import dedent
 from resolve_march_native.engine import Engine
 from resolve_march_native.sort import flags_sort_key
 
-__version__ = '0_p20150806_p0441'
+__version__ = '0_p20150809_p1757'
 
 _HORIZONTAL, _VERTICAL = range(2)
 
