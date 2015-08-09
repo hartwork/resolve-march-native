@@ -8,6 +8,7 @@ import argparse
 from textwrap import dedent
 
 from resolve_march_native.engine import Engine
+from resolve_march_native.sort import flags_sort_key
 
 __version__ = '0_p20150806_p0441'
 
@@ -45,7 +46,7 @@ def main():
         joiner = '\n'
     else:
         joiner = ' '
-    print(joiner.join(sorted(native_unrolled_flag_set)))
+    print(joiner.join(sorted(native_unrolled_flag_set, key=flags_sort_key)))
 
 
 if __name__ == '__main__':
