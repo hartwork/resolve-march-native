@@ -5,4 +5,7 @@
 check:
 	py.test --doctest-modules
 
-.PHONY: check
+clean:
+	find -type f -name '*.pyc' -delete
+
+.PHONY: check clean
