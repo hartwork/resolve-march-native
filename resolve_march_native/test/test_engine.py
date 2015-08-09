@@ -51,3 +51,17 @@ class TestEngine(TestCase):
 				'corei7-avx--4-7-2-debian-wheezy--native.s',
 				'corei7-avx--4-7-2-debian-wheezy--explicit.s',
 				)
+
+	def test_westmere(self):
+		expected_flag_set = set((
+			'--param l1-cache-line-size=64',
+			'--param l1-cache-size=32',
+			'--param l2-cache-size=12288',
+			'-march=westmere',
+		))
+
+		self._test_engine(
+				expected_flag_set,
+				'westmere--4-9-3-gentoo--native.s',
+				'westmere--4-9-3-gentoo--explicit.s',
+				)
