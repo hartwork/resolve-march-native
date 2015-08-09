@@ -44,6 +44,7 @@ class TestEngine(TestCase):
 			'--param l1-cache-size=24',
 			'--param l1-cache-line-size=64',
 			'-march=bonnell',
+			'-mno-cx16',
 		))
 
 		self._test_engine(
