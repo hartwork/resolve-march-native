@@ -10,10 +10,10 @@ Example
 
 ```
 $ resolve-march-native --vertical
+-march=bonnell
+-mno-cx16
 --param l1-cache-line-size=64
---param l1-cache-size=32
---param l2-cache-size=3072
--march=corei7-avx
+--param l1-cache-size=24
 ```
 
 
@@ -34,7 +34,8 @@ optional arguments:
   --keep-identical-mtune
                         keep implied -mtune=... despite architecture identical
                         to -march=... (default: stripped away)
-  --keep-mno-flags      keep -mno-* paramters (default: stripped away)
+  --keep-mno-flags      keep -mno-* parameters (default: (superfluous ones)
+                        stripped away)
   --keep-default-params
                         keep --param ... with values matching defaults
                         (default: stripped away)
