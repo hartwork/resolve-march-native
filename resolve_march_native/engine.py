@@ -73,17 +73,9 @@ class Engine(object):
 	def _get_march_explicit(arch):
 		return '-march=%s' % arch
 
-	def _sanity_check(self, candidate_native_unrolled_flag_set, march_native_flag_set, gcc_command, debug):
-		if set(extract_flags(run(gcc_command, candidate_native_unrolled_flag_set, debug))) \
-				!= march_native_flag_set:
-			print('ERROR: Sanity checks failed, flag list may be mistaken', file=sys.stderr)
-			sys.exit(1)
-
 	def _resolve(self, march_native_flag_set, march_explicit_flag_set, arch, options):
 		native_unrolled_flag_set = march_native_flag_set - march_explicit_flag_set
 		native_unrolled_flag_set.add(self._get_march_explicit(arch))
-
-		self._sanity_check(native_unrolled_flag_set, march_native_flag_set, options.gcc, options.debug)
 
 		if not options.keep_identical_mtune:
 			self._resolve_mtune(native_unrolled_flag_set, arch)
