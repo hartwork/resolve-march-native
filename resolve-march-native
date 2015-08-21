@@ -5,6 +5,8 @@
 from __future__ import print_function
 
 import argparse
+import sys
+import traceback
 from textwrap import dedent
 
 from resolve_march_native.engine import Engine
@@ -44,7 +46,13 @@ def main():
     parser.add_argument('--version', action='version', version='%(prog)s ' + VERSION_STR)
     options = parser.parse_args()
 
-    native_unrolled_flag_set = Engine(options.gcc, options.debug).run(options)
+    try:
+        native_unrolled_flag_set = Engine(options.gcc, options.debug).run(options)
+    except BaseException as e:
+        if options.debug:
+            traceback.print_exc()
+        print('ERROR: %s' % str(e), file=sys.stderr)
+        sys.exit(1)
 
     if options.add_recommended:
         add_recommended_flags(native_unrolled_flag_set)
