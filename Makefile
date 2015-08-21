@@ -2,6 +2,9 @@
 # Copyright (C) 2015 Sebastian Pipping <sebastian@pipping.org>
 # Licensed under GPL v2 or later
 
+DESTDIR = /
+PREFIX = /usr/local
+
 check:
 	py.test --doctest-modules
 
@@ -12,4 +15,7 @@ dist:
 	$(RM) MANIFEST
 	./setup.py sdist
 
-.PHONY: check clean dist
+install:
+	./setup.py install --root "$(DESTDIR)" --prefix "$(PREFIX)"
+
+.PHONY: check clean dist install
