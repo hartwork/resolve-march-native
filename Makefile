@@ -8,4 +8,8 @@ check:
 clean:
 	find -type f -name '*.pyc' -delete
 
-.PHONY: check clean
+dist:
+	$(RM) MANIFEST
+	./setup.py sdist
+
+.PHONY: check clean dist
