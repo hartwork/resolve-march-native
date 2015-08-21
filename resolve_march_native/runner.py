@@ -43,7 +43,12 @@ def run(gcc_command, flags, debug):
 
             if debug:
                 print('# %s' % ' '.join(cmd), file=sys.stderr)
-            subprocess.check_output(cmd, env=env)
+
+            try:
+                subprocess.check_output(cmd, env=env)
+            except OSError as e:
+                e.strerror += ': "%s"' % gcc_command
+                raise
 
             try:
                 with open(output_filename, 'r') as f:
