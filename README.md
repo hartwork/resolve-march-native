@@ -24,7 +24,8 @@ Usage
 $ resolve-march-native --help
 usage: resolve-march-native [-h] [--debug] [--gcc COMMAND] [--vertical]
                             [--keep-identical-mtune] [--keep-mno-flags]
-                            [--keep-default-params] [--version]
+                            [--keep-default-params] [--add-recommended]
+                            [--version]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -39,6 +40,8 @@ optional arguments:
   --keep-default-params
                         keep --param ... with values matching defaults
                         (default: stripped away)
+  --add-recommended, -a
+                        add recommended flags (default: not added)
   --version             show program's version number and exit
 
 resolve-march-native is software libre licensed under GPL v2 or later,
