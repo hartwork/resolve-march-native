@@ -6,12 +6,17 @@ from distutils.core import setup
 
 from resolve_march_native.version import VERSION_STR
 
+def _read(filename):
+    with open(filename, 'r') as f:
+        return f.read()
+
 
 if __name__ == '__main__':
     setup(
             name='resolve-march-native',
             description='Tool to determine what GCC flags -march=native would resolve into',
-            license='GPL v2 or later',
+            long_description=_read('README.rst'),
+            license='GPLv2+',
             version=VERSION_STR,
             author='Sebastian Pipping',
             author_email='sebastian@pipping.org',
