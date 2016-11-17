@@ -2,7 +2,7 @@
 # Copyright (C) 2015 Sebastian Pipping <sebastian@pipping.org>
 # Licensed under GPL v2 or later
 
-from distutils.core import setup
+from setuptools import setup
 
 from resolve_march_native.version import VERSION_STR
 
