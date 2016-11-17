@@ -1,7 +1,6 @@
 # Copyright (C) 2015 Sebastian Pipping <sebastian@pipping.org>
 # Licensed under GPL v2 or later
 
-import os
 from unittest import TestCase
 
 from resolve_march_native.sort import flags_sort_key
