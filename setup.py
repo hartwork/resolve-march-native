@@ -1,4 +1,4 @@
-#! /usr/bin/env python2
+#! /usr/bin/env python
 # Copyright (C) 2015 Sebastian Pipping <sebastian@pipping.org>
 # Licensed under GPL v2 or later
 
@@ -35,7 +35,13 @@ if __name__ == '__main__':
                 'License :: OSI Approved :: GNU General Public License v2 or later (GPLv2+)',
                 'Natural Language :: English',
                 'Operating System :: POSIX :: Linux',
+                'Programming Language :: Python',
+                'Programming Language :: Python :: 2',
                 'Programming Language :: Python :: 2.7',
+                'Programming Language :: Python :: 3',
+                'Programming Language :: Python :: 3.5',
+                'Programming Language :: Python :: 3.6',
+                'Programming Language :: Python :: 3.7',
                 'Topic :: Software Development :: Compilers',
                 'Topic :: Utilities',
             ],
