@@ -21,4 +21,4 @@ class TestSort(TestCase):
 			'--param l1-cache-size=24',
 		]
 		actual_order = sorted(input_order, key=flags_sort_key)
-		self.assertEquals(actual_order, expected_order)
+		self.assertEqual(actual_order, expected_order)

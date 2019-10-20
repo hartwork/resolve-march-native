@@ -153,4 +153,4 @@ class TestParser(TestCase):
 		with open('resolve_march_native/test/data/westmere--4-9-3-gentoo--native.s', 'r') as f:
 			received_flags = list(extract_flags(f.read()))
 
-		self.assertEquals(received_flags, self._EXPECTED_FLAGS_WESTMERE_NATIVE)
+		self.assertEqual(received_flags, self._EXPECTED_FLAGS_WESTMERE_NATIVE)

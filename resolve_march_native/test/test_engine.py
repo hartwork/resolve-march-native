@@ -37,7 +37,7 @@ class TestEngine(TestCase):
 		engine = TestEngine(options.gcc, options.debug)
 		received_flag_set = engine.run(options)
 
-		self.assertEquals(received_flag_set, expected_flag_set)
+		self.assertEqual(received_flag_set, expected_flag_set)
 
 	def test_bonnell(self):
 		expected_flag_set = set((
