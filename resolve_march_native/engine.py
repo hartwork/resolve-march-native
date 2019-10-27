@@ -9,6 +9,10 @@ from resolve_march_native.parser import extract_flags
 from resolve_march_native.runner import run
 
 
+class NoTunePresentError(Exception):
+	pass
+
+
 class Engine(object):
 	def __init__(self, gcc_command, debug):
 		self._gcc_command = gcc_command
@@ -28,16 +32,19 @@ class Engine(object):
 		for flag in flags:
 			if flag.startswith(prefix):
 				return (flag, flag[len(prefix):])
-		raise ValueError('No entry -tune=.. found in: %s' % ' '.join(sorted(flags)))
+		raise NoTunePresentError('No entry -tune=.. found in: %s' % ' '.join(sorted(flags)))
 
 	@staticmethod
 	def _dump_flags(flags):
 		print('Flags extracted: %s' % ' '.join(sorted(flags)), file=sys.stderr)
 
 	def _resolve_mtune(self, flag_set, arch):
-		flag, tune = self._extract_tune_from_flags(flag_set)
-		if tune == arch:
-			flag_set.remove(flag)
+		try:
+			flag, tune = self._extract_tune_from_flags(flag_set)
+			if tune == arch:
+				flag_set.remove(flag)
+		except NoTunePresentError:
+		    pass
 
 	@staticmethod
 	def _resolve_mno_flags(flag_set):
