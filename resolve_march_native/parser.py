@@ -14,7 +14,7 @@ def extract_flags(text):
     start_marker_seen = False
 
     for line in text.split('\n'):
-        if not line.startswith('#'):
+        if not (line.startswith('#') or line.startswith('@')):
             continue
 
         if not start_marker_seen:
