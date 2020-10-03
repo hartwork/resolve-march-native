@@ -8,7 +8,7 @@ from resolve_march_native.version import VERSION_STR
 
 
 def _read(filename):
-    with open(filename, 'r') as f:
+    with open(filename) as f:
         return f.read()
 
 

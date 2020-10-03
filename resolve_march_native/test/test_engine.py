@@ -12,13 +12,13 @@ class TestEngine(TestCase):
 	def _test_engine(self, expected_flag_set, basename_native, basename_explicit):
 		data_home = 'resolve_march_native/test/data'
 
-		with open(os.path.join(data_home, basename_native), 'r') as f:
+		with open(os.path.join(data_home, basename_native)) as f:
 			march_native_flag_set = set(extract_flags(f.read()))
 
-		with open(os.path.join(data_home, basename_explicit), 'r') as f:
+		with open(os.path.join(data_home, basename_explicit)) as f:
 			march_explicit_flag_set = set(extract_flags(f.read()))
 
-		class TestOptions(object):
+		class TestOptions:
 			def __init__(self):
 				self.gcc = 'gcc'
 				self.debug = False
@@ -40,9 +40,9 @@ class TestEngine(TestCase):
 		self.assertEqual(received_flag_set, expected_flag_set)
 
 	def test_armv8_a_crc(self):
-		expected_flag_set = set((
+		expected_flag_set = {
 			'-march=armv8-a+crc',
-		))
+		}
 
 		self._test_engine(
 				expected_flag_set,
@@ -51,12 +51,12 @@ class TestEngine(TestCase):
 				)
 
 	def test_bonnell(self):
-		expected_flag_set = set((
+		expected_flag_set = {
 			'--param l1-cache-size=24',
 			'--param l1-cache-line-size=64',
 			'-march=bonnell',
 			'-mno-cx16',
-		))
+		}
 
 		self._test_engine(
 				expected_flag_set,
@@ -65,12 +65,12 @@ class TestEngine(TestCase):
 				)
 
 	def test_corei7_avx(self):
-		expected_flag_set = set((
+		expected_flag_set = {
 			'--param l1-cache-line-size=64',
 			'--param l1-cache-size=32',
 			'--param l2-cache-size=3072',
 			'-march=corei7-avx',
-		))
+		}
 
 		self._test_engine(
 				expected_flag_set,
@@ -79,12 +79,12 @@ class TestEngine(TestCase):
 				)
 
 	def test_westmere(self):
-		expected_flag_set = set((
+		expected_flag_set = {
 			'--param l1-cache-line-size=64',
 			'--param l1-cache-size=32',
 			'--param l2-cache-size=12288',
 			'-march=westmere',
-		))
+		}
 
 		self._test_engine(
 				expected_flag_set,

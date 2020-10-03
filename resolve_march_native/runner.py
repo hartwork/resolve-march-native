@@ -49,7 +49,7 @@ def run(gcc_command, flags, debug):
                 raise
 
             try:
-                with open(output_filename, 'r') as f:
+                with open(output_filename) as f:
                     return f.read()
             finally:
                 os.remove(output_filename)

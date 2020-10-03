@@ -11,7 +11,7 @@ class NoTunePresentError(Exception):
 	pass
 
 
-class Engine(object):
+class Engine:
 	def __init__(self, gcc_command, debug):
 		self._gcc_command = gcc_command
 		self._debug = debug
@@ -56,7 +56,7 @@ class Engine(object):
 			'l1-cache-size': 64,
 			'l2-cache-size': 512,
 		}
-		needle_set = set(('--param %s=%s' % (k, v) for k, v in defaults.items()))
+		needle_set = {f'--param {k}={v}' for k, v in defaults.items()}
 
 		for flag in list(flag_set):
 			if flag in needle_set:

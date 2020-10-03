@@ -6,7 +6,7 @@ import re
 _param_pattern = '--param [^ \\n]+'
 _simple_pattern = '-[^ \\n]+'
 
-_flag_matcher = re.compile('(?:%s|%s)' % (_param_pattern, _simple_pattern))
+_flag_matcher = re.compile(f'(?:{_param_pattern}|{_simple_pattern})')
 
 
 def extract_flags(text):
