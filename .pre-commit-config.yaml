@@ -20,7 +20,7 @@ repos:
     rev: 3.8.4
     hooks:
       - id: flake8
-        args: ['--ignore', 'E101,E123,E126,E128,E501,W191,W503']
+        args: ['--ignore', 'E101,E123,E126,E128,E501,W503']
 
   - repo: https://github.com/pre-commit/mirrors-isort
     rev: v5.5.4
