@@ -22,7 +22,8 @@ class Engine:
         for flag in flags:
             if flag.startswith(prefix):
                 return flag[len(prefix):]
-        raise ValueError('No entry -march=.. found in: %s' % ' '.join(sorted(flags)))
+        raise ValueError('No entry -march=.. found in: %s' %
+                         ' '.join(sorted(flags)))
 
     @staticmethod
     def _extract_tune_from_flags(flags):
@@ -30,7 +31,8 @@ class Engine:
         for flag in flags:
             if flag.startswith(prefix):
                 return (flag, flag[len(prefix):])
-        raise NoTunePresentError('No entry -tune=.. found in: %s' % ' '.join(sorted(flags)))
+        raise NoTunePresentError(
+            'No entry -tune=.. found in: %s' % ' '.join(sorted(flags)))
 
     @staticmethod
     def _dump_flags(flags):
@@ -61,17 +63,20 @@ class Engine:
         for flag in list(flag_set):
             if flag in needle_set:
                 if self._debug:
-                    print('Stripping %s because it is repeating defaults, only.' % flag, file=sys.stderr)
+                    print('Stripping %s because it is repeating defaults, only.' %
+                          flag, file=sys.stderr)
                 flag_set.remove(flag)
 
     def _get_march_native_flag_set(self):
-        march_native_flag_set = set(extract_flags(run(self._gcc_command, ['-march=native'], self._debug)))
+        march_native_flag_set = set(extract_flags(
+            run(self._gcc_command, ['-march=native'], self._debug)))
         if self._debug:
             self._dump_flags(march_native_flag_set)
         return march_native_flag_set
 
     def _get_march_explicit_flag_set(self, march_explicit):
-        march_explicit_flag_set = set(extract_flags(run(self._gcc_command, [march_explicit], self._debug)))
+        march_explicit_flag_set = set(extract_flags(
+            run(self._gcc_command, [march_explicit], self._debug)))
         if self._debug:
             self._dump_flags(march_explicit_flag_set)
         return march_explicit_flag_set
@@ -80,14 +85,17 @@ class Engine:
     def _get_march_explicit(arch):
         return '-march=%s' % arch
 
-    def _process_flags_explicit_has_more(self, target_set, march_native_flag_set, march_explicit_flag_set):
+    def _process_flags_explicit_has_more(self, target_set,
+                                         march_native_flag_set,
+                                         march_explicit_flag_set):
         PREFIX_NO = '-mno-'
         PREFIX_YES = '-m'
 
         explicit_more_flag_set = march_explicit_flag_set - march_native_flag_set
         for flag in explicit_more_flag_set:
             if not flag.startswith('-m'):
-                print('Unsure what to do about flag %s, please report this as a bug.' % flag, file=sys.stderr)
+                print('Unsure what to do about flag %s, please report this as a bug.' %
+                      flag, file=sys.stderr)
                 continue
 
             if not flag.startswith(PREFIX_NO) and flag.startswith(PREFIX_YES):
@@ -109,7 +117,7 @@ class Engine:
         # NOTE: The next step needs to go after resolution of -mno-* flags
         #       since it may add new -mno-* flags
         self._process_flags_explicit_has_more(native_unrolled_flag_set,
-                march_native_flag_set, march_explicit_flag_set)
+                                              march_native_flag_set, march_explicit_flag_set)
 
         return native_unrolled_flag_set
 
@@ -117,6 +125,6 @@ class Engine:
         march_native_flag_set = self._get_march_native_flag_set()
         arch = self._extract_arch_from_flags(march_native_flag_set)
         march_explicit_flag_set = self._get_march_explicit_flag_set(
-                self._get_march_explicit(arch))
+            self._get_march_explicit(arch))
 
         return self._resolve(march_native_flag_set, march_explicit_flag_set, arch, options)

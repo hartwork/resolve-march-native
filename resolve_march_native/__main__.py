@@ -18,35 +18,39 @@ _HORIZONTAL, _VERTICAL = range(2)
 
 def _inner_main():
     parser = argparse.ArgumentParser(
-            prog='resolve-march-native',
-            formatter_class=argparse.RawDescriptionHelpFormatter,
-            epilog=dedent("""\
+        prog='resolve-march-native',
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog=dedent("""\
                 %(prog)s is software libre licensed under GPL v2 or later,
                 written by Sebastian Pipping.  Please report bugs to
                 https://github.com/hartwork/resolve-march-native/issues.  Thanks!
                 """),
-            )
+    )
     parser.add_argument('--debug', action='store_true',
-            help='enable debugging (default: disabled)')
+                        help='enable debugging (default: disabled)')
     parser.add_argument('--gcc', default='gcc', metavar='COMMAND',
-            help='gcc command (default: %(default)s)')
+                        help='gcc command (default: %(default)s)')
     parser.add_argument('--vertical', dest='formatting',
-            default=_HORIZONTAL, action='store_const', const=_VERTICAL,
-            help='produce vertical output (default: horizontal output)')
+                        default=_HORIZONTAL, action='store_const', const=_VERTICAL,
+                        help='produce vertical output (default: horizontal output)')
     parser.add_argument('--keep-identical-mtune', action='store_true',
-            help='keep implied -mtune=... despite architecture identical to -march=... '
-            '(default: stripped away)')
+                        help='keep implied -mtune=...'
+                             ' despite architecture identical to -march=... '
+                        '(default: stripped away)')
     parser.add_argument('--keep-mno-flags', action='store_true',
-            help='keep -mno-* parameters (default: (superfluous ones) stripped away)')
+                        help='keep -mno-* parameters (default: (superfluous ones) stripped away)')
     parser.add_argument('--keep-default-params', action='store_true',
-            help='keep --param ... with values matching defaults (default: stripped away)')
+                        help='keep --param ... with values matching defaults'
+                             ' (default: stripped away)')
     parser.add_argument('--add-recommended', '-a', action='store_true',
-            help='add recommended flags (default: not added)')
-    parser.add_argument('--version', action='version', version='%(prog)s ' + VERSION_STR)
+                        help='add recommended flags (default: not added)')
+    parser.add_argument('--version', action='version',
+                        version='%(prog)s ' + VERSION_STR)
     options = parser.parse_args()
 
     try:
-        native_unrolled_flag_set = Engine(options.gcc, options.debug).run(options)
+        native_unrolled_flag_set = Engine(
+            options.gcc, options.debug).run(options)
     except Exception as e:
         if options.debug:
             traceback.print_exc()

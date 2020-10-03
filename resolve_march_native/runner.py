@@ -27,11 +27,11 @@ def run(gcc_command, flags, debug):
         try:
             output_filename = os.path.join(tempdir, 'march_native.s')
             cmd = [
-                    gcc_command,
-                    '-S', '-fverbose-asm',
-                    '-o', output_filename,
-                    input_filename,
-                    ] + list(_fix_flags(flags))
+                gcc_command,
+                '-S', '-fverbose-asm',
+                '-o', output_filename,
+                input_filename,
+            ] + list(_fix_flags(flags))
             env = os.environ.copy()
             env.update({
                 'LC_ALL': 'C',

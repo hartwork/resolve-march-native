@@ -14,37 +14,37 @@ def _read(filename):
 
 if __name__ == '__main__':
     setup(
-            name='resolve-march-native',
-            description='Tool to determine what GCC flags -march=native would resolve into',
-            long_description=_read('README.rst'),
-            license='GPLv2+',
-            version=VERSION_STR,
-            author='Sebastian Pipping',
-            author_email='sebastian@pipping.org',
-            url='https://github.com/hartwork/resolve-march-native',
-            packages=[
+        name='resolve-march-native',
+        description='Tool to determine what GCC flags -march=native would resolve into',
+        long_description=_read('README.rst'),
+        license='GPLv2+',
+        version=VERSION_STR,
+        author='Sebastian Pipping',
+        author_email='sebastian@pipping.org',
+        url='https://github.com/hartwork/resolve-march-native',
+        packages=[
                 'resolve_march_native',
+        ],
+        entry_points={
+            'console_scripts': [
+                'resolve-march-native = resolve_march_native.__main__:main',
             ],
-            entry_points={
-                'console_scripts': [
-                    'resolve-march-native = resolve_march_native.__main__:main',
-                ],
-            },
-            classifiers=[
-                'Development Status :: 4 - Beta',
-                'Environment :: Console',
-                'Intended Audience :: End Users/Desktop',
-                'Intended Audience :: System Administrators',
-                'License :: OSI Approved :: GNU General Public License v2 or later (GPLv2+)',
-                'Natural Language :: English',
-                'Operating System :: POSIX :: Linux',
-                'Programming Language :: Python',
-                'Programming Language :: Python :: 3',
-                'Programming Language :: Python :: 3.6',
-                'Programming Language :: Python :: 3.7',
-                'Programming Language :: Python :: 3.8',
-                'Programming Language :: Python :: 3 :: Only',
-                'Topic :: Software Development :: Compilers',
-                'Topic :: Utilities',
-            ],
-            )
+        },
+        classifiers=[
+            'Development Status :: 4 - Beta',
+            'Environment :: Console',
+            'Intended Audience :: End Users/Desktop',
+            'Intended Audience :: System Administrators',
+            'License :: OSI Approved :: GNU General Public License v2 or later (GPLv2+)',
+            'Natural Language :: English',
+            'Operating System :: POSIX :: Linux',
+            'Programming Language :: Python',
+            'Programming Language :: Python :: 3',
+            'Programming Language :: Python :: 3.6',
+            'Programming Language :: Python :: 3.7',
+            'Programming Language :: Python :: 3.8',
+            'Programming Language :: Python :: 3 :: Only',
+            'Topic :: Software Development :: Compilers',
+            'Topic :: Utilities',
+        ],
+    )

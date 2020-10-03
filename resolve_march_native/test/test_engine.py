@@ -45,10 +45,10 @@ class TestEngine(TestCase):
         }
 
         self._test_engine(
-                expected_flag_set,
-                'armv8-a+crc--9-3-0-gentoo--native.s',
-                'armv8-a+crc--9-3-0-gentoo--explicit.s',
-                )
+            expected_flag_set,
+            'armv8-a+crc--9-3-0-gentoo--native.s',
+            'armv8-a+crc--9-3-0-gentoo--explicit.s',
+        )
 
     def test_bonnell(self):
         expected_flag_set = {
@@ -59,10 +59,10 @@ class TestEngine(TestCase):
         }
 
         self._test_engine(
-                expected_flag_set,
-                'bonnell--4-9-3-gentoo--native.s',
-                'bonnell--4-9-3-gentoo--explicit.s',
-                )
+            expected_flag_set,
+            'bonnell--4-9-3-gentoo--native.s',
+            'bonnell--4-9-3-gentoo--explicit.s',
+        )
 
     def test_corei7_avx(self):
         expected_flag_set = {
@@ -73,10 +73,10 @@ class TestEngine(TestCase):
         }
 
         self._test_engine(
-                expected_flag_set,
-                'corei7-avx--4-7-2-debian-wheezy--native.s',
-                'corei7-avx--4-7-2-debian-wheezy--explicit.s',
-                )
+            expected_flag_set,
+            'corei7-avx--4-7-2-debian-wheezy--native.s',
+            'corei7-avx--4-7-2-debian-wheezy--explicit.s',
+        )
 
     def test_westmere(self):
         expected_flag_set = {
@@ -87,7 +87,7 @@ class TestEngine(TestCase):
         }
 
         self._test_engine(
-                expected_flag_set,
-                'westmere--4-9-3-gentoo--native.s',
-                'westmere--4-9-3-gentoo--explicit.s',
-                )
+            expected_flag_set,
+            'westmere--4-9-3-gentoo--native.s',
+            'westmere--4-9-3-gentoo--explicit.s',
+        )
