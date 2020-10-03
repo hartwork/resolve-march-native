@@ -39,6 +39,17 @@ class TestEngine(TestCase):
 
 		self.assertEqual(received_flag_set, expected_flag_set)
 
+	def test_armv8_a_crc(self):
+		expected_flag_set = set((
+			'-march=armv8-a+crc',
+		))
+
+		self._test_engine(
+				expected_flag_set,
+				'armv8-a+crc--9-3-0-gentoo--native.s',
+				'armv8-a+crc--9-3-0-gentoo--explicit.s',
+				)
+
 	def test_bonnell(self):
 		expected_flag_set = set((
 			'--param l1-cache-size=24',
