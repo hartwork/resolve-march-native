@@ -8,10 +8,10 @@ import sys
 import traceback
 from textwrap import dedent
 
-from resolve_march_native.engine import Engine
-from resolve_march_native.recommended import add_recommended_flags
-from resolve_march_native.sort import flags_sort_key
-from resolve_march_native.version import VERSION_STR
+from .engine import Engine
+from .recommended import add_recommended_flags
+from .sort import flags_sort_key
+from .version import VERSION_STR
 
 
 _HORIZONTAL, _VERTICAL = range(2)

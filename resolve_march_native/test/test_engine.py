@@ -4,8 +4,8 @@
 import os
 from unittest import TestCase
 
-from resolve_march_native.parser import extract_flags
-from resolve_march_native.engine import Engine
+from ..parser import extract_flags
+from ..engine import Engine
 
 
 class TestEngine(TestCase):

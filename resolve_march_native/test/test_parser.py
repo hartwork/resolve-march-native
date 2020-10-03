@@ -3,7 +3,7 @@
 
 from unittest import TestCase
 
-from resolve_march_native.parser import extract_flags
+from ..parser import extract_flags
 
 
 class TestParser(TestCase):

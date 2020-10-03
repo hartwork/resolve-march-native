@@ -3,8 +3,8 @@
 
 import sys
 
-from resolve_march_native.parser import extract_flags
-from resolve_march_native.runner import run
+from .parser import extract_flags
+from .runner import run
 
 
 class NoTunePresentError(Exception):
