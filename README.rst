@@ -47,4 +47,3 @@ Usage
     resolve-march-native is software libre licensed under GPL v2 or later,
     written by Sebastian Pipping.  Please report bugs to
     https://github.com/hartwork/resolve-march-native/issues.  Thanks!
-
