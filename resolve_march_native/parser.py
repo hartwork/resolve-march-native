@@ -3,7 +3,6 @@
 
 import re
 
-
 _param_pattern = '--param [^ \\n]+'
 _simple_pattern = '-[^ \\n]+'
 

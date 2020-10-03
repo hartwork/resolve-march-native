@@ -4,8 +4,8 @@
 import os
 from unittest import TestCase
 
-from ..parser import extract_flags
 from ..engine import Engine
+from ..parser import extract_flags
 
 
 class TestEngine(TestCase):

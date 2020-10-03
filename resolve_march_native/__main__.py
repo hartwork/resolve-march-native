@@ -13,7 +13,6 @@ from .recommended import add_recommended_flags
 from .sort import flags_sort_key
 from .version import VERSION_STR
 
-
 _HORIZONTAL, _VERTICAL = range(2)
 
 

@@ -6,6 +6,7 @@ from setuptools import setup
 
 from resolve_march_native.version import VERSION_STR
 
+
 def _read(filename):
     with open(filename, 'r') as f:
         return f.read()
