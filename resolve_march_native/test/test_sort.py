@@ -3,7 +3,7 @@
 
 from unittest import TestCase
 
-from resolve_march_native.sort import flags_sort_key
+from ..sort import flags_sort_key
 
 
 class TestSort(TestCase):

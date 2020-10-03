@@ -1,8 +1,6 @@
 # Copyright (C) 2015 Sebastian Pipping <sebastian@pipping.org>
 # Licensed under GPL v2 or later
 
-from __future__ import print_function
-
 import os
 import subprocess
 import sys
@@ -51,7 +49,7 @@ def run(gcc_command, flags, debug):
                 raise
 
             try:
-                with open(output_filename, 'r') as f:
+                with open(output_filename) as f:
                     return f.read()
             finally:
                 os.remove(output_filename)

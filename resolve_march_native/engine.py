@@ -1,19 +1,17 @@
 # Copyright (C) 2015 Sebastian Pipping <sebastian@pipping.org>
 # Licensed under GPL v2 or later
 
-from __future__ import print_function
-
 import sys
 
-from resolve_march_native.parser import extract_flags
-from resolve_march_native.runner import run
+from .parser import extract_flags
+from .runner import run
 
 
 class NoTunePresentError(Exception):
 	pass
 
 
-class Engine(object):
+class Engine:
 	def __init__(self, gcc_command, debug):
 		self._gcc_command = gcc_command
 		self._debug = debug
@@ -58,7 +56,7 @@ class Engine(object):
 			'l1-cache-size': 64,
 			'l2-cache-size': 512,
 		}
-		needle_set = set(('--param %s=%s' % (k, v) for k, v in defaults.items()))
+		needle_set = {f'--param {k}={v}' for k, v in defaults.items()}
 
 		for flag in list(flag_set):
 			if flag in needle_set:

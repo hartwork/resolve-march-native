@@ -6,8 +6,9 @@ from setuptools import setup
 
 from resolve_march_native.version import VERSION_STR
 
+
 def _read(filename):
-    with open(filename, 'r') as f:
+    with open(filename) as f:
         return f.read()
 
 
@@ -24,9 +25,11 @@ if __name__ == '__main__':
             packages=[
                 'resolve_march_native',
             ],
-            scripts=[
-                'resolve-march-native',
-            ],
+            entry_points={
+                'console_scripts': [
+                    'resolve-march-native = resolve_march_native.__main__:main',
+                ],
+            },
             classifiers=[
                 'Development Status :: 4 - Beta',
                 'Environment :: Console',
@@ -36,12 +39,11 @@ if __name__ == '__main__':
                 'Natural Language :: English',
                 'Operating System :: POSIX :: Linux',
                 'Programming Language :: Python',
-                'Programming Language :: Python :: 2',
-                'Programming Language :: Python :: 2.7',
                 'Programming Language :: Python :: 3',
-                'Programming Language :: Python :: 3.5',
                 'Programming Language :: Python :: 3.6',
                 'Programming Language :: Python :: 3.7',
+                'Programming Language :: Python :: 3.8',
+                'Programming Language :: Python :: 3 :: Only',
                 'Topic :: Software Development :: Compilers',
                 'Topic :: Utilities',
             ],

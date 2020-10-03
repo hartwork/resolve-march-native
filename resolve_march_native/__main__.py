@@ -2,25 +2,23 @@
 # Copyright (C) 2015 Sebastian Pipping <sebastian@pipping.org>
 # Licensed under GPL v2 or later
 
-from __future__ import print_function
-
 import argparse
 import signal
 import sys
 import traceback
 from textwrap import dedent
 
-from resolve_march_native.engine import Engine
-from resolve_march_native.recommended import add_recommended_flags
-from resolve_march_native.sort import flags_sort_key
-from resolve_march_native.version import VERSION_STR
-
+from .engine import Engine
+from .recommended import add_recommended_flags
+from .sort import flags_sort_key
+from .version import VERSION_STR
 
 _HORIZONTAL, _VERTICAL = range(2)
 
 
-def main():
+def _inner_main():
     parser = argparse.ArgumentParser(
+            prog='resolve-march-native',
             formatter_class=argparse.RawDescriptionHelpFormatter,
             epilog=dedent("""\
                 %(prog)s is software libre licensed under GPL v2 or later,
@@ -65,8 +63,12 @@ def main():
     print(joiner.join(sorted(native_unrolled_flag_set, key=flags_sort_key)))
 
 
-if __name__ == '__main__':
+def main():
     try:
-        main()
+        _inner_main()
     except KeyboardInterrupt:
         sys.exit(128 + signal.SIGINT)
+
+
+if __name__ == '__main__':
+    main()
