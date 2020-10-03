@@ -17,8 +17,9 @@ from resolve_march_native.version import VERSION_STR
 _HORIZONTAL, _VERTICAL = range(2)
 
 
-def main():
+def _inner_main():
     parser = argparse.ArgumentParser(
+            prog='resolve-march-native',
             formatter_class=argparse.RawDescriptionHelpFormatter,
             epilog=dedent("""\
                 %(prog)s is software libre licensed under GPL v2 or later,
@@ -63,8 +64,12 @@ def main():
     print(joiner.join(sorted(native_unrolled_flag_set, key=flags_sort_key)))
 
 
-if __name__ == '__main__':
+def main():
     try:
-        main()
+        _inner_main()
     except KeyboardInterrupt:
         sys.exit(128 + signal.SIGINT)
+
+
+if __name__ == '__main__':
+    main()

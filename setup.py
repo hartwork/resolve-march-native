@@ -24,9 +24,11 @@ if __name__ == '__main__':
             packages=[
                 'resolve_march_native',
             ],
-            scripts=[
-                'resolve-march-native',
-            ],
+            entry_points={
+                'console_scripts': [
+                    'resolve-march-native = resolve_march_native.__main__:main',
+                ],
+            },
             classifiers=[
                 'Development Status :: 4 - Beta',
                 'Environment :: Console',
