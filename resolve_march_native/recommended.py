@@ -2,9 +2,9 @@
 # Licensed under GPL v2 or later
 
 _RECOMMENDED_FLAGS = (
-        '-O2',
-        '-pipe',
-        )
+    '-O2',
+    '-pipe',
+)
 
 
 def add_recommended_flags(flag_set):
