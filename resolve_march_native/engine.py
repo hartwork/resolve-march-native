@@ -74,9 +74,9 @@ class Engine:
             self._dump_flags(march_native_flag_set)
         return march_native_flag_set
 
-    def _get_march_explicit_flag_set(self, march_explicit):
+    def _get_march_explicit_flag_set(self, arch):
         march_explicit_flag_set = set(extract_flags(
-            run(self._gcc_command, [march_explicit], self._debug)))
+            run(self._gcc_command, [self._get_march_explicit(arch)], self._debug)))
         if self._debug:
             self._dump_flags(march_explicit_flag_set)
         return march_explicit_flag_set
@@ -125,6 +125,6 @@ class Engine:
         march_native_flag_set = self._get_march_native_flag_set()
         arch = self._extract_arch_from_flags(march_native_flag_set)
         march_explicit_flag_set = self._get_march_explicit_flag_set(
-            self._get_march_explicit(arch))
+            arch)
 
         return self._resolve(march_native_flag_set, march_explicit_flag_set, arch, options)
