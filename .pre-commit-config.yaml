@@ -1,6 +1,8 @@
 # Copyright (C) 2020 Sebastian Pipping <sebastian@pipping.org>
 # Licensed under GPL v2 or later
 
+exclude: '^resolve_march_native/test/data/'
+
 repos:
   - repo: https://github.com/asottile/pyupgrade
     rev: v2.34.0
