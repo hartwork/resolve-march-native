@@ -54,6 +54,7 @@ class TestEngine(TestCase):
         expected_flag_set = {
             '--param l1-cache-size=24',
             '--param l1-cache-line-size=64',
+            '--param l2-cache-size=512',
             '-march=bonnell',
             '-mno-cx16',
         }

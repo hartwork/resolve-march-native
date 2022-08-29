@@ -39,9 +39,6 @@ def _inner_main():
                         '(default: stripped away)')
     parser.add_argument('--keep-mno-flags', action='store_true',
                         help='keep -mno-* parameters (default: (superfluous ones) stripped away)')
-    parser.add_argument('--keep-default-params', action='store_true',
-                        help='keep --param ... with values matching defaults'
-                             ' (default: stripped away)')
     parser.add_argument('--add-recommended', '-a', action='store_true',
                         help='add recommended flags (default: not added)')
     parser.add_argument('--version', action='version',

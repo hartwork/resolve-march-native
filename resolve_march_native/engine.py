@@ -52,21 +52,6 @@ class Engine:
             if flag.startswith('-mno-'):
                 flag_set.remove(flag)
 
-    def _resolve_default_params(self, flag_set):
-        defaults = {
-            'l1-cache-line-size': 32,
-            'l1-cache-size': 64,
-            'l2-cache-size': 512,
-        }
-        needle_set = {f'--param {k}={v}' for k, v in defaults.items()}
-
-        for flag in list(flag_set):
-            if flag in needle_set:
-                if self._debug:
-                    print('Stripping %s because it is repeating defaults, only.' %
-                          flag, file=sys.stderr)
-                flag_set.remove(flag)
-
     def _get_march_native_flag_set(self):
         march_native_flag_set = set(extract_flags(
             run(self._gcc_command, ['-march=native'], self._debug)))
@@ -111,8 +96,6 @@ class Engine:
             self._resolve_mtune(native_unrolled_flag_set, arch)
         if not options.keep_mno_flags:
             self._resolve_mno_flags(native_unrolled_flag_set)
-        if not options.keep_default_params:
-            self._resolve_default_params(native_unrolled_flag_set)
 
         # NOTE: The next step needs to go after resolution of -mno-* flags
         #       since it may add new -mno-* flags
