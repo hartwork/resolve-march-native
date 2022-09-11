@@ -21,13 +21,12 @@ Usage
 
 ::
 
-    $ resolve-march-native --help
+    $ COLUMNS=80 resolve-march-native --help
     usage: resolve-march-native [-h] [--debug] [--gcc COMMAND] [--vertical]
                                 [--keep-identical-mtune] [--keep-mno-flags]
-                                [--keep-default-params] [--add-recommended]
-                                [--version]
+                                [--add-recommended] [--version]
 
-    optional arguments:
+    options:
       -h, --help            show this help message and exit
       --debug               enable debugging (default: disabled)
       --gcc COMMAND         gcc command (default: gcc)
@@ -37,9 +36,6 @@ Usage
                             to -march=... (default: stripped away)
       --keep-mno-flags      keep -mno-* parameters (default: (superfluous ones)
                             stripped away)
-      --keep-default-params
-                            keep --param ... with values matching defaults
-                            (default: stripped away)
       --add-recommended, -a
                             add recommended flags (default: not added)
       --version             show program's version number and exit
