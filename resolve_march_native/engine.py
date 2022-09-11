@@ -5,6 +5,7 @@ import sys
 
 from .parser import extract_flags
 from .runner import run
+from .target_help_parser import get_flags_implied_by_march
 
 
 class NoTunePresentError(Exception):
@@ -72,11 +73,17 @@ class Engine:
             run(self._gcc_command, ['-march=native'], self._debug)))
         if self._debug:
             self._dump_flags(march_native_flag_set)
+        march_native_flag_set |= set(get_flags_implied_by_march('native', gcc=self._gcc_command))
+        if self._debug:
+            self._dump_flags(march_native_flag_set)
         return march_native_flag_set
 
-    def _get_march_explicit_flag_set(self, march_explicit):
+    def _get_march_explicit_flag_set(self, arch):
         march_explicit_flag_set = set(extract_flags(
-            run(self._gcc_command, [march_explicit], self._debug)))
+            run(self._gcc_command, [self._get_march_explicit(arch)], self._debug)))
+        if self._debug:
+            self._dump_flags(march_explicit_flag_set)
+        march_explicit_flag_set |= set(get_flags_implied_by_march(arch, gcc=self._gcc_command))
         if self._debug:
             self._dump_flags(march_explicit_flag_set)
         return march_explicit_flag_set
@@ -104,6 +111,11 @@ class Engine:
                 target_set.add(opposite_flag)
 
     def _resolve(self, march_native_flag_set, march_explicit_flag_set, arch, options):
+        if options.keep_identical_mtune:
+            # NOTE: Set ``march_explicit_flag_set`` will be subtracted below and it may contain
+            #       ``-mtune={arch}``.  So by removing mtune from the remove list, it survives.
+            self._resolve_mtune(march_explicit_flag_set, arch)
+
         native_unrolled_flag_set = march_native_flag_set - march_explicit_flag_set
         native_unrolled_flag_set.add(self._get_march_explicit(arch))
 
@@ -125,6 +137,6 @@ class Engine:
         march_native_flag_set = self._get_march_native_flag_set()
         arch = self._extract_arch_from_flags(march_native_flag_set)
         march_explicit_flag_set = self._get_march_explicit_flag_set(
-            self._get_march_explicit(arch))
+            arch)
 
         return self._resolve(march_native_flag_set, march_explicit_flag_set, arch, options)
