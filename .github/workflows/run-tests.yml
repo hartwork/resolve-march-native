@@ -25,3 +25,9 @@ jobs:
         set -x
         python --version
         python setup.py test
+
+    - name: Smoke test the CLI
+      run: |
+        set -x
+        pip install -e .
+        resolve-march-native --gcc=gcc-10 --vertical
