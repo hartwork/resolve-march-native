@@ -55,6 +55,9 @@ def _parse_gcc_output(gcc_output: str) -> List[str]:
         if line.endswith('[default]'):
             continue
 
+        if line.endswith('[available in C++]'):  # on macOS
+            continue
+
         if line.endswith('[enabled]'):
             flag = _enabled_line_pattern.match(line).group('flag')
             flags.append(flag)

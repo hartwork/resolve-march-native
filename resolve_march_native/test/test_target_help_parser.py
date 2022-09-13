@@ -98,3 +98,7 @@ class GetFlagsImpliedByMarchTest(TestCase):
 class ParseGccOutputTest(TestCase):
     def test_deprecated_lines(self):
         self.assertEqual(_parse_gcc_output('  -mfused-madd                \t\t'), [])
+
+    def test_ignore_lines(self):
+        self.assertEqual(_parse_gcc_output('  -fapple-kext                \t\t[available in C++]'),
+                         [])
