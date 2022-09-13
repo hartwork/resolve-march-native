@@ -1,9 +1,12 @@
 # Copyright (C) 2022 Sebastian Pipping <sebastian@pipping.org>
 # Licensed under GPL v2 or later
 
+import os
 import re
 import subprocess
 from typing import List
+
+from .environment import enforce_c_locale
 
 # Example lines:
 # "  -m128bit-long-double                  [enabled]"
@@ -27,7 +30,9 @@ def get_flags_implied_by_march(arch: str, gcc=None) -> List[str]:
     if gcc is None:
         gcc = 'gcc'
     argv = [gcc, '-Q', f'-march={arch}', '--help=target']
-    gcc_output = subprocess.check_output(argv).decode('UTF-8')
+    env = os.environ.copy()
+    enforce_c_locale(env)
+    gcc_output = subprocess.check_output(argv, env=env).decode('UTF-8')
 
     flags: List[str] = []
 
