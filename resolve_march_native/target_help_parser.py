@@ -19,6 +19,12 @@ _enabled_line_pattern = re.compile(r'^\s+(?P<flag>-[^ ]+)\s+\[enabled\]$')
 _value_line_pattern = re.compile(r'^\s+(?P<flag>-[^ =]+)=(?:<.+>)?\s+(?P<value>.*)$')
 
 # Example lines:
+# "  -mfused-madd                \t\t"
+# "  -mintel-syntax              \t\t"
+# "  -msse5                      \t\t"
+_deprecated_or_removed_line_pattern = re.compile(r'^\s+(?P<flag>-[^ =]+)\s+$')
+
+# Example lines:
 # "  -mfused-madd                          -ffp-contract=fast"
 # "  -mintel-syntax                        -masm=intel"
 # "  -mprefer-avx128                       -mprefer-vector-width=128"
@@ -52,6 +58,10 @@ def _parse_gcc_output(gcc_output: str) -> List[str]:
         if line.endswith('[enabled]'):
             flag = _enabled_line_pattern.match(line).group('flag')
             flags.append(flag)
+            continue
+
+        deprecated_line_match = _deprecated_or_removed_line_pattern.match(line)
+        if deprecated_line_match is not None:
             continue
 
         alias_line_match = _alias_line_pattern.match(line)

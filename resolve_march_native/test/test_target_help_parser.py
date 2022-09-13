@@ -6,7 +6,7 @@ from unittest.mock import patch
 
 from pkg_resources import resource_filename
 
-from ..target_help_parser import get_flags_implied_by_march
+from ..target_help_parser import _parse_gcc_output, get_flags_implied_by_march
 
 
 class GetFlagsImpliedByMarchTest(TestCase):
@@ -93,3 +93,8 @@ class GetFlagsImpliedByMarchTest(TestCase):
         with patch('subprocess.check_output', return_value=stdout_mock_bytes):
             actual_flags = get_flags_implied_by_march('sandybridge')
         self.assertEqual(actual_flags, expected_flags)
+
+
+class ParseGccOutputTest(TestCase):
+    def test_deprecated_lines(self):
+        self.assertEqual(_parse_gcc_output('  -mfused-madd                \t\t'), [])
