@@ -33,7 +33,10 @@ def get_flags_implied_by_march(arch: str, gcc=None) -> List[str]:
     env = os.environ.copy()
     enforce_c_locale(env)
     gcc_output = subprocess.check_output(argv, env=env).decode('UTF-8')
+    return _parse_gcc_output(gcc_output)
 
+
+def _parse_gcc_output(gcc_output: str) -> List[str]:
     flags: List[str] = []
 
     for line in gcc_output.split('\n'):
