@@ -6,6 +6,8 @@ import subprocess
 import sys
 import tempfile
 
+from .environment import enforce_c_locale
+
 
 def _fix_flags(flags):
     prefix = '--param '
@@ -33,11 +35,7 @@ def run(gcc_command, flags, debug):
                 input_filename,
             ] + list(_fix_flags(flags))
             env = os.environ.copy()
-            env.update({
-                'LC_ALL': 'C',
-            })
-            for key in ('LANG', 'LANGUAGE'):
-                env.pop(key, None)
+            enforce_c_locale(env)
 
             if debug:
                 print('# %s' % ' '.join(cmd), file=sys.stderr)
