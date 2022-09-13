@@ -16,7 +16,11 @@ _enabled_line_pattern = re.compile(r'^\s+(?P<flag>-[^ ]+)\s+\[enabled\]$')
 # Example lines:
 # "  -mincoming-stack-boundary=            0"
 # "  -mindirect-branch=                    keep"
-_value_line_pattern = re.compile(r'^\s+(?P<flag>-[^ =]+)=(?:<.+>)?\s+(?P<value>.*)$')
+_assign_value_line_pattern = re.compile(r'^\s+(?P<flag>-[^ =]+)=(?:<.+>)?\s+(?P<value>.*)$')
+
+# Example lines:
+# "  -mtarget-linker <version>   \t\t711"
+_space_value_line_pattern = re.compile(r'^\s+(?P<flag>-[^ =]+) <[^>]+>\s+(?P<value>.*)$')
 
 # Example lines:
 # "  -mfused-madd                \t\t"
@@ -30,6 +34,10 @@ _deprecated_or_removed_line_pattern = re.compile(r'^\s+(?P<flag>-[^ =]+)\s+$')
 # "  -mprefer-avx128                       -mprefer-vector-width=128"
 # "  -msse5                                -mavx"
 _alias_line_pattern = re.compile(r'^\s+-\S+\s+(?P<flag>-[^ ]+)$')
+
+# Example lines:
+# "  -iframework <dir>           \t\t"
+_ignore_line_pattern = re.compile(r'^\s+-iframework <dir>\s+$')
 
 
 def get_flags_implied_by_march(arch: str, gcc=None) -> List[str]:
@@ -63,6 +71,10 @@ def _parse_gcc_output(gcc_output: str) -> List[str]:
             flags.append(flag)
             continue
 
+        ignore_line_match = _ignore_line_pattern.match(line)
+        if ignore_line_match is not None:
+            continue
+
         deprecated_line_match = _deprecated_or_removed_line_pattern.match(line)
         if deprecated_line_match is not None:
             continue
@@ -72,9 +84,15 @@ def _parse_gcc_output(gcc_output: str) -> List[str]:
             flags.append(alias_line_match.group('flag'))
             continue
 
-        value_line_match = _value_line_pattern.match(line)
+        value_line_match = _assign_value_line_pattern.match(line)
         if value_line_match is not None:
             flag = value_line_match.group("flag") + '=' + value_line_match.group("value")
+            flags.append(flag)
+            continue
+
+        value_line_match = _space_value_line_pattern.match(line)
+        if value_line_match is not None:
+            flag = value_line_match.group("flag") + ' ' + value_line_match.group("value")
             flags.append(flag)
             continue
 

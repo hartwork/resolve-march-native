@@ -94,6 +94,94 @@ class GetFlagsImpliedByMarchTest(TestCase):
             actual_flags = get_flags_implied_by_march('sandybridge')
         self.assertEqual(actual_flags, expected_flags)
 
+    def test_macos(self):
+        stdout_mock_filename = resource_filename(
+            'resolve_march_native.test',
+            'data/native-ivybridge--10-4-0-macos-homebrew--target-help.txt'
+        )
+        with open(stdout_mock_filename, 'rb') as f:
+            stdout_mock_bytes = f.read()
+        expected_flags = [
+            '-Wnonportable-cfstrings',
+            '-m128bit-long-double',
+            '-m64',
+            '-m80387',
+            '-mabi=sysv',
+            '-maddress-mode=long',
+            '-maes',
+            '-malign-data=compat',
+            '-malign-functions=0',
+            '-malign-jumps=0',
+            '-malign-loops=0',
+            '-malign-stringops',
+            '-march=ivybridge',
+            '-masm=att',
+            '-matt-stubs',
+            '-mavx',
+            '-mavx256-split-unaligned-load',
+            '-mavx256-split-unaligned-store',
+            '-mbranch-cost=3',
+            '-mconstant-cfstrings',
+            '-mcpu=',
+            '-mcx16',
+            '-mf16c',
+            '-mfancy-math-387',
+            '-mfentry-name=',
+            '-mfentry-section=',
+            '-mfp-ret-in-387',
+            '-mfpmath=sse',
+            '-mfsgsbase',
+            '-mfunction-return=keep',
+            '-ffp-contract=fast',
+            '-mfxsr',
+            '-mhard-float',
+            '-mieee-fp',
+            '-mincoming-stack-boundary=0',
+            '-mindirect-branch=keep',
+            '-minstrument-return=none',
+            '-masm=intel',
+            '-mlarge-data-threshold=65536',
+            '-mlong-double-80',
+            '-mmacosx-version-min=11.0.0',
+            '-mmemcpy-strategy=',
+            '-mmemset-strategy=',
+            '-mmmx',
+            '-mpclmul',
+            '-mpopcnt',
+            '-mprefer-vector-width=128',
+            '-mprefer-vector-width=none',
+            '-mpreferred-stack-boundary=0',
+            '-mpush-args',
+            '-mrdrnd',
+            '-mrecip=',
+            '-mred-zone',
+            '-mregparm=6',
+            '-msahf',
+            '-msse',
+            '-msse2',
+            '-msse3',
+            '-msse4',
+            '-msse4.1',
+            '-msse4.2',
+            '-mavx',
+            '-mssse3',
+            '-mstack-protector-guard-offset=',
+            '-mstack-protector-guard-reg=',
+            '-mstack-protector-guard-symbol=',
+            '-mstack-protector-guard=global',
+            '-mstv',
+            '-mtarget-linker 711',
+            '-mtarget-linker=',
+            '-mtls-dialect=gnu',
+            '-mtune-ctrl=',
+            '-mtune=ivybridge',
+            '-mvzeroupper',
+            '-mxsave'
+        ]
+        with patch('subprocess.check_output', return_value=stdout_mock_bytes):
+            actual_flags = get_flags_implied_by_march('native')
+        self.assertEqual(actual_flags, expected_flags)
+
 
 class ParseGccOutputTest(TestCase):
     def test_deprecated_lines(self):
