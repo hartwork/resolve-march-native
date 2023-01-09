@@ -12,8 +12,8 @@ jobs:
     name: Run the test suite
     strategy:
       matrix:
-        python-version: [3.7, '3.10']  # no particular need for in-between versions
-        runs-on: [macos-latest, ubuntu-latest]
+        python-version: [3.7, 3.11]  # no particular need for in-between versions
+        runs-on: [macos-11, ubuntu-22.04]
     runs-on: ${{ matrix.runs-on }}
     steps:
     - uses: actions/checkout@v3.2.0
@@ -30,4 +30,4 @@ jobs:
       run: |
         set -x
         pip install -e .
-        resolve-march-native --gcc=gcc-10 --vertical
+        resolve-march-native --gcc=gcc-11 --vertical
