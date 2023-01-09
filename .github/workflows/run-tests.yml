@@ -30,4 +30,4 @@ jobs:
       run: |
         set -x
         pip install -e .
-        resolve-march-native --gcc=gcc-10 --vertical
+        resolve-march-native --gcc=gcc-11 --vertical
