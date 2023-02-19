@@ -190,3 +190,8 @@ class ParseGccOutputTest(TestCase):
     def test_ignore_lines(self):
         self.assertEqual(_parse_gcc_output('  -fapple-kext                \t\t[available in C++]'),
                          [])
+
+    def test_equal_value_default_lines(self):
+        # https://github.com/hartwork/resolve-march-native/issues/72
+        self.assertEqual(_parse_gcc_output('  -mabi=ABI                   \t\tlp64'),
+                         ['-mabi=lp64'])
