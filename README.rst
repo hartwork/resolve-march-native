@@ -1,6 +1,9 @@
 .. image:: https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit
    :target: https://github.com/pre-commit/pre-commit
    :alt: pre-commit
+.. image:: https://github.com/hartwork/resolve-march-native/actions/workflows/run-tests.yml/badge.svg
+   :target: https://github.com/hartwork/resolve-march-native/actions/workflows/run-tests.yml
+   :alt: Run the test suite
 
 
 About
