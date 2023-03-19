@@ -19,6 +19,10 @@ _enabled_line_pattern = re.compile(r'^\s+(?P<flag>-[^ ]+)\s+\[enabled\]$')
 _assign_value_line_pattern = re.compile(r'^\s+(?P<flag>-[^ =]+)=(?:<.+>)?\s+(?P<value>.*)$')
 
 # Example lines:
+# "  -mabi=ABI                   \t\tlp64"
+_assign_var_value_line_pattern = re.compile(r'^\s+(?P<flag>-[^ =]+)=[A-Z]+\s+(?P<value>.*)$')
+
+# Example lines:
 # "  -mtarget-linker <version>   \t\t711"
 _space_value_line_pattern = re.compile(r'^\s+(?P<flag>-[^ =]+) <[^>]+>\s+(?P<value>.*)$')
 
@@ -85,6 +89,12 @@ def _parse_gcc_output(gcc_output: str) -> List[str]:
             continue
 
         value_line_match = _assign_value_line_pattern.match(line)
+        if value_line_match is not None:
+            flag = value_line_match.group("flag") + '=' + value_line_match.group("value")
+            flags.append(flag)
+            continue
+
+        value_line_match = _assign_var_value_line_pattern.match(line)
         if value_line_match is not None:
             flag = value_line_match.group("flag") + '=' + value_line_match.group("value")
             flags.append(flag)
