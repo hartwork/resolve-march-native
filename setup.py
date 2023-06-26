@@ -22,7 +22,7 @@ if __name__ == '__main__':
         author='Sebastian Pipping',
         author_email='sebastian@pipping.org',
         url='https://github.com/hartwork/resolve-march-native',
-        python_requires='>=3.7',
+        python_requires='>=3.8',
         packages=[
                 'resolve_march_native',
         ],
@@ -41,7 +41,6 @@ if __name__ == '__main__':
             'Operating System :: POSIX :: Linux',
             'Programming Language :: Python',
             'Programming Language :: Python :: 3',
-            'Programming Language :: Python :: 3.7',
             'Programming Language :: Python :: 3.8',
             'Programming Language :: Python :: 3.9',
             'Programming Language :: Python :: 3.10',
