@@ -23,11 +23,11 @@ jobs:
     - name: Run the test suite
       run: |
         set -x
-        python --version
-        python setup.py test
+        python3 --version
+        python3 setup.py test
 
     - name: Smoke test the CLI
       run: |
         set -x
-        pip install -e .
+        pip3 install -e .
         resolve-march-native --gcc=gcc-11 --vertical
