@@ -215,3 +215,8 @@ class ParseGccOutputTest(TestCase):
         # On cfarm29 (ppc64le)
         self.assertEqual(_parse_gcc_output('  -mgen-cell-microcode        \t\t[ignored]'),
                          ['-mgen-cell-microcode'])
+
+    def test_array_value_lines(self):
+        # On cfarm29 (ppc64le)
+        self.assertEqual(_parse_gcc_output('  -msdata=[none,data,sysv,eabi] \tnone'),
+                         ['-msdata=none'])
