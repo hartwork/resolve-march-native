@@ -205,3 +205,8 @@ class ParseGccOutputTest(TestCase):
         # On cfarm29 (ppc64le)
         self.assertEqual(_parse_gcc_output('  -malign-                    \t\tnatural'),
                          ['-malign-natural'])
+
+    def test_concat_var_lines(self):
+        # On cfarm29 (ppc64le)
+        self.assertEqual(_parse_gcc_output('  -mcall-ABI                  \t\tlinux'),
+                         ['-mcall-linux'])

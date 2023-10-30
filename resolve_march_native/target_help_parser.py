@@ -35,6 +35,10 @@ _value_line_pattern = re.compile(r'^\s+(?P<flag>-[^ =<]+)<[^>]+>\s+(?P<value>.*)
 _concat_arg_line_pattern = re.compile(r'^\s+(?P<flag>-[^ =]+-)\s+(?P<value>.+)$')
 
 # Example lines:
+# "  -mcall-ABI                  \t\tlinux"
+_concat_var_line_pattern = re.compile(r'^\s+(?P<flag>-[^ =]+-)[A-Z]+\s+(?P<value>.+)$')
+
+# Example lines:
 # "  -mfused-madd                \t\t"
 # "  -mintel-syntax              \t\t"
 # "  -msse5                      \t\t"
@@ -123,6 +127,12 @@ def _parse_gcc_output(gcc_output: str) -> List[str]:
         concat_arg_line_match = _concat_arg_line_pattern.match(line)
         if concat_arg_line_match is not None:
             flag = concat_arg_line_match.group("flag") + concat_arg_line_match.group("value")
+            flags.append(flag)
+            continue
+
+        concat_var_line_match = _concat_var_line_pattern.match(line)
+        if concat_var_line_match is not None:
+            flag = concat_var_line_match.group("flag") + concat_var_line_match.group("value")
             flags.append(flag)
             continue
 
