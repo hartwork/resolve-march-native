@@ -200,3 +200,8 @@ class ParseGccOutputTest(TestCase):
         # On cfarm29 (ppc64le)
         self.assertEqual(_parse_gcc_output('  -G<number>                  \t\t8'),
                          ['-G8'])
+
+    def test_concat_arg_lines(self):
+        # On cfarm29 (ppc64le)
+        self.assertEqual(_parse_gcc_output('  -malign-                    \t\tnatural'),
+                         ['-malign-natural'])

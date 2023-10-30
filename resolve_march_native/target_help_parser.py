@@ -31,6 +31,10 @@ _space_value_line_pattern = re.compile(r'^\s+(?P<flag>-[^ =]+) <[^>]+>\s+(?P<val
 _value_line_pattern = re.compile(r'^\s+(?P<flag>-[^ =<]+)<[^>]+>\s+(?P<value>.*)$')
 
 # Example lines:
+# "  -malign-                    \t\tnatural"
+_concat_arg_line_pattern = re.compile(r'^\s+(?P<flag>-[^ =]+-)\s+(?P<value>.+)$')
+
+# Example lines:
 # "  -mfused-madd                \t\t"
 # "  -mintel-syntax              \t\t"
 # "  -msse5                      \t\t"
@@ -113,6 +117,12 @@ def _parse_gcc_output(gcc_output: str) -> List[str]:
         value_line_match = _value_line_pattern.match(line)
         if value_line_match is not None:
             flag = value_line_match.group("flag") + value_line_match.group("value")
+            flags.append(flag)
+            continue
+
+        concat_arg_line_match = _concat_arg_line_pattern.match(line)
+        if concat_arg_line_match is not None:
+            flag = concat_arg_line_match.group("flag") + concat_arg_line_match.group("value")
             flags.append(flag)
             continue
 
