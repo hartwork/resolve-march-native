@@ -14,6 +14,10 @@ from .environment import enforce_c_locale
 _enabled_line_pattern = re.compile(r'^\s+(?P<flag>-[^ ]+)\s+\[enabled\]$')
 
 # Example lines:
+# "  -mgen-cell-microcode        \t\t[ignored]"
+_ignore_marked_line_pattern = re.compile(r'^\s+(?P<flag>-[^ ]+)\s+\[ignored\]$')
+
+# Example lines:
 # "  -mincoming-stack-boundary=            0"
 # "  -mindirect-branch=                    keep"
 _assign_value_line_pattern = re.compile(r'^\s+(?P<flag>-[^ =]+)=(?:<.+>)?\s+(?P<value>.*)$')
@@ -84,6 +88,11 @@ def _parse_gcc_output(gcc_output: str) -> List[str]:
 
         if line.endswith('[enabled]'):
             flag = _enabled_line_pattern.match(line).group('flag')
+            flags.append(flag)
+            continue
+
+        if line.endswith('[ignored]'):
+            flag = _ignore_marked_line_pattern.match(line).group('flag')
             flags.append(flag)
             continue
 

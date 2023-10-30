@@ -210,3 +210,8 @@ class ParseGccOutputTest(TestCase):
         # On cfarm29 (ppc64le)
         self.assertEqual(_parse_gcc_output('  -mcall-ABI                  \t\tlinux'),
                          ['-mcall-linux'])
+
+    def test_ignore_marked_lines(self):
+        # On cfarm29 (ppc64le)
+        self.assertEqual(_parse_gcc_output('  -mgen-cell-microcode        \t\t[ignored]'),
+                         ['-mgen-cell-microcode'])
