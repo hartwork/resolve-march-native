@@ -195,3 +195,8 @@ class ParseGccOutputTest(TestCase):
         # https://github.com/hartwork/resolve-march-native/issues/72
         self.assertEqual(_parse_gcc_output('  -mabi=ABI                   \t\tlp64'),
                          ['-mabi=lp64'])
+
+    def test_value_default_lines(self):
+        # On cfarm29 (ppc64le)
+        self.assertEqual(_parse_gcc_output('  -G<number>                  \t\t8'),
+                         ['-G8'])

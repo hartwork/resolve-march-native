@@ -27,6 +27,10 @@ _assign_var_value_line_pattern = re.compile(r'^\s+(?P<flag>-[^ =]+)=[A-Z]+\s+(?P
 _space_value_line_pattern = re.compile(r'^\s+(?P<flag>-[^ =]+) <[^>]+>\s+(?P<value>.*)$')
 
 # Example lines:
+# "  -G<number>                  \t\t8"
+_value_line_pattern = re.compile(r'^\s+(?P<flag>-[^ =<]+)<[^>]+>\s+(?P<value>.*)$')
+
+# Example lines:
 # "  -mfused-madd                \t\t"
 # "  -mintel-syntax              \t\t"
 # "  -msse5                      \t\t"
@@ -103,6 +107,12 @@ def _parse_gcc_output(gcc_output: str) -> List[str]:
         value_line_match = _space_value_line_pattern.match(line)
         if value_line_match is not None:
             flag = value_line_match.group("flag") + ' ' + value_line_match.group("value")
+            flags.append(flag)
+            continue
+
+        value_line_match = _value_line_pattern.match(line)
+        if value_line_match is not None:
+            flag = value_line_match.group("flag") + value_line_match.group("value")
             flags.append(flag)
             continue
 
