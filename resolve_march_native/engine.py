@@ -33,7 +33,7 @@ class Engine:
             if flag.startswith(prefix):
                 return (flag, flag[len(prefix):])
         raise NoTunePresentError(
-            'No entry -tune=.. found in: %s' % ' '.join(sorted(flags)))
+            'No entry -mtune=.. found in: %s' % ' '.join(sorted(flags)))
 
     @staticmethod
     def _dump_flags(flags):
