@@ -64,18 +64,19 @@ _alias_line_pattern = re.compile(r'^\s+-\S+\s+(?P<flag>-[^ ]+)$')
 _ignore_line_pattern = re.compile(r'^\s+-iframework <dir>\s+$')
 
 
-def get_flags_implied_by_march(arch: str, gcc=None) -> List[str]:
+def get_flags_implied_by_march(arch: str, gcc=None, debug=True) -> List[str]:
     if gcc is None:
         gcc = 'gcc'
     base_argv = [gcc, '-Q', '--help=target']
     env = os.environ.copy()
+    stderr = None if debug else subprocess.DEVNULL
     enforce_c_locale(env)
     try:
         gcc_output = subprocess.check_output(base_argv + [f'-march={arch}'],
-                                             env=env).decode('UTF-8')
+                                             env=env, stderr=stderr).decode('UTF-8')
     except subprocess.CalledProcessError:
         gcc_output = subprocess.check_output(base_argv + [f'-mcpu={arch}'],
-                                             env=env).decode('UTF-8')
+                                             env=env, stderr=stderr).decode('UTF-8')
     return _parse_gcc_output(gcc_output)
 
 

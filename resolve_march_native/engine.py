@@ -64,7 +64,8 @@ class Engine:
         march_native_flag_set = set(extract_flags(output))
         if self._debug:
             self._dump_flags(march_native_flag_set)
-        march_native_flag_set |= set(get_flags_implied_by_march('native', gcc=self._gcc_command))
+        march_native_flag_set |= set(get_flags_implied_by_march('native', gcc=self._gcc_command,
+                                                                debug=self._debug))
         if self._debug:
             self._dump_flags(march_native_flag_set)
         return march_native_flag_set
@@ -77,7 +78,8 @@ class Engine:
         march_explicit_flag_set = set(extract_flags(output))
         if self._debug:
             self._dump_flags(march_explicit_flag_set)
-        march_explicit_flag_set |= set(get_flags_implied_by_march(arch, gcc=self._gcc_command))
+        march_explicit_flag_set |= set(get_flags_implied_by_march(arch, gcc=self._gcc_command,
+                                                                  debug=self._debug))
         if self._debug:
             self._dump_flags(march_explicit_flag_set)
         return march_explicit_flag_set

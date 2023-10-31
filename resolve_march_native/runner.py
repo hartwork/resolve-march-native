@@ -35,13 +35,15 @@ def run(gcc_command, flags, debug):
                 input_filename,
             ] + list(_fix_flags(flags))
             env = os.environ.copy()
+            stderr = subprocess.DEVNULL
             enforce_c_locale(env)
 
             if debug:
                 print('# %s' % ' '.join(cmd), file=sys.stderr)
+                stderr = None  # i.e. forward to terminal
 
             try:
-                subprocess.check_output(cmd, env=env)
+                subprocess.check_output(cmd, env=env, stderr=stderr)
             except OSError as e:
                 e.strerror += ': "%s"' % gcc_command
                 raise
