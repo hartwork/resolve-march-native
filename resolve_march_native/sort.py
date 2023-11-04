@@ -4,6 +4,8 @@
 def flags_sort_key(text):
     if text.startswith('-march='):
         return (0, text)  # March goes first
+    if text.startswith('-mcpu='):
+        return (0.1, text)
     if text.startswith('-mtune='):
         return (0.5, text)
     elif text.startswith('--param'):
