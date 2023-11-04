@@ -14,6 +14,10 @@ from .environment import enforce_c_locale
 _enabled_line_pattern = re.compile(r'^\s+(?P<flag>-[^ ]+)\s+\[enabled\]$')
 
 # Example lines:
+# "  -mgen-cell-microcode        \t\t[ignored]"
+_ignore_marked_line_pattern = re.compile(r'^\s+(?P<flag>-[^ ]+)\s+\[ignored\]$')
+
+# Example lines:
 # "  -mincoming-stack-boundary=            0"
 # "  -mindirect-branch=                    keep"
 _assign_value_line_pattern = re.compile(r'^\s+(?P<flag>-[^ =]+)=(?:<.+>)?\s+(?P<value>.*)$')
@@ -23,8 +27,24 @@ _assign_value_line_pattern = re.compile(r'^\s+(?P<flag>-[^ =]+)=(?:<.+>)?\s+(?P<
 _assign_var_value_line_pattern = re.compile(r'^\s+(?P<flag>-[^ =]+)=[A-Z]+\s+(?P<value>.*)$')
 
 # Example lines:
+# "  -msdata=[none,data,sysv,eabi] \tnone"
+_array_value_line_pattern = re.compile(r'^\s+(?P<flag>-[^ =]+)=\[.+\]\s+(?P<value>.*)$')
+
+# Example lines:
 # "  -mtarget-linker <version>   \t\t711"
 _space_value_line_pattern = re.compile(r'^\s+(?P<flag>-[^ =]+) <[^>]+>\s+(?P<value>.*)$')
+
+# Example lines:
+# "  -G<number>                  \t\t8"
+_value_line_pattern = re.compile(r'^\s+(?P<flag>-[^ =<]+)<[^>]+>\s+(?P<value>.*)$')
+
+# Example lines:
+# "  -malign-                    \t\tnatural"
+_concat_arg_line_pattern = re.compile(r'^\s+(?P<flag>-[^ =]+-)\s+(?P<value>.+)$')
+
+# Example lines:
+# "  -mcall-ABI                  \t\tlinux"
+_concat_var_line_pattern = re.compile(r'^\s+(?P<flag>-[^ =]+-)[A-Z]+\s+(?P<value>.+)$')
 
 # Example lines:
 # "  -mfused-madd                \t\t"
@@ -44,13 +64,19 @@ _alias_line_pattern = re.compile(r'^\s+-\S+\s+(?P<flag>-[^ ]+)$')
 _ignore_line_pattern = re.compile(r'^\s+-iframework <dir>\s+$')
 
 
-def get_flags_implied_by_march(arch: str, gcc=None) -> List[str]:
+def get_flags_implied_by_march(arch: str, gcc=None, debug=True) -> List[str]:
     if gcc is None:
         gcc = 'gcc'
-    argv = [gcc, '-Q', f'-march={arch}', '--help=target']
+    base_argv = [gcc, '-Q', '--help=target']
     env = os.environ.copy()
+    stderr = None if debug else subprocess.DEVNULL
     enforce_c_locale(env)
-    gcc_output = subprocess.check_output(argv, env=env).decode('UTF-8')
+    try:
+        gcc_output = subprocess.check_output(base_argv + [f'-march={arch}'],
+                                             env=env, stderr=stderr).decode('UTF-8')
+    except subprocess.CalledProcessError:
+        gcc_output = subprocess.check_output(base_argv + [f'-mcpu={arch}'],
+                                             env=env, stderr=stderr).decode('UTF-8')
     return _parse_gcc_output(gcc_output)
 
 
@@ -72,6 +98,11 @@ def _parse_gcc_output(gcc_output: str) -> List[str]:
 
         if line.endswith('[enabled]'):
             flag = _enabled_line_pattern.match(line).group('flag')
+            flags.append(flag)
+            continue
+
+        if line.endswith('[ignored]'):
+            flag = _ignore_marked_line_pattern.match(line).group('flag')
             flags.append(flag)
             continue
 
@@ -100,9 +131,33 @@ def _parse_gcc_output(gcc_output: str) -> List[str]:
             flags.append(flag)
             continue
 
+        value_line_match = _array_value_line_pattern.match(line)
+        if value_line_match is not None:
+            flag = value_line_match.group("flag") + '=' + value_line_match.group("value")
+            flags.append(flag)
+            continue
+
         value_line_match = _space_value_line_pattern.match(line)
         if value_line_match is not None:
             flag = value_line_match.group("flag") + ' ' + value_line_match.group("value")
+            flags.append(flag)
+            continue
+
+        value_line_match = _value_line_pattern.match(line)
+        if value_line_match is not None:
+            flag = value_line_match.group("flag") + value_line_match.group("value")
+            flags.append(flag)
+            continue
+
+        concat_arg_line_match = _concat_arg_line_pattern.match(line)
+        if concat_arg_line_match is not None:
+            flag = concat_arg_line_match.group("flag") + concat_arg_line_match.group("value")
+            flags.append(flag)
+            continue
+
+        concat_var_line_match = _concat_var_line_pattern.match(line)
+        if concat_var_line_match is not None:
+            flag = concat_var_line_match.group("flag") + concat_var_line_match.group("value")
             flags.append(flag)
             continue
 
