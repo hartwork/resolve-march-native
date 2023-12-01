@@ -23,7 +23,7 @@ def _inner_main():
         epilog=dedent("""\
                 %(prog)s is software libre licensed under GPL v2 or later,
                 written by Sebastian Pipping.  Please report bugs to
-                https://github.com/hartwork/resolve-march-native/issues.  Thanks!
+                https://github.com/hartwork/resolve-march-native/issues — thank you!
                 """),
     )
     parser.add_argument('--debug', action='store_true',
