@@ -21,10 +21,11 @@ def _inner_main():
         prog='resolve-march-native',
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog=dedent("""\
-                %(prog)s is software libre licensed under GPL v2 or later,
-                written by Sebastian Pipping.  Please report bugs to
-                https://github.com/hartwork/resolve-march-native/issues.  Thanks!
-                """),
+                Software libre licensed under GPL v2 or later.
+                Brought to you by Sebastian Pipping <sebastian@pipping.org>.
+
+                Please report bugs at https://github.com/hartwork/resolve-march-native/issues — thank you!
+                """),  # noqa: E501
     )
     parser.add_argument('--debug', action='store_true',
                         help='enable debugging (default: disabled)')
