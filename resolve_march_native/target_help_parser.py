@@ -15,6 +15,11 @@ from .environment import enforce_c_locale
 _enabled_line_pattern = re.compile(r'^\s+(?P<flag>-[^ ]+)\s+\[enabled\]$')
 
 # Example lines:
+# "  -mavx                                 [disabled]"
+# "  -mno-align-stringops        \t\t[disabled]"
+_disabled_m_line_pattern = re.compile(r'^\s+(?P<flag>-m[^ ]+)\s+\[disabled\]$')
+
+# Example lines:
 # "  -mgen-cell-microcode        \t\t[ignored]"
 _ignore_marked_line_pattern = re.compile(r'^\s+(?P<flag>-[^ ]+)\s+\[ignored\]$')
 
@@ -92,9 +97,6 @@ def _parse_gcc_output(gcc_output: str) -> List[str]:
         if not line.startswith('  -'):
             continue
 
-        if line.endswith('[disabled]'):
-            continue
-
         if line.endswith('[default]'):
             continue
 
@@ -104,6 +106,15 @@ def _parse_gcc_output(gcc_output: str) -> List[str]:
         if line.endswith('[enabled]'):
             flag = _enabled_line_pattern.match(line).group('flag')
             flags.append(flag)
+            continue
+
+        if line.endswith('[disabled]'):
+            flag = _disabled_m_line_pattern.match(line).group('flag')
+            if flag.startswith('-mno-'):
+                # Drop the "no"
+                flags.append('-m' + flag[len('-mno-'):])
+            else:
+                flags.append('-mno-' + flag[len('-m'):])
             continue
 
         if line.endswith('[ignored]'):
