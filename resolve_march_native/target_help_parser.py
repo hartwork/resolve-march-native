@@ -4,6 +4,7 @@
 import os
 import re
 import subprocess
+import sys
 from typing import List
 
 from .environment import enforce_c_locale
@@ -72,11 +73,15 @@ def get_flags_implied_by_march(arch: str, gcc=None, debug=True) -> List[str]:
     stderr = None if debug else subprocess.DEVNULL
     enforce_c_locale(env)
     try:
-        gcc_output = subprocess.check_output(base_argv + [f'-march={arch}'],
-                                             env=env, stderr=stderr).decode('UTF-8')
+        cmd = base_argv + [f'-march={arch}']
+        if debug:
+            print('# %s' % ' '.join(cmd), file=sys.stderr)
+        gcc_output = subprocess.check_output(cmd, env=env, stderr=stderr).decode('UTF-8')
     except subprocess.CalledProcessError:
-        gcc_output = subprocess.check_output(base_argv + [f'-mcpu={arch}'],
-                                             env=env, stderr=stderr).decode('UTF-8')
+        cmd = base_argv + [f'-mcpu={arch}']
+        if debug:
+            print('# %s' % ' '.join(cmd), file=sys.stderr)
+        gcc_output = subprocess.check_output(cmd, env=env, stderr=stderr).decode('UTF-8')
     return _parse_gcc_output(gcc_output)
 
 
