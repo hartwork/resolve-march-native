@@ -48,6 +48,7 @@ Usage
                             add recommended flags (default: not added)
       --version             show program's version number and exit
 
-    resolve-march-native is software libre licensed under GPL v2 or later,
-    written by Sebastian Pipping.  Please report bugs to
-    https://github.com/hartwork/resolve-march-native/issues.  Thanks!
+    Software libre licensed under GPL v2 or later.
+    Brought to you by Sebastian Pipping <sebastian@pipping.org>.
+
+    Please report bugs at https://github.com/hartwork/resolve-march-native/issues — thank you!
