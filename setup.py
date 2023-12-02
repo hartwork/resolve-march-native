@@ -16,13 +16,17 @@ if __name__ == '__main__':
     setup(
         name='resolve-march-native',
         description='Tool to determine what GCC flags -march=native would resolve into',
-        long_description=_read('README.rst'),
+        long_description=_read('README.md'),
+        long_description_content_type='text/markdown',
         license='GPLv2+',
         version=VERSION_STR,
         author='Sebastian Pipping',
         author_email='sebastian@pipping.org',
         url='https://github.com/hartwork/resolve-march-native',
         python_requires='>=3.8',
+        setup_requires=[
+            'setuptools>=38.6.0',  # for long_description_content_type
+        ],
         packages=[
                 'resolve_march_native',
         ],
