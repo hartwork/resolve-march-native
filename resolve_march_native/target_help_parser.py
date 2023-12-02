@@ -132,7 +132,6 @@ def _parse_gcc_output(gcc_output: str) -> List[str]:
 
         alias_line_match = _alias_line_pattern.match(line)
         if alias_line_match is not None:
-            flags.append(alias_line_match.group('flag'))
             continue
 
         value_line_match = _assign_value_line_pattern.match(line)
