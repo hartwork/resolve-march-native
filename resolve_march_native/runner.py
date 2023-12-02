@@ -23,15 +23,13 @@ def run(gcc_command, flags, debug):
     tempdir = tempfile.mkdtemp()
     try:
         input_filename = os.path.join(tempdir, 'empty.c')
-        with open(input_filename, 'w') as f:
-            pass
+        open(input_filename, 'w')
 
         try:
-            output_filename = os.path.join(tempdir, 'march_native.s')
             cmd = [
                 gcc_command,
                 '-S', '-fverbose-asm',
-                '-o', output_filename,
+                '-o', '/dev/stdout',
                 input_filename,
             ] + list(_fix_flags(flags))
             env = os.environ.copy()
@@ -43,16 +41,10 @@ def run(gcc_command, flags, debug):
                 stderr = None  # i.e. forward to terminal
 
             try:
-                subprocess.check_output(cmd, env=env, stderr=stderr)
+                return subprocess.check_output(cmd, env=env, stderr=stderr).decode('UTF-8')
             except OSError as e:
                 e.strerror += ': "%s"' % gcc_command
                 raise
-
-            try:
-                with open(output_filename) as f:
-                    return f.read()
-            finally:
-                os.remove(output_filename)
         finally:
             os.remove(input_filename)
     finally:
