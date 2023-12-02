@@ -3,6 +3,7 @@
 
 import os
 from unittest import TestCase
+from unittest.mock import patch
 
 from ..engine import Engine
 from ..parser import extract_flags
@@ -91,4 +92,93 @@ class TestEngine(TestCase):
             expected_flag_set,
             'westmere--4-9-3-gentoo--native.s',
             'westmere--4-9-3-gentoo--explicit.s',
+        )
+
+    def test_sandybridge_celeron_without_avx(self):
+        # NOTE: -mno-avx was cut away here by:
+        #       1. keep_mno_flags = False
+        #       2. ignorance of target help output
+        expected_flag_set = {
+            '-mmmx',
+            '-mpopcnt',
+            '-msse',
+            '-msse2',
+            '-msse3',
+            '-mssse3',
+            '-msse4.1',
+            '-msse4.2',
+            '-mpclmul',
+            '-mcx16',
+            '-mfxsr',
+            '-msahf',
+            '-mxsave',
+            '-mxsaveopt',
+            '--param=l1-cache-size=32',
+            '--param=l1-cache-line-size=64',
+            '--param=l2-cache-size=2048',
+            '-march=sandybridge',
+        }
+
+        self._test_engine(
+            expected_flag_set,
+            'sandybridge-celeron--assembly-native.txt',
+            'sandybridge-celeron--assembly-explicit.txt',
+        )
+
+
+class TestEngineFourFiles(TestCase):
+    def _test_engine(self, expected_flag_set,
+                     basename_assembly_native, basename_assembly_explicit,
+                     basename_target_help_native, basename_target_help_explicit):
+        data_home = 'resolve_march_native/test/data'
+
+        def fake_subproces_check_output(args, *_1, **_2):
+            if '-fverbose-asm' in args:
+                if '-march=native' in args:
+                    basename = basename_assembly_native
+                else:
+                    basename = basename_assembly_explicit
+            else:
+                assert '--help=target' in args
+                if '-march=native' in args:
+                    basename = basename_target_help_native
+                else:
+                    basename = basename_target_help_explicit
+
+            filename = os.path.join(data_home, basename)
+
+            with open(filename, 'br') as f:
+                return f.read()
+
+        class TestOptions:
+            def __init__(self):
+                self.gcc = 'false'
+                self.debug = False
+                self.keep_identical_mtune = False
+                self.keep_mno_flags = False
+                self.keep_default_params = False
+
+        options = TestOptions()
+        engine = Engine(options.gcc, options.debug)
+
+        with patch('subprocess.check_output', fake_subproces_check_output):
+            received_flag_set = engine.run(options)
+
+        self.assertEqual(received_flag_set, expected_flag_set)
+
+    def test_sandybridge_celeron_without_avx(self):  # i.e. issue #110
+        expected_flag_set = {
+            '-mno-avx',
+            '--param=l1-cache-line-size=64',
+            '--param=l1-cache-size=32',
+            '--param=l2-cache-size=2048',
+            '-march=sandybridge',
+        }
+
+        self._test_engine(
+            expected_flag_set,
+            'sandybridge-celeron--assembly-native.txt',
+            'sandybridge-celeron--assembly-explicit.txt',
+            'sandybridge-celeron--target-help--native.txt',
+            'sandybridge-celeron--target-help--explicit.txt',
         )

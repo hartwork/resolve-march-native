@@ -1,0 +1,8 @@
+	.file	"tmp.WugiYUyPb7.c"
+# GNU C17 (Gentoo 11.3.0 p7) version 11.3.0 (x86_64-pc-linux-gnu)
+#	compiled by GNU C version 11.3.0, GMP version 6.2.1, MPFR version 4.1.0-p13, MPC version 1.2.1, isl version none
+# GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+# options passed: -march=sandybridge
+	.text
+	.ident	"GCC: (Gentoo 11.3.0 p7) 11.3.0"
+	.section	.note.GNU-stack,"",@progbits
