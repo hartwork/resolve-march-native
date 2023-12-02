@@ -94,6 +94,37 @@ class TestEngine(TestCase):
             'westmere--4-9-3-gentoo--explicit.s',
         )
 
+    def test_sandybridge_celeron_without_avx(self):
+        # NOTE: -mno-avx was cut away here by:
+        #       1. keep_mno_flags = False
+        #       2. ignorance of target help output
+        expected_flag_set = {
+            '-mmmx',
+            '-mpopcnt',
+            '-msse',
+            '-msse2',
+            '-msse3',
+            '-mssse3',
+            '-msse4.1',
+            '-msse4.2',
+            '-mpclmul',
+            '-mcx16',
+            '-mfxsr',
+            '-msahf',
+            '-mxsave',
+            '-mxsaveopt',
+            '--param=l1-cache-size=32',
+            '--param=l1-cache-line-size=64',
+            '--param=l2-cache-size=2048',
+            '-march=sandybridge',
+        }
+
+        self._test_engine(
+            expected_flag_set,
+            'sandybridge-celeron--assembly-native.txt',
+            'sandybridge-celeron--assembly-explicit.txt',
+        )
+
 
 class TestEngineFourFiles(TestCase):
     def _test_engine(self, expected_flag_set,
