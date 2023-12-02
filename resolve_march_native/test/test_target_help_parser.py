@@ -418,6 +418,34 @@ class GetFlagsImpliedByMarchTest(TestCase):
             actual_flags = get_flags_implied_by_march('native')
         self.assertEqual(actual_flags, expected_flags)
 
+    def test_sandybridge_celeron_without_avx__native(self):
+        stdout_mock_filename = resource_filename(
+            'resolve_march_native.test',
+            'data/sandybridge-celeron--target-help--native.txt'
+        )
+        with open(stdout_mock_filename, 'rb') as f:
+            stdout_mock_bytes = f.read()
+
+        with patch('subprocess.check_output', return_value=stdout_mock_bytes):
+            actual_flags = get_flags_implied_by_march('native')
+
+        self.assertIn('-mno-avx', actual_flags)
+        self.assertNotIn('-mavx', actual_flags)
+
+    def test_sandybridge_celeron_without_avx__explicit(self):
+        stdout_mock_filename = resource_filename(
+            'resolve_march_native.test',
+            'data/sandybridge-celeron--target-help--explicit.txt'
+        )
+        with open(stdout_mock_filename, 'rb') as f:
+            stdout_mock_bytes = f.read()
+
+        with patch('subprocess.check_output', return_value=stdout_mock_bytes):
+            actual_flags = get_flags_implied_by_march('native')
+
+        self.assertIn('-mavx', actual_flags)
+        self.assertNotIn('-mno-avx', actual_flags)
+
 
 class ParseGccOutputTest(TestCase):
     def test_deprecated_lines(self):
