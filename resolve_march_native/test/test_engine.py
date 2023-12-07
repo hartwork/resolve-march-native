@@ -1,7 +1,7 @@
 # Copyright (C) 2015 Sebastian Pipping <sebastian@pipping.org>
 # Licensed under GPL v2 or later
 
-import os
+from importlib.resources import files
 from unittest import TestCase
 from unittest.mock import patch
 
@@ -11,12 +11,10 @@ from ..parser import extract_flags
 
 class TestEngine(TestCase):
     def _test_engine(self, expected_flag_set, basename_native, basename_explicit):
-        data_home = 'resolve_march_native/test/data'
-
-        with open(os.path.join(data_home, basename_native)) as f:
+        with open(files('resolve_march_native.test') / 'data' / basename_native) as f:
             march_native_flag_set = set(extract_flags(f.read()))
 
-        with open(os.path.join(data_home, basename_explicit)) as f:
+        with open(files('resolve_march_native.test') / 'data' / basename_explicit) as f:
             march_explicit_flag_set = set(extract_flags(f.read()))
 
         class TestOptions:
@@ -130,8 +128,6 @@ class TestEngineFourFiles(TestCase):
     def _test_engine(self, expected_flag_set,
                      basename_assembly_native, basename_assembly_explicit,
                      basename_target_help_native, basename_target_help_explicit):
-        data_home = 'resolve_march_native/test/data'
-
         def fake_subproces_check_output(args, *_1, **_2):
             if '-fverbose-asm' in args:
                 if '-march=native' in args:
@@ -145,7 +141,7 @@ class TestEngineFourFiles(TestCase):
                 else:
                     basename = basename_target_help_explicit
 
-            filename = os.path.join(data_home, basename)
+            filename = files('resolve_march_native.test') / 'data' / basename
 
             with open(filename, 'br') as f:
                 return f.read()
