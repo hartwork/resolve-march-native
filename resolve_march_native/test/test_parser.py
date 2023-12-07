@@ -3,6 +3,8 @@
 
 from unittest import TestCase
 
+from importlib_resources import files
+
 from ..parser import extract_flags
 
 
@@ -150,7 +152,9 @@ class TestParser(TestCase):
     ]
 
     def test_parse_westmere_native_s(self):
-        with open('resolve_march_native/test/data/westmere--4-9-3-gentoo--native.s') as f:
+        with open(files('resolve_march_native.test')
+                  / 'data'
+                  / 'westmere--4-9-3-gentoo--native.s') as f:
             received_flags = list(extract_flags(f.read()))
 
         self.assertEqual(received_flags, self._EXPECTED_FLAGS_WESTMERE_NATIVE)

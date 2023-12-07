@@ -4,17 +4,16 @@
 from unittest import TestCase
 from unittest.mock import patch
 
-from pkg_resources import resource_filename
+from importlib_resources import files
 
 from ..target_help_parser import _parse_gcc_output, get_flags_implied_by_march
 
 
 class GetFlagsImpliedByMarchTest(TestCase):
     def test(self):
-        stdout_mock_filename = resource_filename(
-            'resolve_march_native.test',
-            'data/sandybridge--11-3-0-gentoo--target-help.txt'
-        )
+        stdout_mock_filename = (files('resolve_march_native.test')
+                                / 'data' /
+                                'sandybridge--11-3-0-gentoo--target-help.txt')
         with open(stdout_mock_filename, 'rb') as f:
             stdout_mock_bytes = f.read()
         expected_flags = [
@@ -219,10 +218,9 @@ class GetFlagsImpliedByMarchTest(TestCase):
         self.assertEqual(actual_flags, expected_flags)
 
     def test_macos(self):
-        stdout_mock_filename = resource_filename(
-            'resolve_march_native.test',
-            'data/native-ivybridge--10-4-0-macos-homebrew--target-help.txt'
-        )
+        stdout_mock_filename = (files('resolve_march_native.test')
+                                / 'data'
+                                / 'native-ivybridge--10-4-0-macos-homebrew--target-help.txt')
         with open(stdout_mock_filename, 'rb') as f:
             stdout_mock_bytes = f.read()
         expected_flags = [
@@ -419,10 +417,9 @@ class GetFlagsImpliedByMarchTest(TestCase):
         self.assertEqual(actual_flags, expected_flags)
 
     def test_sandybridge_celeron_without_avx__native(self):
-        stdout_mock_filename = resource_filename(
-            'resolve_march_native.test',
-            'data/sandybridge-celeron--target-help--native.txt'
-        )
+        stdout_mock_filename = (files('resolve_march_native.test')
+                                / 'data'
+                                / 'sandybridge-celeron--target-help--native.txt')
         with open(stdout_mock_filename, 'rb') as f:
             stdout_mock_bytes = f.read()
 
@@ -433,10 +430,9 @@ class GetFlagsImpliedByMarchTest(TestCase):
         self.assertNotIn('-mavx', actual_flags)
 
     def test_sandybridge_celeron_without_avx__explicit(self):
-        stdout_mock_filename = resource_filename(
-            'resolve_march_native.test',
-            'data/sandybridge-celeron--target-help--explicit.txt'
-        )
+        stdout_mock_filename = (files('resolve_march_native.test')
+                                / 'data'
+                                / 'sandybridge-celeron--target-help--explicit.txt')
         with open(stdout_mock_filename, 'rb') as f:
             stdout_mock_bytes = f.read()
 
