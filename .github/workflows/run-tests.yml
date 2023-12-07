@@ -27,6 +27,10 @@ jobs:
         pip3 install -U setuptools  # for Python >=3.12
         python3 setup.py test
 
+        # Once again with pytest for its warnings
+        pip3 install --require-hashes -r requirements.txt
+        pytest -v -s -Wdefault -Werror
+
     - name: Smoke test the CLI
       run: |
         set -x
