@@ -1,0 +1,14 @@
+	.file	"tmp.D8pcqS6dmh.c"
+
+ # rs6000/powerpc options: -mcpu=power9 -msdata=none
+	.machine power9
+	.abiversion 2
+ # GNU C17 (Debian 12.2.0-14) version 12.2.0 (powerpc64le-linux-gnu)
+ #	compiled by GNU C version 12.2.0, GMP version 6.2.1, MPFR version 4.1.1-p1, MPC version 1.3.1, isl version isl-0.25-GMP
+
+ # warning: MPFR header version 4.1.1-p1 differs from library version 4.2.0.
+ # GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+ # options passed: -mcpu=power9 -msecure-plt -fasynchronous-unwind-tables
+	.section	".text"
+	.ident	"GCC: (Debian 12.2.0-14) 12.2.0"
+	.section	.note.GNU-stack,"",@progbits

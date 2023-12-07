@@ -1,0 +1,176 @@
+The following options are target specific:
+  -G<number>                  		8
+  -m32                        		[disabled]
+  -m64                        		[enabled]
+  -mabi=altivec               		[enabled]
+  -mabi=d32                   		[enabled]
+  -mabi=d64                   		[disabled]
+  -mabi=elfv1                 		[disabled]
+  -mabi=elfv2                 		[disabled]
+  -mabi=ibmlongdouble         		[enabled]
+  -mabi=ieeelongdouble        		[disabled]
+  -mabi=no-altivec            		[disabled]
+  -mabi=vec-default           		[enabled]
+  -mabi=vec-extabi            		[disabled]
+  -mads                       		[disabled]
+  -maix-struct-return         		[enabled]
+  -malign-                    		natural
+  -malign-branch-targets      		
+  -mallow-movmisalign         		[enabled]
+  -maltivec                   		[enabled]
+  -malways-hint               		
+  -mavoid-indexed-addresses   		[disabled]
+  -mbig                       		[disabled]
+  -mbig-endian                		[disabled]
+  -mbionic                    		[disabled]
+  -mbit-align                 		[disabled]
+  -mbit-word                  		[disabled]
+  -mblock-compare-inline-limit= 	63
+  -mblock-compare-inline-loop-limit= 	-1
+  -mblock-move-inline-limit=  		64
+  -mblock-ops-unaligned-vsx   		[enabled]
+  -mblock-ops-vector-pair     		[disabled]
+  -mbss-plt                   		[disabled]
+  -mcall-ABI                  		linux
+  -mcmodel=                   		medium
+  -mcmpb                      		[enabled]
+  -mcompat-align-parm         		[disabled]
+  -mcpu=                      		power9
+  -mcrypto                    		[enabled]
+  -mdebug=                    		
+  -mdirect-move               		[enabled]
+  -mdlmzb                     		[disabled]
+  -meabi                      		[disabled]
+  -mefficient-unaligned-vsx   		[enabled]
+  -memb                       		[disabled]
+  -mfloat128                  		[enabled]
+  -mfloat128-convert          		[disabled]
+  -mfloat128-hardware         		[enabled]
+  -mfp-in-toc                 		[disabled]
+  -mfprnd                     		[enabled]
+  -mfriz                      		
+  -mfull-toc                  		[disabled]
+  -mfused-madd                		-ffp-contract=fast
+  -mgen-cell-microcode        		[ignored]
+  -mglibc                     		[enabled]
+  -mgnu-attribute             		[enabled]
+  -mhard-dfp                  		[enabled]
+  -mhard-float                		[enabled]
+  -mhtm                       		[enabled]
+  -mieee128-constant          		[enabled]
+  -minsert-sched-nops=        		
+  -misel                      		[enabled]
+  -mlittle                    		[enabled]
+  -mlittle-endian             		[enabled]
+  -mlong-double-              		127
+  -mlongcall                  		[disabled]
+  -mlra                       		[ignored]
+  -mmfcrf                     		[enabled]
+  -mmfpgpr                    		[disabled]
+  -mminimal-toc               		[disabled]
+  -mmma                       		[disabled]
+  -mmodulo                    		[enabled]
+  -mmulhw                     		[disabled]
+  -mmultiple                  		[disabled]
+  -mmusl                      		[disabled]
+  -mmvme                      		[disabled]
+  -mnewlib                    		[disabled]
+  -mno-fp-in-toc              		[enabled]
+  -mno-mfpgpr                 		[ignored]
+  -mno-string                 		[ignored]
+  -mno-sum-in-toc             		[disabled]
+  -mno-toc                    		[disabled]
+  -mno-traceback              		[disabled]
+  -mno-update                 		[disabled]
+  -moptimize-swaps            		[enabled]
+  -mpcrel                     		[disabled]
+  -mpcrel-opt                 		[disabled]
+  -mpltseq                    		[enabled]
+  -mpointers-to-nested-functions 	[enabled]
+  -mpopcntb                   		[enabled]
+  -mpopcntd                   		[enabled]
+  -mpower10                   		[disabled]
+  -mpower10-fusion            		[disabled]
+  -mpower8-fusion             		[disabled]
+  -mpower8-fusion-sign        		[disabled]
+  -mpower8-vector             		[enabled]
+  -mpower9-minmax             		[enabled]
+  -mpower9-misc               		[enabled]
+  -mpower9-vector             		[enabled]
+  -mpowerpc                   		[ignored]
+  -mpowerpc-gfxopt            		[enabled]
+  -mpowerpc-gpopt             		[enabled]
+  -mpowerpc64                 		[enabled]
+  -mprefixed                  		[disabled]
+  -mprioritize-restricted-insns= 	0
+  -mprivileged                		[disabled]
+  -mprofile-kernel            		[disabled]
+  -mprototype                 		[disabled]
+  -mquad-memory               		[disabled]
+  -mquad-memory-atomic        		[enabled]
+  -mreadonly-in-sdata         		[enabled]
+  -mrecip                     		[disabled]
+  -mrecip-precision           		[enabled]
+  -mrecip=                    		
+  -mregnames                  		[disabled]
+  -mrelative-jumptables       		[enabled]
+  -mrelocatable               		[disabled]
+  -mrelocatable-lib           		[disabled]
+  -mrop-protect               		[disabled]
+  -msave-toc-indirect         		[enabled]
+  -msched-costly-dep=         		
+  -msched-epilog              		[enabled]
+  -msched-groups              		
+  -msched-prolog              		[enabled]
+  -msdata                     		[disabled]
+  -msdata=[none,data,sysv,eabi] 	none
+  -msecure-plt                		[enabled]
+  -mshlib                     		[disabled]
+  -msim                       		[disabled]
+  -msingle-pic-base           		[disabled]
+  -msoft-float                		[disabled]
+  -mspeculate-indirect-jumps  		[enabled]
+  -msplat-float-constant      		[enabled]
+  -msplat-word-constant       		[enabled]
+  -mstack-protector-guard-offset= 	
+  -mstack-protector-guard-reg= 		
+  -mstack-protector-guard=    		tls
+  -mstrict-align              		[disabled]
+  -mstring                    		[disabled]
+  -mstring-compare-inline-limit= 	64
+  -msum-in-toc                		[enabled]
+  -msvr4-struct-return        		[disabled]
+  -mtls-size=[16,32]          		32
+  -mtoc                       		[disabled]
+  -mtraceback=[full,part,no]  		[default]
+  -mtune=                     		power9
+  -muclibc                    		[disabled]
+  -munroll-only-small-loops   		[disabled]
+  -mupdate                    		[enabled]
+  -mveclibabi=                		
+  -mvrsave                    		[disabled]
+  -mvrsave=no                 		-mvrsave
+  -mvrsave=yes                		-mvrsave
+  -mvsx                       		[enabled]
+  -mvsx-align-128             		[disabled]
+  -mvsx-timode                		[ignored]
+  -mwarn-altivec-long         		[enabled]
+  -mxl-compat                 		[disabled]
+  -myellowknife               		[disabled]
+
+  Valid arguments to -malign-:
+    natural power
+
+  Known code models (for use with the -mcmodel= option):
+    large medium small
+
+  Known CPUs (for use with the -mcpu= and -mtune= options):
+    401 403 405 405fp 440 440fp 464 464fp 476 476fp 505 601 602 603 603e 604
+    604e 620 630 740 7400 7450 750 801 821 823 8540 8548 860 970 G3 G4 G5 a2
+    cell e300c2 e300c3 e500mc e500mc64 e5500 e6500 ec603e native power10 power3
+    power4 power5 power5+ power6 power6x power7 power8 power9 powerpc powerpc64
+    powerpc64le rs64 titan
+
+  Valid arguments to -mstack-protector-guard=:
+    global tls
+

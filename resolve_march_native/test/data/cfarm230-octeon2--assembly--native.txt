@@ -1,0 +1,47 @@
+	.file	1 "tmp.5jOsTjKhy6.c"
+	.section .mdebug.abi32
+	.previous
+	.nan	legacy
+	.module	fp=xx
+	.module	nooddspreg
+	.abicalls
+
+ # -G value = 0, Arch = octeon2, ISA = 65
+ # GNU C17 (Debian 8.3.0-6) version 8.3.0 (mips-linux-gnu)
+ #	compiled by GNU C version 8.3.0, GMP version 6.1.2, MPFR version 4.0.2, MPC version 1.1.0, isl version isl-0.20-GMP
+
+ # GGC heuristics: --param ggc-min-expand=96 --param ggc-min-heapsize=124622
+ # options passed:  -imultiarch mips-linux-gnu /tmp/tmp.5jOsTjKhy6.c -meb
+ # -mfpxx -mllsc -mno-lxc1-sxc1 -march=octeon2 -mabi=32
+ # -auxbase-strip /dev/stdout -fverbose-asm
+ # options enabled:  -fPIE -faggressive-loop-optimizations -fauto-inc-dec
+ # -fchkp-check-incomplete-type -fchkp-check-read -fchkp-check-write
+ # -fchkp-instrument-calls -fchkp-narrow-bounds -fchkp-optimize
+ # -fchkp-store-bounds -fchkp-use-static-bounds
+ # -fchkp-use-static-const-bounds -fchkp-use-wrappers -fcommon
+ # -fdelete-null-pointer-checks -fdwarf2-cfi-asm -fearly-inlining
+ # -feliminate-unused-debug-types -ffp-int-builtin-inexact -ffunction-cse
+ # -fgcse-lm -fgnu-runtime -fgnu-unique -fident -finline-atomics
+ # -fira-hoist-pressure -fira-share-save-slots -fira-share-spill-slots
+ # -fivopts -fkeep-static-consts -fleading-underscore -flifetime-dse
+ # -flto-odr-type-merging -fmath-errno -fmerge-debug-strings
+ # -fpcc-struct-return -fpeephole -fpic -fplt -fprefetch-loop-arrays
+ # -fsched-critical-path-heuristic -fsched-dep-count-heuristic
+ # -fsched-group-heuristic -fsched-interblock -fsched-last-insn-heuristic
+ # -fsched-rank-heuristic -fsched-spec -fsched-spec-insn-heuristic
+ # -fsched-stalled-insns-dep -fschedule-fusion -fsemantic-interposition
+ # -fshow-column -fshrink-wrap-separate -fsigned-zeros
+ # -fsplit-ivs-in-unroller -fssa-backprop -fstdarg-opt
+ # -fstrict-volatile-bitfields -fsync-libcalls -ftrapping-math
+ # -ftree-cselim -ftree-forwprop -ftree-loop-if-convert -ftree-loop-im
+ # -ftree-loop-ivcanon -ftree-loop-optimize -ftree-parallelize-loops=
+ # -ftree-phiprop -ftree-reassoc -ftree-scev-cprop -funit-at-a-time
+ # -fverbose-asm -fzero-initialized-in-bss -mabicalls -mcheck-zero-division
+ # -mdivide-traps -mdouble-float -meb -mexplicit-relocs -mextern-sdata
+ # -mfp-exceptions -mfp32 -mfpxx -mglibc -mgp32 -mgpopt -mhard-float
+ # -mimadd -mllsc -mload-store-pairs -mlocal-sdata -mlong32 -mlra -mmadd4
+ # -mno-mdmx -mno-mips16 -mno-mips3d -mrelax-pic-calls -mshared
+ # -msplit-addresses
+
+	.text
+	.ident	"GCC: (Debian 8.3.0-6) 8.3.0"

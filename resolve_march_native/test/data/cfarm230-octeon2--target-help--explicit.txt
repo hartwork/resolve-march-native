@@ -1,0 +1,135 @@
+The following options are target specific:
+  -G<number>                  		0
+  -mabi=ABI                   		32
+  -mabicalls                  		[enabled]
+  -mabs=MODE                  		[default]
+  -mandroid                   		[disabled]
+  -march=ISA                  		octeon2
+  -mbionic                    		[disabled]
+  -mbranch-cost=COST          		4
+  -mbranch-likely             		[disabled]
+  -mcheck-zero-division       		[enabled]
+  -mcode-readable=SETTING     		yes
+  -mcompact-branches=         		optimal
+  -mdebug                     		[disabled]
+  -mdebugd                    		[disabled]
+  -mdivide-breaks             		[disabled]
+  -mdivide-traps              		[enabled]
+  -mdmx                       		[disabled]
+  -mdouble-float              		[enabled]
+  -mdsp                       		[disabled]
+  -mdspr2                     		[disabled]
+  -meb                        		[enabled]
+  -mel                        		[disabled]
+  -membedded-data             		[disabled]
+  -meva                       		[disabled]
+  -mexplicit-relocs           		[enabled]
+  -mextern-sdata              		[enabled]
+  -mfix-24k                   		[disabled]
+  -mfix-r10000                		[disabled]
+  -mfix-r4000                 		[disabled]
+  -mfix-r4400                 		[disabled]
+  -mfix-rm7000                		[disabled]
+  -mfix-sb1                   		[disabled]
+  -mfix-vr4120                		[disabled]
+  -mfix-vr4130                		[disabled]
+  -mfix4300                   		[disabled]
+  -mflip-mips16               		[disabled]
+  -mflush-func=FUNC           		_flush_cache
+  -mfp-exceptions             		[enabled]
+  -mfp32                      		[enabled]
+  -mfp64                      		[disabled]
+  -mfpxx                      		[enabled]
+  -mframe-header-opt          		[disabled]
+  -mfused-madd                		
+  -mglibc                     		[enabled]
+  -mgp32                      		[enabled]
+  -mgp64                      		[disabled]
+  -mgpopt                     		[enabled]
+  -mhard-float                		[enabled]
+  -mimadd                     		[enabled]
+  -minterlink-compressed      		[disabled]
+  -minterlink-mips16          		[disabled]
+  -mipsN                      		1
+  -mips16                     		[disabled]
+  -mips3d                     		[disabled]
+  -mllsc                      		[enabled]
+  -mload-store-pairs          		[enabled]
+  -mlocal-sdata               		[enabled]
+  -mlong-calls                		[disabled]
+  -mlong32                    		[enabled]
+  -mlong64                    		[disabled]
+  -mlra                       		[enabled]
+  -mlxc1-sxc1                 		[disabled]
+  -mmad                       		[disabled]
+  -mmadd4                     		[enabled]
+  -mmcount-ra-address         		[disabled]
+  -mmcu                       		[disabled]
+  -mmemcpy                    		[disabled]
+  -mmicromips                 		[disabled]
+  -mmsa                       		[disabled]
+  -mmt                        		[disabled]
+  -mmusl                      		[disabled]
+  -mnan=ENCODING              		[default]
+  -mno-flush-func             		[disabled]
+  -mno-mdmx                   		[enabled]
+  -mno-mips16                 		[enabled]
+  -mno-mips3d                 		[enabled]
+  -modd-spreg                 		[disabled]
+  -mpaired-single             		[disabled]
+  -mplt                       		[disabled]
+  -mr10k-cache-barrier=SETTING 		none
+  -mrelax-pic-calls           		[enabled]
+  -mshared                    		[enabled]
+  -msingle-float              		[disabled]
+  -msmartmips                 		[disabled]
+  -msoft-float                		[disabled]
+  -msplit-addresses           		[enabled]
+  -msym32                     		[disabled]
+  -msynci                     		[disabled]
+  -mtune=PROCESSOR            		mips1
+  -muclibc                    		[disabled]
+  -muninit-const-in-rodata    		[disabled]
+  -mvirt                      		[disabled]
+  -mvr4130-align              		[disabled]
+  -mxgot                      		[disabled]
+  -mxpa                       		[disabled]
+
+  Known MIPS ABIs (for use with the -mabi= option):
+    32 64 eabi n32 o64
+
+  Known MIPS CPUs (for use with the -march= and -mtune= options):
+    10000 1004kc 1004kf 1004kf1_1 1004kf2_1 10k 12000 12k 14000 14k 16000 16k
+    2000 20kc 24kc 24kec 24kef 24kef1_1 24kef2_1 24kefx 24kex 24kf 24kf1_1
+    24kf2_1 24kfx 24kx 2k 3000 34kc 34kf 34kf1_1 34kf2_1 34kfx 34kn 34kx 3900 3k
+    4000 4100 4111 4120 4130 4300 4400 4600 4650 4700 4k 4kc 4kec 4kem 4kep 4km
+    4kp 4ksc 4ksd 5000 5400 5500 5900 5k 5kc 5kf 6000 6k 7000 74kc 74kf 74kf1_1
+    74kf2_1 74kf3_2 74kfx 74kx 7k 8000 8k 9000 9k from-abi i6400 interaptiv
+    loongson2e loongson2f loongson3a m14k m14kc m14ke m14kec m4k m5100 m5101
+    mips1 mips2 mips3 mips32 mips32r2 mips32r3 mips32r5 mips32r6 mips4 mips64
+    mips64r2 mips64r3 mips64r5 mips64r6 native octeon octeon+ octeon2 octeon3
+    orion p5600 r10000 r1004kc r1004kf r1004kf1_1 r1004kf2_1 r10k r12000 r12k
+    r14000 r14k r16000 r16k r2000 r20kc r24kc r24kec r24kef r24kef1_1 r24kef2_1
+    r24kefx r24kex r24kf r24kf1_1 r24kf2_1 r24kfx r24kx r2k r3000 r34kc r34kf
+    r34kf1_1 r34kf2_1 r34kfx r34kn r34kx r3900 r3k r4000 r4100 r4111 r4120 r4130
+    r4300 r4400 r4600 r4650 r4700 r4k r4kc r4kec r4kem r4kep r4km r4kp r4ksc
+    r4ksd r5000 r5400 r5500 r5900 r5k r5kc r5kf r6000 r6k r7000 r74kc r74kf
+    r74kf1_1 r74kf2_1 r74kf3_2 r74kfx r74kx r7k r8000 r8k r9000 r9k rm7000 rm7k
+    rm9000 rm9k sb1 sb1a sr71000 sr71k vr4100 vr4111 vr4120 vr4130 vr4300 vr5000
+    vr5400 vr5500 vr5k xlp xlr
+
+  Policies available for use with -mcompact-branches=:
+    always never optimal
+
+  Valid arguments to -mcode-readable=:
+    no pcrel yes
+
+  Known MIPS IEEE 754 settings (for use with the -mabs= and -mnan= options):
+    2008 legacy
+
+  Known MIPS ISA levels (for use with the -mips option):
+    1 2 3 32 32r2 32r3 32r5 32r6 4 64 64r2 64r3 64r5 64r6
+
+  Valid arguments to -mr10k-cache-barrier=:
+    load-store none store
+

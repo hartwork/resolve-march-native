@@ -1,0 +1,31 @@
+The following options are target specific:
+  -mabi=ABI                   		lp64
+  -march=ARCH                 		armv8-a+crypto+crc
+  -mbig-endian                		[disabled]
+  -mbionic                    		[disabled]
+  -mcmodel=                   		small
+  -mcpu=CPU                   		
+  -mfix-cortex-a53-835769     		[enabled]
+  -mfix-cortex-a53-843419     		[enabled]
+  -mgeneral-regs-only         		[disabled]
+  -mglibc                     		[enabled]
+  -mlittle-endian             		[enabled]
+  -mmusl                      		[disabled]
+  -momit-leaf-frame-pointer   		[enabled]
+  -moverride=STRING           		
+  -mpc-relative-literal-loads 		[enabled]
+  -mstrict-align              		[disabled]
+  -mtls-dialect=              		desc
+  -mtls-size=                 		[default]
+  -mtune=CPU                  		
+  -muclibc                    		[disabled]
+
+  Known AArch64 ABIs (for use with the -mabi= option):
+    ilp32 lp64
+
+  The code model option names for -mcmodel:
+    large small tiny
+
+  The possible TLS dialects:
+    desc trad
+

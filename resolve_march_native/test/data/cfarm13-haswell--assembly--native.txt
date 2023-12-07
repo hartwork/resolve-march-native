@@ -1,0 +1,52 @@
+	.file	"tmp.zTwlr0Pwo3.c"
+# GNU C17 (Debian 10.2.1-6) version 10.2.1 20210110 (x86_64-linux-gnu)
+#	compiled by GNU C version 10.2.1 20210110, GMP version 6.2.1, MPFR version 4.1.0, MPC version 1.2.0, isl version isl-0.23-GMP
+
+# GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+# options passed:  -imultiarch x86_64-linux-gnu /tmp/tmp.zTwlr0Pwo3.c
+# -march=haswell -mmmx -mno-3dnow -msse -msse2 -msse3 -mssse3 -mno-sse4a
+# -mcx16 -msahf -mmovbe -maes -mno-sha -mpclmul -mpopcnt -mabm -mno-lwp
+# -mfma -mno-fma4 -mno-xop -mbmi -mno-sgx -mbmi2 -mno-pconfig -mno-wbnoinvd
+# -mno-tbm -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mno-rtm -mno-hle -mrdrnd
+# -mf16c -mfsgsbase -mno-rdseed -mno-prfchw -mno-adx -mfxsr -mxsave
+# -mxsaveopt -mno-avx512f -mno-avx512er -mno-avx512cd -mno-avx512pf
+# -mno-prefetchwt1 -mno-clflushopt -mno-xsavec -mno-xsaves -mno-avx512dq
+# -mno-avx512bw -mno-avx512vl -mno-avx512ifma -mno-avx512vbmi
+# -mno-avx5124fmaps -mno-avx5124vnniw -mno-clwb -mno-mwaitx -mno-clzero
+# -mno-pku -mno-rdpid -mno-gfni -mno-shstk -mno-avx512vbmi2 -mno-avx512vnni
+# -mno-vaes -mno-vpclmulqdq -mno-avx512bitalg -mno-avx512vpopcntdq
+# -mno-movdiri -mno-movdir64b -mno-waitpkg -mno-cldemote -mno-ptwrite
+# -mno-avx512bf16 -mno-enqcmd -mno-avx512vp2intersect
+# --param=l1-cache-size=32 --param=l1-cache-line-size=64
+# --param=l2-cache-size=15360 -mtune=haswell -auxbase-strip /dev/stdout
+# -fverbose-asm -fasynchronous-unwind-tables
+# options enabled:  -fPIC -fPIE -faggressive-loop-optimizations
+# -fallocation-dce -fasynchronous-unwind-tables -fauto-inc-dec
+# -fdelete-null-pointer-checks -fdwarf2-cfi-asm -fearly-inlining
+# -feliminate-unused-debug-symbols -feliminate-unused-debug-types
+# -ffp-int-builtin-inexact -ffunction-cse -fgcse-lm -fgnu-unique -fident
+# -finline-atomics -fipa-stack-alignment -fira-hoist-pressure
+# -fira-share-save-slots -fira-share-spill-slots -fivopts
+# -fkeep-static-consts -fleading-underscore -flifetime-dse -fmath-errno
+# -fmerge-debug-strings -fpeephole -fplt -fprefetch-loop-arrays
+# -freg-struct-return -fsched-critical-path-heuristic
+# -fsched-dep-count-heuristic -fsched-group-heuristic -fsched-interblock
+# -fsched-last-insn-heuristic -fsched-rank-heuristic -fsched-spec
+# -fsched-spec-insn-heuristic -fsched-stalled-insns-dep -fschedule-fusion
+# -fsemantic-interposition -fshow-column -fshrink-wrap-separate
+# -fsigned-zeros -fsplit-ivs-in-unroller -fssa-backprop -fstdarg-opt
+# -fstrict-volatile-bitfields -fsync-libcalls -ftrapping-math -ftree-cselim
+# -ftree-forwprop -ftree-loop-if-convert -ftree-loop-im -ftree-loop-ivcanon
+# -ftree-loop-optimize -ftree-parallelize-loops= -ftree-phiprop
+# -ftree-reassoc -ftree-scev-cprop -funit-at-a-time -funwind-tables
+# -fverbose-asm -fzero-initialized-in-bss -m128bit-long-double -m64 -m80387
+# -mabm -maes -malign-stringops -mavx -mavx2 -mbmi -mbmi2 -mcx16 -mf16c
+# -mfancy-math-387 -mfma -mfp-ret-in-387 -mfsgsbase -mfxsr -mglibc -mhle
+# -mieee-fp -mlong-double-80 -mlzcnt -mmmx -mmovbe -mpclmul -mpopcnt
+# -mpush-args -mrdrnd -mred-zone -msahf -msse -msse2 -msse3 -msse4 -msse4.1
+# -msse4.2 -mssse3 -mstv -mtls-direct-seg-refs -mvzeroupper -mxsave
+# -mxsaveopt
+
+	.text
+	.ident	"GCC: (Debian 10.2.1-6) 10.2.1 20210110"
+	.section	.note.GNU-stack,"",@progbits

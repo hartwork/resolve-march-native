@@ -1,0 +1,10 @@
+	.file	"tmp.no6aYDl0aH.c"
+# GNU C17 (Debian 12.2.0-14) version 12.2.0 (x86_64-linux-gnu)
+#	compiled by GNU C version 12.2.0, GMP version 6.2.1, MPFR version 4.1.1-p1, MPC version 1.3.1, isl version isl-0.25-GMP
+
+# warning: MPFR header version 4.1.1-p1 differs from library version 4.2.0.
+# GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+# options passed: -march=haswell -fasynchronous-unwind-tables
+	.text
+	.ident	"GCC: (Debian 12.2.0-14) 12.2.0"
+	.section	.note.GNU-stack,"",@progbits
