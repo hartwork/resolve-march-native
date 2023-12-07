@@ -215,7 +215,7 @@ class GetFlagsImpliedByMarchTest(TestCase):
             '-mno-xsaves',
         ]
         with patch('subprocess.check_output', return_value=stdout_mock_bytes):
-            actual_flags = get_flags_implied_by_march('sandybridge')
+            actual_flags = get_flags_implied_by_march('sandybridge', debug=False)
         self.assertEqual(actual_flags, expected_flags)
 
     def test_macos(self):
@@ -415,7 +415,7 @@ class GetFlagsImpliedByMarchTest(TestCase):
             '-mno-xsaves',
         ]
         with patch('subprocess.check_output', return_value=stdout_mock_bytes):
-            actual_flags = get_flags_implied_by_march('native')
+            actual_flags = get_flags_implied_by_march('native', debug=False)
         self.assertEqual(actual_flags, expected_flags)
 
     def test_sandybridge_celeron_without_avx__native(self):
@@ -427,7 +427,7 @@ class GetFlagsImpliedByMarchTest(TestCase):
             stdout_mock_bytes = f.read()
 
         with patch('subprocess.check_output', return_value=stdout_mock_bytes):
-            actual_flags = get_flags_implied_by_march('native')
+            actual_flags = get_flags_implied_by_march('native', debug=False)
 
         self.assertIn('-mno-avx', actual_flags)
         self.assertNotIn('-mavx', actual_flags)
@@ -441,7 +441,7 @@ class GetFlagsImpliedByMarchTest(TestCase):
             stdout_mock_bytes = f.read()
 
         with patch('subprocess.check_output', return_value=stdout_mock_bytes):
-            actual_flags = get_flags_implied_by_march('native')
+            actual_flags = get_flags_implied_by_march('native', debug=False)
 
         self.assertIn('-mavx', actual_flags)
         self.assertNotIn('-mno-avx', actual_flags)
