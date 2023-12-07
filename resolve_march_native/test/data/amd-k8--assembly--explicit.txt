@@ -1,0 +1,8 @@
+	.file	"tmp.5WRm9r3nVq.c"
+# GNU C17 (Gentoo 13.2.1_p20230826 p7) version 13.2.1 20230826 (x86_64-pc-linux-gnu)
+#	compiled by GNU C version 13.2.1 20230826, GMP version 6.3.0, MPFR version 4.2.1, MPC version 1.3.1, isl version none
+# GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+# options passed: -march=k8-sse3
+	.text
+	.ident	"GCC: (Gentoo 13.2.1_p20230826 p7) 13.2.1 20230826"
+	.section	.note.GNU-stack,"",@progbits
