@@ -1,4 +1,6 @@
+/.idea
 /build
 /dist
+/resolve_march_native.egg-info
 /MANIFEST
 *.pyc
