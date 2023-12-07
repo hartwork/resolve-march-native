@@ -182,3 +182,23 @@ class TestEngineFourFiles(TestCase):
             'sandybridge-celeron--target-help--native.txt',
             'sandybridge-celeron--target-help--explicit.txt',
         )
+
+    def test_amd_k8_hammer(self):
+        expected_flag_set = {
+            '-mcx16',
+            '-mprfchw',
+            '-msahf',
+            '--param=l1-cache-line-size=64',
+            '--param=l1-cache-size=64',
+            '--param=l2-cache-size=512',
+            '-march=k8-sse3',
+            '-mtune=k8',
+        }
+
+        self._test_engine(
+            expected_flag_set,
+            'amd-k8--assembly--native.txt',
+            'amd-k8--assembly--explicit.txt',
+            'amd-k8--target-help--native.txt',
+            'amd-k8--target-help--explicit.txt',
+        )
