@@ -27,6 +27,9 @@ if __name__ == '__main__':
         setup_requires=[
             'setuptools>=38.6.0',  # for long_description_content_type
         ],
+        tests_require=[
+            'importlib-resources>=6.1.1',
+        ],
         packages=[
                 'resolve_march_native',
         ],

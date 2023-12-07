@@ -1,8 +1,9 @@
 # Copyright (C) 2015 Sebastian Pipping <sebastian@pipping.org>
 # Licensed under GPL v2 or later
 
-from importlib.resources import files
 from unittest import TestCase
+
+from importlib_resources import files
 
 from ..parser import extract_flags
 

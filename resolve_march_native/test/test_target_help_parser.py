@@ -1,9 +1,10 @@
 # Copyright (C) 2022 Sebastian Pipping <sebastian@pipping.org>
 # Licensed under GPL v2 or later
 
-from importlib.resources import files
 from unittest import TestCase
 from unittest.mock import patch
+
+from importlib_resources import files
 
 from ..target_help_parser import _parse_gcc_output, get_flags_implied_by_march
 
