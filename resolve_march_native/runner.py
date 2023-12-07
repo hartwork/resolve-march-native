@@ -20,17 +20,12 @@ def _fix_flags(flags):
 
 
 def run(gcc_command, flags, debug):
-    tempdir = tempfile.mkdtemp()
-    try:
-        input_filename = os.path.join(tempdir, 'empty.c')
-        open(input_filename, 'w')
-
-        try:
+    with tempfile.NamedTemporaryFile(suffix='.c') as f:
             cmd = [
                 gcc_command,
                 '-S', '-fverbose-asm',
                 '-o', '/dev/stdout',
-                input_filename,
+                f.name,
             ] + list(_fix_flags(flags))
             env = os.environ.copy()
             stderr = subprocess.DEVNULL
@@ -45,7 +40,3 @@ def run(gcc_command, flags, debug):
             except OSError as e:
                 e.strerror += ': "%s"' % gcc_command
                 raise
-        finally:
-            os.remove(input_filename)
-    finally:
-        os.rmdir(tempdir)
