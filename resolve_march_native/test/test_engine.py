@@ -199,3 +199,209 @@ class TestEngineFourFiles(TestCase):
             'amd-k8--target-help--native.txt',
             'amd-k8--target-help--explicit.txt',
         )
+
+    def test_cfarm110_power7(self):
+        expected_flag_set = {
+            '-mcpu=power7',
+        }
+
+        self._test_engine(
+            expected_flag_set,
+            'cfarm110-power7--assembly--native.txt',
+            'cfarm110-power7--assembly--explicit.txt',
+            'cfarm110-power7--target-help--native.txt',
+            'cfarm110-power7--target-help--explicit.txt',
+        )
+
+    def test_cfarm112_power8(self):
+        expected_flag_set = {
+            '-mcpu=power8',
+        }
+
+        self._test_engine(
+            expected_flag_set,
+            'cfarm112-power8--assembly--native.txt',
+            'cfarm112-power8--assembly--explicit.txt',
+            'cfarm112-power8--target-help--native.txt',
+            'cfarm112-power8--target-help--explicit.txt',
+        )
+
+    def test_cfarm117_armv8_a_crypto_crc(self):
+        expected_flag_set = {
+            '-march=armv8-a+crypto+crc',
+        }
+
+        self._test_engine(
+            expected_flag_set,
+            'cfarm117-armv8-a+crypto+crc--assembly--native.txt',
+            'cfarm117-armv8-a+crypto+crc--assembly--explicit.txt',
+            'cfarm117-armv8-a+crypto+crc--target-help--native.txt',
+            'cfarm117-armv8-a+crypto+crc--target-help--explicit.txt',
+        )
+
+    def test_cfarm118_armv8_a_crypto_crc(self):
+        expected_flag_set = {
+            '-march=armv8-a+crypto+crc',
+        }
+
+        self._test_engine(
+            expected_flag_set,
+            'cfarm118-armv8-a+crypto+crc--assembly--native.txt',
+            'cfarm118-armv8-a+crypto+crc--assembly--explicit.txt',
+            'cfarm118-armv8-a+crypto+crc--target-help--native.txt',
+            'cfarm118-armv8-a+crypto+crc--target-help--explicit.txt',
+        )
+
+    def test_cfarm120_power10(self):
+        expected_flag_set = {
+            '-mcpu=power10',
+        }
+
+        self._test_engine(
+            expected_flag_set,
+            'cfarm120-power10--assembly--native.txt',
+            'cfarm120-power10--assembly--explicit.txt',
+            'cfarm120-power10--target-help--native.txt',
+            'cfarm120-power10--target-help--explicit.txt',
+        )
+
+    def test_cfarm13_haswell(self):
+        expected_flag_set = {
+            '-mabm',
+            '-maes',
+            '--param=l1-cache-line-size=64',
+            '--param=l1-cache-size=32',
+            '--param=l2-cache-size=15360',
+            '-march=haswell',
+        }
+
+        self._test_engine(
+            expected_flag_set,
+            'cfarm13-haswell--assembly--native.txt',
+            'cfarm13-haswell--assembly--explicit.txt',
+            'cfarm13-haswell--target-help--native.txt',
+            'cfarm13-haswell--target-help--explicit.txt',
+        )
+
+    def test_cfarm14_haswell(self):
+        expected_flag_set = {
+            '-mabm',
+            '-maes',
+            '--param=l1-cache-line-size=64',
+            '--param=l1-cache-size=32',
+            '--param=l2-cache-size=15360',
+            '-march=haswell',
+        }
+
+        self._test_engine(
+            expected_flag_set,
+            'cfarm14-haswell--assembly--native.txt',
+            'cfarm14-haswell--assembly--explicit.txt',
+            'cfarm14-haswell--target-help--native.txt',
+            'cfarm14-haswell--target-help--explicit.txt',
+        )
+
+    def test_cfarm185_armv8_a_crypto_crc(self):
+        expected_flag_set = {
+            '-march=armv8-a+crypto+crc',
+        }
+
+        self._test_engine(
+            expected_flag_set,
+            'cfarm185-armv8-a+crypto+crc--assembly--native.txt',
+            'cfarm185-armv8-a+crypto+crc--assembly--explicit.txt',
+            'cfarm185-armv8-a+crypto+crc--target-help--native.txt',
+            'cfarm185-armv8-a+crypto+crc--target-help--explicit.txt',
+        )
+
+    def test_cfarm186_westmere(self):
+        expected_flag_set = {
+            '-maes',
+            '--param=l1-cache-line-size=64',
+            '--param=l1-cache-size=32',
+            '--param=l2-cache-size=12288',
+            '-march=westmere',
+        }
+
+        self._test_engine(
+            expected_flag_set,
+            'cfarm186-westmere--assembly--native.txt',
+            'cfarm186-westmere--assembly--explicit.txt',
+            'cfarm186-westmere--target-help--native.txt',
+            'cfarm186-westmere--target-help--explicit.txt',
+        )
+
+    def test_cfarm187_westmere(self):
+        expected_flag_set = {
+            '--param l1-cache-line-size=64',
+            '--param l1-cache-size=32',
+            '--param l2-cache-size=12288',
+            '-march=westmere',
+        }
+
+        self._test_engine(
+            expected_flag_set,
+            'cfarm187-westmere--assembly--native.txt',
+            'cfarm187-westmere--assembly--explicit.txt',
+            'cfarm187-westmere--target-help--native.txt',
+            'cfarm187-westmere--target-help--explicit.txt',
+        )
+
+    def test_cfarm188_westmere(self):
+        expected_flag_set = {
+            '--param l1-cache-line-size=64',
+            '--param l1-cache-size=32',
+            '--param l2-cache-size=12288',
+            '-march=westmere',
+        }
+
+        self._test_engine(
+            expected_flag_set,
+            'cfarm188-westmere--assembly--native.txt',
+            'cfarm188-westmere--assembly--explicit.txt',
+            'cfarm188-westmere--target-help--native.txt',
+            'cfarm188-westmere--target-help--explicit.txt',
+        )
+
+    def test_cfarm230_octeon2(self):
+        expected_flag_set = {
+            '-march=octeon2',
+        }
+
+        self._test_engine(
+            expected_flag_set,
+            'cfarm230-octeon2--assembly--native.txt',
+            'cfarm230-octeon2--assembly--explicit.txt',
+            'cfarm230-octeon2--target-help--native.txt',
+            'cfarm230-octeon2--target-help--explicit.txt',
+        )
+
+    def test_cfarm29_power9(self):
+        expected_flag_set = {
+            '-mcpu=power9',
+        }
+
+        self._test_engine(
+            expected_flag_set,
+            'cfarm29-power9--assembly--native.txt',
+            'cfarm29-power9--assembly--explicit.txt',
+            'cfarm29-power9--target-help--native.txt',
+            'cfarm29-power9--target-help--explicit.txt',
+        )
+
+    def test_cfarm70_nocona(self):
+        expected_flag_set = {
+            '-msahf',
+            '--param l1-cache-line-size=64',
+            '--param l1-cache-size=16',
+            '--param l2-cache-size=2048',
+            '-march=nocona',
+        }
+
+        self._test_engine(
+            expected_flag_set,
+            'cfarm70-nocona--assembly--native.txt',
+            'cfarm70-nocona--assembly--explicit.txt',
+            'cfarm70-nocona--target-help--native.txt',
+            'cfarm70-nocona--target-help--explicit.txt',
+        )

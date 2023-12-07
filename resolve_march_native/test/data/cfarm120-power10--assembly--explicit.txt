@@ -1,0 +1,12 @@
+	.file	"tmp.x4bHtYekrU.c"
+
+ # rs6000/powerpc options: -mcpu=power10 -msdata=none
+	.machine power10
+	.abiversion 2
+ # GNU C17 (GCC) version 11.4.1 20230605 (Red Hat 11.4.1-2) (ppc64le-redhat-linux)
+ #	compiled by GNU C version 11.4.1 20230605 (Red Hat 11.4.1-2), GMP version 6.2.0, MPFR version 4.1.0-p9, MPC version 1.2.1, isl version none
+ # GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+ # options passed: -msecure-plt -mcpu=power10
+	.section	".text"
+	.ident	"GCC: (GNU) 11.4.1 20230605 (Red Hat 11.4.1-2)"
+	.section	.note.GNU-stack,"",@progbits

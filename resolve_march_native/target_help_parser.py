@@ -19,6 +19,14 @@ _enabled_line_pattern = re.compile(r'^\s+(?P<flag>-[^ ]+)\s+\[enabled\]$')
 # "  -mno-align-stringops        \t\t[disabled]"
 _disabled_m_line_pattern = re.compile(r'^\s+(?P<flag>-m[^ ]+)\s+\[disabled\]$')
 
+# Exmample lines:
+# "  -misel=no                   \t\t"
+_assign_no_line_pattern = re.compile(r'^\s+(?P<flag>-m[^ ]+)=no\s+$')
+
+# Exmample lines:
+# "  -misel=yes                  \t\t"
+_assign_yes_line_pattern = re.compile(r'^\s+(?P<flag>-m[^ ]+)=yes\s+$')
+
 # Example lines:
 # "  -mgen-cell-microcode        \t\t[ignored]"
 _ignore_marked_line_pattern = re.compile(r'^\s+(?P<flag>-[^ ]+)\s+\[ignored\]$')
@@ -43,6 +51,10 @@ _space_value_line_pattern = re.compile(r'^\s+(?P<flag>-[^ =]+) <[^>]+>\s+(?P<val
 # Example lines:
 # "  -G<number>                  \t\t8"
 _value_line_pattern = re.compile(r'^\s+(?P<flag>-[^ =<]+)<[^>]+>\s+(?P<value>.*)$')
+
+# Example lines:
+# "  -mipsN                      \t\t1"
+_value_upper_line_pattern = re.compile(r'^\s+(?P<flag>-[^ =A-Z]+)[A-Z]+\s+(?P<value>.*)$')
 
 # Example lines:
 # "  -malign-                    \t\tnatural"
@@ -117,6 +129,19 @@ def _parse_gcc_output(gcc_output: str) -> List[str]:
                 flags.append('-mno-' + flag[len('-m'):])
             continue
 
+        if '=no' in line:
+            m = _assign_no_line_pattern.match(line)
+            if m is not None:
+                flag = m.group('flag')
+                flags.append('-mno-' + flag[len('-m'):])
+                continue
+
+        if '=yes' in line:
+            m = _assign_yes_line_pattern.match(line)
+            if m is not None:
+                flags.append(m.group('flag'))
+                continue
+
         if line.endswith('[ignored]'):
             flag = _ignore_marked_line_pattern.match(line).group('flag')
             flags.append(flag)
@@ -159,6 +184,12 @@ def _parse_gcc_output(gcc_output: str) -> List[str]:
             continue
 
         value_line_match = _value_line_pattern.match(line)
+        if value_line_match is not None:
+            flag = value_line_match.group("flag") + value_line_match.group("value")
+            flags.append(flag)
+            continue
+
+        value_line_match = _value_upper_line_pattern.match(line)
         if value_line_match is not None:
             flag = value_line_match.group("flag") + value_line_match.group("value")
             flags.append(flag)

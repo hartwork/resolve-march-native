@@ -1,0 +1,37 @@
+	.file	"tmp.exDMmsY8B3.c"
+# GNU C17 (Debian 10.2.1-6) version 10.2.1 20210110 (x86_64-linux-gnu)
+#	compiled by GNU C version 10.2.1 20210110, GMP version 6.2.1, MPFR version 4.1.0, MPC version 1.2.0, isl version isl-0.23-GMP
+
+# GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+# options passed:  -imultiarch x86_64-linux-gnu /tmp/tmp.exDMmsY8B3.c
+# -march=westmere -auxbase-strip /dev/stdout -fverbose-asm
+# -fasynchronous-unwind-tables
+# options enabled:  -fPIC -fPIE -faggressive-loop-optimizations
+# -fallocation-dce -fasynchronous-unwind-tables -fauto-inc-dec
+# -fdelete-null-pointer-checks -fdwarf2-cfi-asm -fearly-inlining
+# -feliminate-unused-debug-symbols -feliminate-unused-debug-types
+# -ffp-int-builtin-inexact -ffunction-cse -fgcse-lm -fgnu-unique -fident
+# -finline-atomics -fipa-stack-alignment -fira-hoist-pressure
+# -fira-share-save-slots -fira-share-spill-slots -fivopts
+# -fkeep-static-consts -fleading-underscore -flifetime-dse -fmath-errno
+# -fmerge-debug-strings -fpeephole -fplt -fprefetch-loop-arrays
+# -freg-struct-return -fsched-critical-path-heuristic
+# -fsched-dep-count-heuristic -fsched-group-heuristic -fsched-interblock
+# -fsched-last-insn-heuristic -fsched-rank-heuristic -fsched-spec
+# -fsched-spec-insn-heuristic -fsched-stalled-insns-dep -fschedule-fusion
+# -fsemantic-interposition -fshow-column -fshrink-wrap-separate
+# -fsigned-zeros -fsplit-ivs-in-unroller -fssa-backprop -fstdarg-opt
+# -fstrict-volatile-bitfields -fsync-libcalls -ftrapping-math -ftree-cselim
+# -ftree-forwprop -ftree-loop-if-convert -ftree-loop-im -ftree-loop-ivcanon
+# -ftree-loop-optimize -ftree-parallelize-loops= -ftree-phiprop
+# -ftree-reassoc -ftree-scev-cprop -funit-at-a-time -funwind-tables
+# -fverbose-asm -fzero-initialized-in-bss -m128bit-long-double -m64 -m80387
+# -malign-stringops -mavx256-split-unaligned-load
+# -mavx256-split-unaligned-store -mcx16 -mfancy-math-387 -mfp-ret-in-387
+# -mfxsr -mglibc -mieee-fp -mlong-double-80 -mmmx -mpclmul -mpopcnt
+# -mpush-args -mred-zone -msahf -msse -msse2 -msse3 -msse4 -msse4.1
+# -msse4.2 -mssse3 -mstv -mtls-direct-seg-refs -mvzeroupper
+
+	.text
+	.ident	"GCC: (Debian 10.2.1-6) 10.2.1 20210110"
+	.section	.note.GNU-stack,"",@progbits

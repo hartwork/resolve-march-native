@@ -1,0 +1,40 @@
+The following options are target specific:
+  -mabi=ABI                   		lp64
+  -march=ARCH                 		armv8-a+crypto+crc
+  -mbig-endian                		[disabled]
+  -mbionic                    		[disabled]
+  -mcmodel=                   		small
+  -mcpu=CPU                   		
+  -mfix-cortex-a53-835769     		[enabled]
+  -mfix-cortex-a53-843419     		[enabled]
+  -mgeneral-regs-only         		[disabled]
+  -mglibc                     		[enabled]
+  -mlittle-endian             		[enabled]
+  -mmusl                      		[disabled]
+  -momit-leaf-frame-pointer   		[enabled]
+  -moutline-atomics           		[disabled]
+  -moverride=STRING           		
+  -mpc-relative-literal-loads 		[enabled]
+  -msign-return-address=      		none
+  -mstrict-align              		[disabled]
+  -msve-vector-bits=N         		scalable
+  -mtls-dialect=              		desc
+  -mtls-size=                 		24
+  -mtune=CPU                  		
+  -muclibc                    		[disabled]
+
+  Known AArch64 ABIs (for use with the -mabi= option):
+    ilp32 lp64
+
+  Supported AArch64 return address signing scope (for use with -msign-return-address= option):
+    all non-leaf none
+
+  The code model option names for -mcmodel:
+    large small tiny
+
+  The possible SVE vector lengths:
+    1024 128 2048 256 512 scalable
+
+  The possible TLS dialects:
+    desc trad
+

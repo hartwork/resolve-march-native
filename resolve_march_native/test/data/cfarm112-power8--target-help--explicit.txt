@@ -1,0 +1,171 @@
+The following options are target specific:
+  -G<number>                  		0
+  -m32                        		[disabled]
+  -m64                        		[enabled]
+  -mabi=altivec               		[disabled]
+  -mabi=d32                   		[enabled]
+  -mabi=d64                   		[disabled]
+  -mabi=elfv1                 		[disabled]
+  -mabi=elfv2                 		[disabled]
+  -mabi=ibmlongdouble         		[enabled]
+  -mabi=ieeelongdouble        		[disabled]
+  -mabi=no-altivec            		[enabled]
+  -mabi=no-spe                		[enabled]
+  -mabi=spe                   		[disabled]
+  -mads                       		[disabled]
+  -maix-struct-return         		[disabled]
+  -malign-                    		power
+  -malign-branch-targets      		[enabled]
+  -mallow-df-permute          		[disabled]
+  -mallow-movmisalign         		[enabled]
+  -maltivec                   		[enabled]
+  -maltivec=be                		[disabled]
+  -maltivec=le                		[disabled]
+  -malways-hint               		[enabled]
+  -mandroid                   		[disabled]
+  -mavoid-indexed-addresses   		[enabled]
+  -mbig                       		[disabled]
+  -mbig-endian                		[disabled]
+  -mbionic                    		[disabled]
+  -mbit-align                 		[disabled]
+  -mbit-word                  		[disabled]
+  -mblock-move-inline-limit=  		0
+  -mbss-plt                   		[disabled]
+  -mcall-                     		
+  -mcmodel=                   		small
+  -mcmpb                      		[enabled]
+  -mcompat-align-parm         		[enabled]
+  -mcpu=                      		power8
+  -mcrypto                    		[enabled]
+  -mdebug=                    		
+  -mdirect-move               		[enabled]
+  -mdlmzb                     		[disabled]
+  -mdouble-float              		[disabled]
+  -meabi                      		[disabled]
+  -mefficient-unaligned-vector 		[enabled]
+  -memb                       		[disabled]
+  -mfloat-gprs=               		no
+  -mfp-in-toc                 		[enabled]
+  -mfprnd                     		[enabled]
+  -mfpu=                      		none
+  -mfriz                      		[enabled]
+  -mfull-toc                  		[disabled]
+  -mfused-madd                		
+  -mgen-cell-microcode        		[enabled]
+  -mglibc                     		[enabled]
+  -mhard-dfp                  		[enabled]
+  -mhard-float                		[enabled]
+  -mhtm                       		[enabled]
+  -minsert-sched-nops=        		
+  -misel                      		[disabled]
+  -misel=no                   		
+  -misel=yes                  		
+  -mlittle                    		[enabled]
+  -mlittle-endian             		[enabled]
+  -mlong-double-<n>           		0
+  -mlongcall                  		[disabled]
+  -mlra                       		[disabled]
+  -mmfcrf                     		[enabled]
+  -mmfpgpr                    		[disabled]
+  -mminimal-toc               		[disabled]
+  -mmulhw                     		[disabled]
+  -mmultiple                  		[disabled]
+  -mmvme                      		[disabled]
+  -mnewlib                    		[disabled]
+  -mno-fp-in-toc              		[disabled]
+  -mno-sum-in-toc             		[disabled]
+  -mno-toc                    		[disabled]
+  -mno-traceback              		[disabled]
+  -mno-update                 		[disabled]
+  -moptimize-swaps            		[enabled]
+  -mpaired                    		[disabled]
+  -mpointers-to-nested-functions 	[enabled]
+  -mpopcntb                   		[enabled]
+  -mpopcntd                   		[enabled]
+  -mpower8-fusion             		[enabled]
+  -mpower8-fusion-sign        		[disabled]
+  -mpower8-vector             		[enabled]
+  -mpowerpc                   		
+  -mpowerpc-gfxopt            		[enabled]
+  -mpowerpc-gpopt             		[enabled]
+  -mpowerpc64                 		[enabled]
+  -mprioritize-restricted-insns= 	0
+  -mprofile-kernel            		[disabled]
+  -mprototype                 		[disabled]
+  -mquad-memory               		[enabled]
+  -mquad-memory-atomic        		[enabled]
+  -mrecip                     		[disabled]
+  -mrecip-precision           		[enabled]
+  -mrecip=                    		
+  -mregnames                  		[disabled]
+  -mrelocatable               		[disabled]
+  -mrelocatable-lib           		[disabled]
+  -msave-toc-indirect         		[disabled]
+  -msched-costly-dep=         		
+  -msched-epilog              		[enabled]
+  -msched-groups              		[enabled]
+  -msched-prolog              		[enabled]
+  -msdata                     		[disabled]
+  -msdata=                    		
+  -msecure-plt                		[enabled]
+  -mshlib                     		[disabled]
+  -msim                       		[disabled]
+  -msimple-fpu                		[disabled]
+  -msingle-float              		[disabled]
+  -msingle-pic-base           		[disabled]
+  -msoft-float                		[disabled]
+  -mspe                       		[disabled]
+  -mspe=no                    		
+  -mspe=yes                   		
+  -mstack-protector-guard-offset= 	
+  -mstack-protector-guard-reg= 		
+  -mstack-protector-guard=    		tls
+  -mstrict-align              		[disabled]
+  -mstring                    		[disabled]
+  -msum-in-toc                		[enabled]
+  -msvr4-struct-return        		[enabled]
+  -mtls-markers               		[enabled]
+  -mtls-size=                 		32
+  -mtoc                       		[disabled]
+  -mtraceback=                		[default]
+  -mtune=                     		[default]
+  -muclibc                    		[disabled]
+  -mupdate                    		[enabled]
+  -mupper-regs-df             		[disabled]
+  -mupper-regs-sf             		[disabled]
+  -mveclibabi=                		
+  -mvectorize-builtins        		[enabled]
+  -mvrsave                    		[disabled]
+  -mvrsave=no                 		
+  -mvrsave=yes                		
+  -mvsx                       		[enabled]
+  -mvsx-align-128             		[disabled]
+  -mvsx-scalar-double         		[enabled]
+  -mvsx-scalar-float          		[enabled]
+  -mvsx-scalar-memory         		
+  -mvsx-timode                		[disabled]
+  -mwarn-altivec-long         		[enabled]
+  -mwarn-cell-microcode       		[disabled]
+  -mxilinx-fpu                		[disabled]
+  -mxl-compat                 		[disabled]
+  -myellowknife               		[disabled]
+
+  Valid arguments to -malign-:
+    natural power
+
+  Known code models (for use with the -mcmodel= option):
+    large medium small
+
+  Known CPUs (for use with the -mcpu= and -mtune= options):
+    401 403 405 405fp 440 440fp 464 464fp 476 476fp 505 601 602 603 603e 604
+    604e 620 630 740 7400 7450 750 801 821 823 8540 8548 860 970 G3 G4 G5 a2
+    cell e300c2 e300c3 e500mc e500mc64 e5500 e6500 ec603e native power3 power4
+    power5 power5+ power6 power6x power7 power8 powerpc powerpc64 powerpc64le
+    rs64 titan
+
+  Valid arguments to -mfloat-gprs=:
+    double no single yes
+
+  Valid arguments to -mstack-protector-guard=:
+    global tls
+

@@ -1,0 +1,37 @@
+	.arch armv8-a+crypto+crc
+	.file	"tmp.6Wpmi5RuWW.c"
+// GNU C17 (GCC) version 8.5.0 20210514 (Red Hat 8.5.0-21) (aarch64-redhat-linux)
+//	compiled by GNU C version 8.5.0 20210514 (Red Hat 8.5.0-21), GMP version 6.1.2, MPFR version 3.1.6-p2, MPC version 1.1.0, isl version none
+// GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+// options passed:  /tmp/tmp.6Wpmi5RuWW.c -march=armv8-a+crypto+crc
+// -mlittle-endian -mabi=lp64 -auxbase-strip /dev/stdout -fverbose-asm
+// options enabled:  -faggressive-loop-optimizations
+// -fasynchronous-unwind-tables -fauto-inc-dec -fchkp-check-incomplete-type
+// -fchkp-check-read -fchkp-check-write -fchkp-instrument-calls
+// -fchkp-narrow-bounds -fchkp-optimize -fchkp-store-bounds
+// -fchkp-use-static-bounds -fchkp-use-static-const-bounds
+// -fchkp-use-wrappers -fcommon -fdelete-null-pointer-checks
+// -fdwarf2-cfi-asm -fearly-inlining -feliminate-unused-debug-types
+// -ffp-int-builtin-inexact -ffunction-cse -fgcse-lm -fgnu-runtime
+// -fgnu-unique -fident -finline-atomics -fira-hoist-pressure
+// -fira-share-save-slots -fira-share-spill-slots -fivopts
+// -fkeep-static-consts -fleading-underscore -flifetime-dse
+// -flto-odr-type-merging -fmath-errno -fmerge-debug-strings
+// -fomit-frame-pointer -fpeephole -fplt -fprefetch-loop-arrays
+// -freg-struct-return -fsched-critical-path-heuristic
+// -fsched-dep-count-heuristic -fsched-group-heuristic -fsched-interblock
+// -fsched-last-insn-heuristic -fsched-rank-heuristic -fsched-spec
+// -fsched-spec-insn-heuristic -fsched-stalled-insns-dep -fschedule-fusion
+// -fsemantic-interposition -fshow-column -fshrink-wrap-separate
+// -fsigned-zeros -fsplit-ivs-in-unroller -fssa-backprop -fstdarg-opt
+// -fstrict-volatile-bitfields -fsync-libcalls -ftrapping-math
+// -ftree-cselim -ftree-forwprop -ftree-loop-if-convert -ftree-loop-im
+// -ftree-loop-ivcanon -ftree-loop-optimize -ftree-parallelize-loops=
+// -ftree-phiprop -ftree-reassoc -ftree-scev-cprop -funit-at-a-time
+// -funwind-tables -fverbose-asm -fzero-initialized-in-bss
+// -mfix-cortex-a53-835769 -mfix-cortex-a53-843419 -mglibc -mlittle-endian
+// -momit-leaf-frame-pointer -mpc-relative-literal-loads
+
+	.text
+	.ident	"GCC: (GNU) 8.5.0 20210514 (Red Hat 8.5.0-21)"
+	.section	.note.GNU-stack,"",@progbits
