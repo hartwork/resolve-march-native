@@ -45,6 +45,10 @@ _space_value_line_pattern = re.compile(r'^\s+(?P<flag>-[^ =]+) <[^>]+>\s+(?P<val
 _value_line_pattern = re.compile(r'^\s+(?P<flag>-[^ =<]+)<[^>]+>\s+(?P<value>.*)$')
 
 # Example lines:
+# "  -mipsN                      \t\t1"
+_value_upper_line_pattern = re.compile(r'^\s+(?P<flag>-[^ =A-Z]+)[A-Z]+\s+(?P<value>.*)$')
+
+# Example lines:
 # "  -malign-                    \t\tnatural"
 _concat_arg_line_pattern = re.compile(r'^\s+(?P<flag>-[^ =]+-)\s+(?P<value>.+)$')
 
@@ -159,6 +163,12 @@ def _parse_gcc_output(gcc_output: str) -> List[str]:
             continue
 
         value_line_match = _value_line_pattern.match(line)
+        if value_line_match is not None:
+            flag = value_line_match.group("flag") + value_line_match.group("value")
+            flags.append(flag)
+            continue
+
+        value_line_match = _value_upper_line_pattern.match(line)
         if value_line_match is not None:
             flag = value_line_match.group("flag") + value_line_match.group("value")
             flags.append(flag)

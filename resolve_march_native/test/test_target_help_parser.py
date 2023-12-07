@@ -486,3 +486,7 @@ class ParseGccOutputTest(TestCase):
                          ['-malign-stringops'])
         self.assertEqual(_parse_gcc_output('  -mavx                                 [disabled]'),
                          ['-mno-avx'])
+
+    def test_upper_value_lines(self):
+        self.assertEqual(_parse_gcc_output('  -mipsN                      \t\t1'),
+                         ['-mips1'])
