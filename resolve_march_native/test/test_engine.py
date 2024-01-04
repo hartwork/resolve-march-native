@@ -404,3 +404,23 @@ class TestEngineFourFiles(TestCase):
             'cfarm70-nocona--target-help--native.txt',
             'cfarm70-nocona--target-help--explicit.txt',
         )
+
+    def test_pentium(self):
+        expected_flag_set = {
+            '-mbranch-cost=3',
+            '-mno-accumulate-outgoing-args',
+            '-mno-sahf',
+            '--param=l1-cache-line-size=64',
+            '--param=l1-cache-size=32',
+            '--param=l2-cache-size=1024',
+            '-march=pentium-m',
+            '-mtune=generic',
+        }
+
+        self._test_engine(
+            expected_flag_set,
+            'pentium-m--assembly--native.txt',
+            'pentium-m--assembly--explicit.txt',
+            'pentium-m--target-help--native.txt',
+            'pentium-m--target-help--explicit.txt',
+        )
