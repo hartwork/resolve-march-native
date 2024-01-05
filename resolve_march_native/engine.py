@@ -99,7 +99,7 @@ class Engine:
                 continue
 
             if not flag.startswith(PREFIX_NO) and flag.startswith(PREFIX_YES) \
-                    and not flag.startswith(PREFIX_MTUNE):
+                    and not flag.startswith(PREFIX_MTUNE) and '=' not in flag:
                 # march=<explicit> enabled something (too much) that march=native disabled
                 opposite_flag = PREFIX_NO + flag[len(PREFIX_YES):]
                 target_set.add(opposite_flag)
