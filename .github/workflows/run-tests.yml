@@ -25,9 +25,6 @@ jobs:
         set -x
         python3 --version
         pip3 install -U setuptools  # for Python >=3.12
-        python3 setup.py test
-
-        # Once again with pytest for its warnings
         pip3 install --require-hashes -r requirements.txt
         pytest -v -s -Wdefault -Werror
 
