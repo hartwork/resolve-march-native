@@ -32,4 +32,4 @@ jobs:
       run: |
         set -x
         pip3 install -e .
-        resolve-march-native --gcc=gcc-11 --vertical
+        resolve-march-native --gcc=gcc-12 --vertical
