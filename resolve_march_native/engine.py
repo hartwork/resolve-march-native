@@ -3,6 +3,7 @@
 
 import subprocess
 import sys
+from contextlib import suppress
 
 from .parser import extract_flags
 from .runner import run
@@ -126,6 +127,11 @@ class Engine:
         #       since it may add new -mno-* flags
         self._process_flags_explicit_has_more(native_unrolled_flag_set,
                                               march_native_flag_set, march_explicit_flag_set)
+
+        # Workaround issues with tribool for machines with e.g. SSE4.1 but not SSE4.2
+        for flag_prefix in ('-m', '-mno-'):
+            with suppress(KeyError):
+                native_unrolled_flag_set.remove(f"{flag_prefix}sse4")
 
         return native_unrolled_flag_set
 

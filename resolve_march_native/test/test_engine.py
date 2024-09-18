@@ -424,3 +424,22 @@ class TestEngineFourFiles(TestCase):
             'pentium-m--target-help--native.txt',
             'pentium-m--target-help--explicit.txt',
         )
+
+    def test_sse4_weirdness_issue_177(self):
+        expected_flag_set = {
+            # No "-msse4" here!
+            '-msse4.1',
+            '-mxsave',
+            '--param=l1-cache-size=32',
+            '--param=l1-cache-line-size=64',
+            '--param=l2-cache-size=6144',
+            '-march=core2',
+        }
+
+        self._test_engine(
+            expected_flag_set,
+            'harpertown-core2--assembly--native.txt',
+            'harpertown-core2--assembly--explicit.txt',
+            'harpertown-core2--target-help--native.txt',
+            'harpertown-core2--target-help--explicit.txt',
+        )
