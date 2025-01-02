@@ -16,7 +16,7 @@ permissions:
 
 jobs:
   run-tests:
-    name: Run the test suite
+    name: Run the test suite (${{ matrix.gcc }}, ${{ matrix.runs-on }}, Python ${{ matrix.gcc }})
     strategy:
       fail-fast: false
       matrix:
