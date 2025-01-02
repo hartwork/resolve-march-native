@@ -22,13 +22,17 @@ jobs:
       matrix:
         include:
             # No particular need for in-between versions of Python
-          - python-version: 3.9
+          - gcc: gcc-12
+            python-version: 3.9
             runs-on: macos-13
-          - python-version: 3.12
+          - gcc: gcc-12
+            python-version: 3.12
             runs-on: macos-13
-          - python-version: 3.9
+          - gcc: gcc-12
+            python-version: 3.9
             runs-on: ubuntu-22.04
-          - python-version: 3.12
+          - gcc: gcc-12
+            python-version: 3.12
             runs-on: ubuntu-22.04
     runs-on: ${{ matrix.runs-on }}
     steps:
@@ -45,7 +49,9 @@ jobs:
         pytest -v -s -Wdefault -Werror
 
     - name: Smoke test the CLI
+      env:
+        gcc: ${{ matrix.gcc }}
       run: |
         set -x
         pip3 install -e .
-        resolve-march-native --gcc=gcc-12 --vertical
+        resolve-march-native --gcc="${gcc}" --vertical
