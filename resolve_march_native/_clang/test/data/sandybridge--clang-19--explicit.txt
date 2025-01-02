@@ -1,0 +1,7 @@
+clang version 19.1.2
+Target: x86_64-pc-linux-gnu
+Thread model: posix
+InstalledDir: /usr/lib/llvm/19/bin
+Configuration file: /etc/clang/x86_64-pc-linux-gnu-clang.cfg
+ (in-process)
+ "/usr/lib/llvm/19/bin/clang-19" "-cc1" "-triple" "x86_64-pc-linux-gnu" "-E" "-disable-free" "-clear-ast-before-backend" "-disable-llvm-verifier" "-discard-value-names" "-main-file-name" "-" "-mrelocation-model" "pic" "-pic-level" "2" "-pic-is-pie" "-mframe-pointer=all" "-fmath-errno" "-ffp-contract=on" "-fno-rounding-math" "-mconstructor-aliases" "-funwind-tables=2" "-target-cpu" "sandybridge" "-debugger-tuning=gdb" "-fdebug-compilation-dir=/CENSORED/resolve-march-native" "-fcoverage-compilation-dir=/CENSORED/resolve-march-native" "-resource-dir" "/usr/lib/llvm/19/bin/../../../../lib/clang/19" "-include" "/usr/include/gentoo/fortify.h" "-include" "/usr/include/gentoo/maybe-stddefs.h" "-internal-isystem" "/usr/lib/llvm/19/bin/../../../../lib/clang/19/include" "-internal-isystem" "/usr/local/include" "-internal-isystem" "/usr/lib/gcc/x86_64-pc-linux-gnu/13/../../../../x86_64-pc-linux-gnu/include" "-internal-externc-isystem" "/include" "-internal-externc-isystem" "/usr/include" "-ferror-limit" "19" "-stack-protector" "2" "-fstack-clash-protection" "-fcf-protection=none" "-fgnuc-version=4.2.1" "-fskip-odr-check-in-gmf" "-D__GCC_HAVE_DWARF2_CFI_ASM=1" "-o" "-" "-x" "c" "-"
