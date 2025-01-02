@@ -46,6 +46,14 @@ jobs:
             install: binutils gcc-15
             python-version: 3.13
             runs-on: ubuntu-24.04
+          - cc: clang-10
+            install: null
+            python-version: 3.13
+            runs-on: ubuntu-20.04
+          - cc: clang-18
+            install: null
+            python-version: 3.13
+            runs-on: ubuntu-24.04
           - cc: musl-gcc
             install: musl-tools
             python-version: 3.13
@@ -88,9 +96,15 @@ jobs:
       env:
         cc: ${{ matrix.cc }}
       run: |
+        if [[ "${cc}" = clang* ]]; then
+          args=( --clang "${cc}" )
+        else
+          args=( --gcc "${cc}" )
+        fi
+
         set -x
         pip3 install -e .
-        coverage run -a -m resolve_march_native --gcc="${cc}" --vertical
+        coverage run -a -m resolve_march_native "${args[@]}" --vertical
         coverage report | tee coverage.txt
         coverage html
 
