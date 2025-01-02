@@ -7,7 +7,7 @@ import subprocess
 import sys
 from typing import List
 
-from .environment import enforce_c_locale
+from resolve_march_native.environment import enforce_c_locale
 
 # Example lines:
 # "  -m128bit-long-double                  [enabled]"

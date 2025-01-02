@@ -5,9 +5,10 @@ import subprocess
 import sys
 from contextlib import suppress
 
-from .parser import extract_flags
-from .runner import run
-from .target_help_parser import get_flags_implied_by_march
+from resolve_march_native._gcc.parser import extract_flags
+from resolve_march_native._gcc.runner import run
+from resolve_march_native._gcc.target_help_parser import \
+    get_flags_implied_by_march
 
 
 class NoTunePresentError(Exception):

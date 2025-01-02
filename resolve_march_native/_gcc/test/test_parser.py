@@ -4,7 +4,7 @@
 from importlib.resources import files
 from unittest import TestCase
 
-from ..parser import extract_flags
+from resolve_march_native._gcc.parser import extract_flags
 
 
 class TestParser(TestCase):
@@ -151,7 +151,7 @@ class TestParser(TestCase):
     ]
 
     def test_parse_westmere_native_s(self):
-        with open(files('resolve_march_native.test')
+        with open(files('resolve_march_native._gcc.test')
                   / 'data'
                   / 'westmere--4-9-3-gentoo--native.s') as f:
             received_flags = list(extract_flags(f.read()))
