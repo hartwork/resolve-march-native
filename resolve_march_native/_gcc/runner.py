@@ -6,7 +6,7 @@ import subprocess
 import sys
 import tempfile
 
-from .environment import enforce_c_locale
+from resolve_march_native.environment import enforce_c_locale
 
 
 def _fix_flags(flags):
