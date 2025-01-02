@@ -8,6 +8,7 @@ on:
   push:
   schedule:
     - cron: '0 14 * * 5'  # Every Friday 2pm
+  workflow_dispatch:
 
 jobs:
   run-tests:
