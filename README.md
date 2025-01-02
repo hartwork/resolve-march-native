@@ -12,10 +12,11 @@
 
 ```console
 $ resolve-march-native --vertical
--march=bonnell
--mno-cx16
---param l1-cache-line-size=64
---param l1-cache-size=24
+-march=sandybridge
+-maes
+--param=l1-cache-line-size=64
+--param=l1-cache-size=32
+--param=l2-cache-size=3072
 ```
 
 
