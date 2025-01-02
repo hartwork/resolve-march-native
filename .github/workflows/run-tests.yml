@@ -18,6 +18,7 @@ jobs:
   run-tests:
     name: Run the test suite
     strategy:
+      fail-fast: false
       matrix:
         include:
             # No particular need for in-between versions of Python
