@@ -5,12 +5,13 @@ from importlib.resources import files
 from unittest import TestCase
 from unittest.mock import patch
 
-from ..target_help_parser import _parse_gcc_output, get_flags_implied_by_march
+from resolve_march_native._gcc.target_help_parser import (
+    _parse_gcc_output, get_flags_implied_by_march)
 
 
 class GetFlagsImpliedByMarchTest(TestCase):
     def test(self):
-        stdout_mock_filename = (files('resolve_march_native.test')
+        stdout_mock_filename = (files('resolve_march_native._gcc.test')
                                 / 'data' /
                                 'sandybridge--11-3-0-gentoo--target-help.txt')
         with open(stdout_mock_filename, 'rb') as f:
@@ -217,7 +218,7 @@ class GetFlagsImpliedByMarchTest(TestCase):
         self.assertEqual(actual_flags, expected_flags)
 
     def test_macos(self):
-        stdout_mock_filename = (files('resolve_march_native.test')
+        stdout_mock_filename = (files('resolve_march_native._gcc.test')
                                 / 'data'
                                 / 'native-ivybridge--10-4-0-macos-homebrew--target-help.txt')
         with open(stdout_mock_filename, 'rb') as f:
@@ -416,7 +417,7 @@ class GetFlagsImpliedByMarchTest(TestCase):
         self.assertEqual(actual_flags, expected_flags)
 
     def test_sandybridge_celeron_without_avx__native(self):
-        stdout_mock_filename = (files('resolve_march_native.test')
+        stdout_mock_filename = (files('resolve_march_native._gcc.test')
                                 / 'data'
                                 / 'sandybridge-celeron--target-help--native.txt')
         with open(stdout_mock_filename, 'rb') as f:
@@ -429,7 +430,7 @@ class GetFlagsImpliedByMarchTest(TestCase):
         self.assertNotIn('-mavx', actual_flags)
 
     def test_sandybridge_celeron_without_avx__explicit(self):
-        stdout_mock_filename = (files('resolve_march_native.test')
+        stdout_mock_filename = (files('resolve_march_native._gcc.test')
                                 / 'data'
                                 / 'sandybridge-celeron--target-help--explicit.txt')
         with open(stdout_mock_filename, 'rb') as f:

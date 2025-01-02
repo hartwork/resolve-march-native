@@ -8,7 +8,8 @@ import sys
 import traceback
 from textwrap import dedent
 
-from .engine import Engine
+from resolve_march_native._gcc.engine import Engine
+
 from .recommended import add_recommended_flags
 from .sort import flags_sort_key
 from .version import VERSION_STR
