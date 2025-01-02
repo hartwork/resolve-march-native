@@ -42,8 +42,30 @@ jobs:
             install: null
             python-version: 3.12
             runs-on: ubuntu-22.04
+          - gcc: gcc-14
+            install: null
+            python-version: 3.12
+            runs-on: ubuntu-24.04
+          - gcc: gcc-15
+            install: binutils gcc-15
+            python-version: 3.12
+            runs-on: ubuntu-24.04
+          - gcc: musl-gcc
+            install: musl-tools
+            python-version: 3.12
+            runs-on: ubuntu-24.04
     runs-on: ${{ matrix.runs-on }}
     steps:
+
+    - name: Add GCC 15 Ubuntu repositories
+      if: "${{ matrix.gcc == 'gcc-15' }}"
+      run: |
+           set -x
+           # The repository is at home at https://launchpad.net/~ubuntu-toolchain-r/+archive/ubuntu/test .
+           # NOTE: plucky is 25.04 (not 24.04 LTS)
+           wget -O - 'https://keyserver.ubuntu.com/pks/lookup?op=get&search=0xc8ec952e2a0e1fbdc5090f6a2c277a0a352154e5' | sudo apt-key add -
+           sudo add-apt-repository 'deb https://ppa.launchpadcontent.net/ubuntu-toolchain-r/test/ubuntu plucky main'
+           sudo add-apt-repository 'deb http://archive.ubuntu.com/ubuntu/ plucky main'
 
     - name: Install runtime dependencies
       if: "${{ matrix.install }}"
