@@ -32,16 +32,12 @@ jobs:
             runs-on: macos-13
           - gcc: gcc-12
             install: null
-            python-version: 3.12
-            runs-on: macos-13
-          - gcc: gcc-12
-            install: null
             python-version: 3.9
             runs-on: ubuntu-22.04
-          - gcc: gcc-12
+          - gcc: gcc-14
             install: null
             python-version: 3.12
-            runs-on: ubuntu-22.04
+            runs-on: macos-13
           - gcc: gcc-14
             install: null
             python-version: 3.12
