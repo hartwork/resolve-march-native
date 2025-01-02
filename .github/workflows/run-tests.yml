@@ -10,6 +10,10 @@ on:
     - cron: '0 14 * * 5'  # Every Friday 2pm
   workflow_dispatch:
 
+# Drop permissions to minimum for security
+permissions:
+  contents: read
+
 jobs:
   run-tests:
     name: Run the test suite
