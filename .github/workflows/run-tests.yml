@@ -4,8 +4,8 @@
 name: Run the test suite
 
 on:
-- pull_request
-- push
+  pull_request:
+  push:
 
 jobs:
   run-tests:
