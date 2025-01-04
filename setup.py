@@ -2,7 +2,7 @@
 # Copyright (C) 2015 Sebastian Pipping <sebastian@pipping.org>
 # Licensed under GPL v2 or later
 
-from setuptools import setup
+from setuptools import find_packages, setup
 
 from resolve_march_native.version import VERSION_STR
 
@@ -27,9 +27,7 @@ if __name__ == '__main__':
         setup_requires=[
             'setuptools>=38.6.0',  # for long_description_content_type
         ],
-        packages=[
-                'resolve_march_native',
-        ],
+        packages=find_packages(exclude=['*.test']),
         entry_points={
             'console_scripts': [
                 'resolve-march-native = resolve_march_native.__main__:main',
