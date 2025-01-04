@@ -9,6 +9,7 @@ from resolve_march_native._gcc.parser import extract_flags
 from resolve_march_native._gcc.runner import run
 from resolve_march_native._gcc.target_help_parser import \
     get_flags_implied_by_march
+from resolve_march_native.messenger import announce_flags
 
 
 class NoTunePresentError(Exception):
@@ -40,10 +41,6 @@ class Engine:
         raise NoTunePresentError(
             'No entry -mtune=.. found in: %s' % ' '.join(sorted(flags)))
 
-    @staticmethod
-    def _dump_flags(flags):
-        print('Flags extracted: %s' % ' '.join(sorted(flags)), file=sys.stderr)
-
     def _resolve_mtune(self, flag_set, arch):
         try:
             flag, tune = self._extract_tune_from_flags(flag_set)
@@ -65,11 +62,11 @@ class Engine:
             output = run(self._gcc_command, ['-mcpu=native'], self._debug)
         march_native_flag_set = set(extract_flags(output))
         if self._debug:
-            self._dump_flags(march_native_flag_set)
+            announce_flags(march_native_flag_set)
         march_native_flag_set |= set(get_flags_implied_by_march('native', gcc=self._gcc_command,
                                                                 debug=self._debug))
         if self._debug:
-            self._dump_flags(march_native_flag_set)
+            announce_flags(march_native_flag_set)
         return march_native_flag_set
 
     def _get_march_explicit_flag_set(self, arch):
@@ -79,11 +76,11 @@ class Engine:
             output = run(self._gcc_command, ['-mcpu=%s' % arch], self._debug)
         march_explicit_flag_set = set(extract_flags(output))
         if self._debug:
-            self._dump_flags(march_explicit_flag_set)
+            announce_flags(march_explicit_flag_set)
         march_explicit_flag_set |= set(get_flags_implied_by_march(arch, gcc=self._gcc_command,
                                                                   debug=self._debug))
         if self._debug:
-            self._dump_flags(march_explicit_flag_set)
+            announce_flags(march_explicit_flag_set)
         return march_explicit_flag_set
 
     def _process_flags_explicit_has_more(self, target_set,

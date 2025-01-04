@@ -4,10 +4,10 @@
 import os
 import re
 import subprocess
-import sys
 from typing import List
 
 from resolve_march_native.environment import enforce_c_locale
+from resolve_march_native.messenger import announce_command
 
 # Example lines:
 # "  -m128bit-long-double                  [enabled]"
@@ -92,12 +92,12 @@ def get_flags_implied_by_march(arch: str, gcc=None, debug=True) -> List[str]:
     try:
         cmd = base_argv + [f'-march={arch}']
         if debug:
-            print('# %s' % ' '.join(cmd), file=sys.stderr)
+            announce_command(cmd)
         gcc_output = subprocess.check_output(cmd, env=env, stderr=stderr).decode('UTF-8')
     except subprocess.CalledProcessError:
         cmd = base_argv + [f'-mcpu={arch}']
         if debug:
-            print('# %s' % ' '.join(cmd), file=sys.stderr)
+            announce_command(cmd)
         gcc_output = subprocess.check_output(cmd, env=env, stderr=stderr).decode('UTF-8')
     return _parse_gcc_output(gcc_output)
 
