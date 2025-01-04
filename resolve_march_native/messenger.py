@@ -2,7 +2,7 @@
 # Licensed under GPL v2 or later
 
 import sys
-from typing import Iterable
+from typing import Iterable, Sequence
 
 
 def announce_command(argv: list[str]) -> None:
@@ -10,4 +10,6 @@ def announce_command(argv: list[str]) -> None:
 
 
 def announce_flags(flags: Iterable[str]) -> None:
-    print('Flags extracted: %s' % ' '.join(sorted(flags)), file=sys.stderr)
+    if not isinstance(flags, Sequence):
+        flags = sorted(flags)
+    print('Flags extracted: %s' % ' '.join(flags), file=sys.stderr)
