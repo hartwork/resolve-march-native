@@ -82,7 +82,7 @@ jobs:
         python3 --version
         pip3 install -U setuptools  # for Python >=3.12
         pip3 install --require-hashes -r requirements.txt
-        pytest -v -s -Wdefault -Werror
+        coverage run -a -m pytest -v -s -Wdefault -Werror
 
     - name: Smoke test the CLI
       env:
@@ -90,4 +90,15 @@ jobs:
       run: |
         set -x
         pip3 install -e .
-        resolve-march-native --gcc="${gcc}" --vertical
+        coverage run -a -m resolve_march_native --gcc="${gcc}" --vertical
+        coverage report | tee coverage.txt
+        coverage html
+
+    - name: Upload HTML coverage report as an artifact
+      uses: actions/upload-artifact@6f51ac03b9356f520e9adb1b1b7802705f340c2b  # v4.5.0
+      with:
+        name: "coverage_${{ matrix.gcc }}_python_${{ matrix.python-version }}_${{ matrix.runs-on }}"  # .zip
+        path: |
+          coverage.txt
+          htmlcov/
+        if-no-files-found: error
