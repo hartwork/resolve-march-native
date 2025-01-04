@@ -16,37 +16,45 @@ permissions:
 
 jobs:
   run-tests:
-    name: Run the test suite (${{ matrix.gcc }}, ${{ matrix.runs-on }}, Python ${{ matrix.python-version }})
+    name: Run the test suite (${{ matrix.cc }}, ${{ matrix.runs-on }}, Python ${{ matrix.python-version }})
     strategy:
       fail-fast: false
       matrix:
         include:
             # No particular need for in-between versions of Python
-          - gcc: gcc-7
+          - cc: gcc-7
             install: gcc-7
             python-version: 3.9
             runs-on: ubuntu-20.04
-          - gcc: gcc-12
+          - cc: gcc-12
             install: null
             python-version: 3.9
             runs-on: macos-13
-          - gcc: gcc-12
+          - cc: gcc-12
             install: null
             python-version: 3.9
             runs-on: ubuntu-22.04
-          - gcc: gcc-14
+          - cc: gcc-14
             install: null
             python-version: 3.13
             runs-on: macos-13
-          - gcc: gcc-14
+          - cc: gcc-14
             install: null
             python-version: 3.13
             runs-on: ubuntu-24.04
-          - gcc: gcc-15
+          - cc: gcc-15
             install: binutils gcc-15
             python-version: 3.13
             runs-on: ubuntu-24.04
-          - gcc: musl-gcc
+          - cc: clang-10
+            install: null
+            python-version: 3.13
+            runs-on: ubuntu-20.04
+          - cc: clang-18
+            install: null
+            python-version: 3.13
+            runs-on: ubuntu-24.04
+          - cc: musl-gcc
             install: musl-tools
             python-version: 3.13
             runs-on: ubuntu-24.04
@@ -54,7 +62,7 @@ jobs:
     steps:
 
     - name: Add GCC 15 Ubuntu repositories
-      if: "${{ matrix.gcc == 'gcc-15' }}"
+      if: "${{ matrix.cc == 'gcc-15' }}"
       run: |
         set -x
         # The repository is at home at https://launchpad.net/~ubuntu-toolchain-r/+archive/ubuntu/test .
@@ -86,18 +94,24 @@ jobs:
 
     - name: Smoke test the CLI
       env:
-        gcc: ${{ matrix.gcc }}
+        cc: ${{ matrix.cc }}
       run: |
+        if [[ "${cc}" = clang* ]]; then
+          args=( --clang "${cc}" )
+        else
+          args=( --gcc "${cc}" )
+        fi
+
         set -x
         pip3 install -e .
-        coverage run -a -m resolve_march_native --gcc="${gcc}" --vertical
+        coverage run -a -m resolve_march_native "${args[@]}" --vertical
         coverage report | tee coverage.txt
         coverage html
 
     - name: Upload HTML coverage report as an artifact
       uses: actions/upload-artifact@6f51ac03b9356f520e9adb1b1b7802705f340c2b  # v4.5.0
       with:
-        name: "coverage_${{ matrix.gcc }}_python_${{ matrix.python-version }}_${{ matrix.runs-on }}"  # .zip
+        name: "coverage_${{ matrix.cc }}_python_${{ matrix.python-version }}_${{ matrix.runs-on }}"  # .zip
         path: |
           coverage.txt
           htmlcov/

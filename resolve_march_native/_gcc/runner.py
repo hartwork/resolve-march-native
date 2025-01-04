@@ -3,10 +3,10 @@
 
 import os
 import subprocess
-import sys
 import tempfile
 
-from .environment import enforce_c_locale
+from resolve_march_native.environment import enforce_c_locale
+from resolve_march_native.messenger import announce_command
 
 
 def _fix_flags(flags):
@@ -32,7 +32,7 @@ def run(gcc_command, flags, debug):
         enforce_c_locale(env)
 
         if debug:
-            print('# %s' % ' '.join(cmd), file=sys.stderr)
+            announce_command(cmd)
             stderr = None  # i.e. forward to terminal
 
         try:

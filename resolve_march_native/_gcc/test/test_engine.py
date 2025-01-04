@@ -5,16 +5,16 @@ from importlib.resources import files
 from unittest import TestCase
 from unittest.mock import patch
 
-from ..engine import Engine
-from ..parser import extract_flags
+from resolve_march_native._gcc.engine import Engine
+from resolve_march_native._gcc.parser import extract_flags
 
 
 class TestEngine(TestCase):
     def _test_engine(self, expected_flag_set, basename_native, basename_explicit):
-        with open(files('resolve_march_native.test') / 'data' / basename_native) as f:
+        with open(files('resolve_march_native._gcc.test') / 'data' / basename_native) as f:
             march_native_flag_set = set(extract_flags(f.read()))
 
-        with open(files('resolve_march_native.test') / 'data' / basename_explicit) as f:
+        with open(files('resolve_march_native._gcc.test') / 'data' / basename_explicit) as f:
             march_explicit_flag_set = set(extract_flags(f.read()))
 
         class TestOptions:
@@ -141,7 +141,7 @@ class TestEngineFourFiles(TestCase):
                 else:
                     basename = basename_target_help_explicit
 
-            filename = files('resolve_march_native.test') / 'data' / basename
+            filename = files('resolve_march_native._gcc.test') / 'data' / basename
 
             with open(filename, 'br') as f:
                 return f.read()
