@@ -1,5 +1,6 @@
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit)](https://github.com/pre-commit/pre-commit)
 [![Run the test suite](https://github.com/hartwork/resolve-march-native/actions/workflows/run-tests.yml/badge.svg)](https://github.com/hartwork/resolve-march-native/actions/workflows/run-tests.yml)
+[![Packaging status](https://repology.org/badge/tiny-repos/resolve-march-native.svg)](https://repology.org/project/resolve-march-native/versions)
 
 
 # About
