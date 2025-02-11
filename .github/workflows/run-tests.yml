@@ -22,10 +22,10 @@ jobs:
       matrix:
         include:
             # No particular need for in-between versions of Python
-          - cc: gcc-7
-            install: gcc-7
+          - cc: gcc-9
+            install: gcc-9
             python-version: 3.9
-            runs-on: ubuntu-20.04
+            runs-on: ubuntu-22.04
           - cc: gcc-12
             install: null
             python-version: 3.9
@@ -46,10 +46,10 @@ jobs:
             install: binutils gcc-15
             python-version: 3.13
             runs-on: ubuntu-24.04
-          - cc: clang-10
-            install: null
+          - cc: clang-11
+            install: clang-11
             python-version: 3.13
-            runs-on: ubuntu-20.04
+            runs-on: ubuntu-22.04
           - cc: clang-18
             install: null
             python-version: 3.13
