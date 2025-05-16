@@ -60,7 +60,7 @@ options:
   --clang [COMMAND]     [EXPERIMENTAL] target Clang (default: target GCC) and
                         use given command if any (default: clang)
   --gcc [COMMAND]       target GCC explicitly and use given command if any
-                        (default: gcc))
+                        (default: gcc)
   --vertical            produce vertical output (default: horizontal output)
   --add-recommended, -a
                         add recommended flags (default: not added)

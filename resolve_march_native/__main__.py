@@ -41,7 +41,7 @@ def _inner_main():
                                    f' and use given command if any (default: {_CLANG_COMMAND})')
     clang_or_gcc.add_argument('--gcc', default=_UNSET, metavar='COMMAND', nargs='?',
                               help='target GCC explicitly'
-                                   f' and use given command if any (default: {_GCC_COMMAND}))')
+                                   f' and use given command if any (default: {_GCC_COMMAND})')
 
     parser.add_argument('--vertical', dest='formatting',
                         default=_HORIZONTAL, action='store_const', const=_VERTICAL,
