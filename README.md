@@ -49,8 +49,9 @@ $ resolve-march-native --clang --vertical
 
 ```console
 $ COLUMNS=80 resolve-march-native --help
-usage: resolve-march-native [-h] [--debug] [--clang [COMMAND] | --gcc
-                            [COMMAND]] [--vertical] [--keep-minus-features]
+usage: resolve-march-native [-h] [--debug] [--clang [COMMAND] |
+                            --gcc [COMMAND]] [--vertical]
+                            [--keep-minus-features] [--drop-cache-sizes]
                             [--keep-identical-mtune] [--keep-mno-flags]
                             [--add-recommended] [--version]
 
@@ -72,6 +73,9 @@ Clang-related arguments:
                         stripped away)
 
 GCC-related arguments:
+  --drop-cache-sizes    drop known cache size parameters like
+                        --param=l1-cache-line-size=64 (default: keep cache
+                        size parameters)
   --keep-identical-mtune
                         keep implied -mtune=... despite architecture identical
                         to -march=... (default: stripped away)

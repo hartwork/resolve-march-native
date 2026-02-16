@@ -9,6 +9,21 @@ from resolve_march_native._gcc.engine import Engine
 from resolve_march_native._gcc.parser import extract_flags
 
 
+class DropCacheSizesTest(TestCase):
+    def test_drop_cache_sizes(self):
+        flags = {
+            "-maes",
+            "--param=l1-cache-line-size=64",
+            "--param=l1-cache-size=32",
+            "--param=l2-cache-size=3072",
+        }
+        expected_flags = {
+            "-maes",
+        }
+        Engine._drop_cache_sizes(flags)
+        self.assertEqual(flags, expected_flags)
+
+
 class TestEngine(TestCase):
     def _test_engine(self, expected_flag_set, basename_native, basename_explicit):
         with open(files('resolve_march_native._gcc.test') / 'data' / basename_native) as f:
@@ -21,6 +36,7 @@ class TestEngine(TestCase):
             def __init__(self):
                 self.gcc = 'gcc'
                 self.debug = False
+                self.keep_cache_sizes = True
                 self.keep_identical_mtune = False
                 self.keep_mno_flags = False
                 self.keep_default_params = False
@@ -150,6 +166,7 @@ class TestEngineFourFiles(TestCase):
             def __init__(self):
                 self.gcc = 'false'
                 self.debug = False
+                self.keep_cache_sizes = True
                 self.keep_identical_mtune = False
                 self.keep_mno_flags = False
                 self.keep_default_params = False
