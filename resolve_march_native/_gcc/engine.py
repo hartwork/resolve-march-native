@@ -1,6 +1,7 @@
 # Copyright (C) 2015 Sebastian Pipping <sebastian@pipping.org>
 # Licensed under GPL v2 or later
 
+import re
 import subprocess
 import sys
 from contextlib import suppress
@@ -10,6 +11,8 @@ from resolve_march_native._gcc.runner import run
 from resolve_march_native._gcc.target_help_parser import \
     get_flags_implied_by_march
 from resolve_march_native.messenger import announce_flags
+
+_CACHE_SIZE_REGEX = '^--param=(?:l[1-9]+-)?cache-(?:line-)?size=[1-9][0-9]*$'
 
 
 class NoTunePresentError(Exception):
@@ -53,6 +56,12 @@ class Engine:
     def _resolve_mno_flags(flag_set):
         for flag in list(flag_set):
             if flag.startswith('-mno-'):
+                flag_set.remove(flag)
+
+    @staticmethod
+    def _drop_cache_sizes(flag_set):
+        for flag in list(flag_set):
+            if re.match(_CACHE_SIZE_REGEX, flag):
                 flag_set.remove(flag)
 
     def _get_march_native_flag_set(self):
@@ -120,6 +129,8 @@ class Engine:
             self._resolve_mtune(native_unrolled_flag_set, arch)
         if not options.keep_mno_flags:
             self._resolve_mno_flags(native_unrolled_flag_set)
+        if not options.keep_cache_sizes:
+            self._drop_cache_sizes(native_unrolled_flag_set)
 
         # NOTE: The next step needs to go after resolution of -mno-* flags
         #       since it may add new -mno-* flags

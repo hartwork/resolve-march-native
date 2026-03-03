@@ -53,6 +53,11 @@ def _inner_main():
                                       ' (default: stripped away)')
 
     gcc_arguments = parser.add_argument_group(title="GCC-related arguments")
+    gcc_arguments.add_argument('--drop-cache-sizes',
+                               dest="keep_cache_sizes", default=True, action='store_false',
+                               help='drop known cache size parameters'
+                                    ' like --param=l1-cache-line-size=64'
+                                    ' (default: keep cache size parameters)')
     gcc_arguments.add_argument('--keep-identical-mtune', action='store_true',
                                help='keep implied -mtune=...'
                                     ' despite architecture identical to -march=... '
