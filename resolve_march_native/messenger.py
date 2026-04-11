@@ -2,7 +2,7 @@
 # Licensed under GPL v2 or later
 
 import sys
-from typing import Iterable, Sequence
+from collections.abc import Iterable, Sequence
 
 
 def announce_command(argv: list[str]) -> None:
