@@ -2,7 +2,7 @@
 # Licensed under GPL v2 or later
 
 import re
-from typing import Generator
+from collections.abc import Generator
 
 _SINGLE_PARAM_ARGS = {
     # NOTE: It's probably okay to be incomplete here, so far "-target-feature [+-]FEATURE"

@@ -4,7 +4,6 @@
 import os
 import re
 import subprocess
-from typing import List
 
 from resolve_march_native.environment import enforce_c_locale
 from resolve_march_native.messenger import announce_command
@@ -82,7 +81,7 @@ _alias_line_pattern = re.compile(r'^\s+-\S+\s+(?P<flag>-[^ ]+)$')
 _ignore_line_pattern = re.compile(r'^\s+-iframework <dir>\s+$')
 
 
-def get_flags_implied_by_march(arch: str, gcc=None, debug=True) -> List[str]:
+def get_flags_implied_by_march(arch: str, gcc=None, debug=True) -> list[str]:
     if gcc is None:
         gcc = 'gcc'
     base_argv = [gcc, '-Q', '--help=target']
@@ -102,8 +101,8 @@ def get_flags_implied_by_march(arch: str, gcc=None, debug=True) -> List[str]:
     return _parse_gcc_output(gcc_output)
 
 
-def _parse_gcc_output(gcc_output: str) -> List[str]:
-    flags: List[str] = []
+def _parse_gcc_output(gcc_output: str) -> list[str]:
+    flags: list[str] = []
 
     for line in gcc_output.split('\n'):
         if not line.startswith('  -'):
