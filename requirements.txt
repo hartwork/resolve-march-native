@@ -91,9 +91,9 @@ coverage==7.14.2 \
     --hash=sha256:f44e7579a769a21d5b5e3166916bfe30ee175aaffff750324cbb11be2dbec5ad \
     --hash=sha256:f48a85bb437fab7782021c40bfee6b15146928b96960d008ace41b6901a0f21d \
     --hash=sha256:fb40cac5b1a6378fdccc99268f1033112ee4636e4fd9aaf240f6930d1fcea12c
-pytest==9.1.0 \
-    --hash=sha256:41dd9148c08072446394cefd3d79701701335a9f4cae69ba92e39f6c7f5c061c \
-    --hash=sha256:8ebb0e7888bdf2bdfc602ec51f8f62d50200af37356c74e503c79a94f5c81f32
+pytest==9.1.1 \
+    --hash=sha256:1088fbde8f2b49d95a549a195707afa7a76a3ce9bcadc26b6d71f0ffda5fe313 \
+    --hash=sha256:37a86b45efb9a47a61a36449063e8e18d0cab3161329fc099eb21783169c4f0c
 
 # Indirect dependencies
 exceptiongroup==1.3.1 \
